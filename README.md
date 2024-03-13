@@ -14,7 +14,7 @@
 - **User-friendly Interface**: Nightwise offers an intuitive and clean user interface, making task management a breeze.
 - **Task Organization**: Easily organize your tasks with categories, priorities, and due dates.
 - **Responsive Design**: Nightwise adapts seamlessly to different screen sizes, ensuring a consistent user experience across devices.
-- **Framework Comparison**: The project provides a platform to compare Vue.js with other frontend frameworks like Svelte and Solid, showcasing their strengths and weaknesses in real-world scenarios.
+- **Framework Comparison**: The project provides a platform to compare Vue.js with other frontend frameworks like [Svelte](https://github.com/rezajaber/nightwise-svelte) and [Solid](https://github.com/rezajaber/nightwise-solid), showcasing their strengths and weaknesses in real-world scenarios.
 
 ## Installation
 
