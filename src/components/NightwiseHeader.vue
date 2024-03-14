@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between">
-    <p class="font-display text-sm font-semibold">Nightwise</p>
+    <p class="font-display font-semibold">Nightwise</p>
 
     <div class="">
       <button>

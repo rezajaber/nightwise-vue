@@ -12,7 +12,7 @@ import SubtextTask from "../components/SubtextTask.vue";
   <main class="mt-5 flex gap-8">
     <div class="w-fit">
       <SearchTask />
-      <OverdueTask class="mt-5" />
+      <OverdueTask class="mt-7" />
       <OntimeTask class="mt-8" />
     </div>
 
