@@ -8,8 +8,8 @@ import OntimeTask from "../components/OntimeTask.vue";
 <template>
   <main class="w-fit">
     <SearchTask class="mt-4" />
-    <TaskCounter class="mt-4" />
-    <OverdueTask class="mt-4 pl-4" />
-    <OntimeTask class="mt-4 pl-4" />
+    <OverdueTask class="mt-4" />
+    <OntimeTask class="mt-8" />
   </main>
 </template>
+../components/OverdueTaskCounter.vue
