@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 </script>
 
 <template>
-  <div class="border-purple-500 flex justify-between border">
+  <div class="flex justify-between">
     <div class="flex items-center gap-2">
       <Button size="sm">Close</Button>
 
