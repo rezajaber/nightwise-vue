@@ -3,6 +3,7 @@ import SearchTask from "../components/SearchTask.vue";
 import OverdueTask from "../components/OverdueTask.vue";
 import OntimeTask from "../components/OntimeTask.vue";
 import ControlBar from "../components/ControlBar.vue";
+import TaskTitle from "../components/TaskTitle.vue";
 </script>
 
 <template>
@@ -15,7 +16,7 @@ import ControlBar from "../components/ControlBar.vue";
 
     <div class="w-full">
       <ControlBar />
+      <TaskTitle class="mt-8" />
     </div>
   </main>
 </template>
-../components/OverdueTaskCounter.vue
