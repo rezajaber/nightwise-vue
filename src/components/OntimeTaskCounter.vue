@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
 </script>
 
 <template>
