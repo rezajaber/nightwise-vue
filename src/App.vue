@@ -10,4 +10,3 @@ import Header from "../src/components/NightwiseHeader.vue";
     <RouterView />
   </div>
 </template>
-./components/SiteHeader.vue./components/NightwiseHeader.vue
