@@ -5,6 +5,7 @@ import OntimeTask from "../components/OntimeTask.vue";
 import ControlBar from "../components/ControlBar.vue";
 import TaskTitle from "../components/TaskTitle.vue";
 import ChronoTagger from "../components/ChronoTagger.vue";
+import SubtextTask from "../components/SubtextTask.vue";
 </script>
 
 <template>
@@ -19,6 +20,7 @@ import ChronoTagger from "../components/ChronoTagger.vue";
       <ControlBar />
       <TaskTitle class="mt-7" />
       <ChronoTagger class="mt-7" />
+      <SubtextTask class="mt-7" />
     </div>
   </main>
 </template>
