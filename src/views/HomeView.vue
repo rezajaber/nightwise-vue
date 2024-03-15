@@ -9,7 +9,7 @@ import SubtextTask from "../components/SubtextTask.vue";
 </script>
 
 <template>
-  <main class="mt-5 flex gap-8">
+  <main class="mt-6 flex gap-8">
     <div class="w-fit">
       <SearchTask />
       <OverdueTask class="mt-7" />

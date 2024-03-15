@@ -1,13 +1,17 @@
+<script setup lang="ts">
+import { Button } from "@/components/ui/button";
+</script>
+
 <template>
-  <div class="flex justify-between">
-    <p class="font-display font-semibold">Nightwise</p>
+  <div class="flex items-center justify-between">
+    <p class="font-display text-sm font-semibold">Nightwise</p>
 
     <div class="">
-      <button>
+      <Button size="sm">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -18,13 +22,13 @@
         >
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
         </svg>
-      </button>
+      </Button>
 
-      <button>
+      <Button size="sm">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -43,7 +47,7 @@
           <path d="m6.34 17.66-1.41 1.41" />
           <path d="m19.07 4.93-1.41 1.41" />
         </svg>
-      </button>
+      </Button>
     </div>
   </div>
 </template>

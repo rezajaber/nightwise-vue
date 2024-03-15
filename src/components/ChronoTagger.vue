@@ -29,10 +29,11 @@ const position = ref("Studies");
     <Popover>
       <PopoverTrigger as-child>
         <Button
+          size="sm"
           :variant="'outline'"
           :class="
             cn(
-              'h-9 w-fit justify-start text-left font-normal',
+              'w-fit justify-start text-left font-normal',
               !date && 'text-muted-foreground',
             )
           "

@@ -5,7 +5,7 @@ import Header from "../src/components/NightwiseHeader.vue";
 </script>
 
 <template>
-  <div class="px-36 py-5">
+  <div class="px-48 py-6">
     <Header />
     <RouterView />
   </div>
