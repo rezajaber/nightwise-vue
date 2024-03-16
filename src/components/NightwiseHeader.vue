@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 
 <template>
   <div class="flex items-center justify-between">
-    <p class="font-display text-sm font-semibold">Nightwise</p>
+    <p class="font-display font-semibold">Nightwise</p>
 
     <div class="">
-      <Button size="sm">
+      <Button size="xs">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -24,7 +24,7 @@ import { Button } from "@/components/ui/button";
         </svg>
       </Button>
 
-      <Button size="sm">
+      <Button size="xs">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"

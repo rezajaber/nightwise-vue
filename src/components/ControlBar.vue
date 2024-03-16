@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 <template>
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
-      <Button size="sm">Close</Button>
+      <Button size="xs">Close</Button>
 
-      <Button size="sm"
+      <Button size="xs"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -24,11 +24,11 @@ import { Button } from "@/components/ui/button";
           <path d="M5 5L19 19" /></svg
       ></Button>
 
-      <Button size="sm"
+      <Button size="xs"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -43,13 +43,13 @@ import { Button } from "@/components/ui/button";
     </div>
 
     <div class="flex items-center gap-2">
-      <Button size="sm">Delete</Button>
+      <Button size="xs">Delete</Button>
 
-      <Button size="sm"
+      <Button size="xs"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -61,11 +61,11 @@ import { Button } from "@/components/ui/button";
           <path d="M6 8L2 12L6 16" />
           <path d="M2 12H22" /></svg
       ></Button>
-      <Button size="sm"
+      <Button size="xs"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -77,11 +77,11 @@ import { Button } from "@/components/ui/button";
           <path d="M8 18L12 22L16 18" />
           <path d="M12 2V22" /></svg
       ></Button>
-      <Button size="sm"
+      <Button size="xs"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"

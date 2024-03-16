@@ -15,10 +15,10 @@ const position = ref("This Week");
 </script>
 
 <template>
-  <div class="grid w-fit gap-2">
+  <div class="grid min-w-64 gap-2">
     <div class="flex gap-2.5">
-      <Input />
-      <Button size="sm" class="px-2.5"
+      <Input class="h-7 w-full" />
+      <Button size="xs" class="px-2.5"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -38,13 +38,13 @@ const position = ref("This Week");
     </div>
 
     <div class="flex gap-2.5">
-      <Button size="sm" class="w-1/3">Show done</Button>
+      <Button size="xs" class="w-2/5">Show done</Button>
 
       <DropdownMenu>
         <DropdownMenuTrigger as-child>
           <Button
-            size="sm"
-            class="w-2/3 justify-between px-4"
+            size="xs"
+            class="w-3/5 justify-between px-4"
             variant="outline"
           >
             {{ position }}

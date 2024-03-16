@@ -29,7 +29,7 @@ const position = ref("Studies");
     <Popover>
       <PopoverTrigger as-child>
         <Button
-          size="sm"
+          size="xs"
           :variant="'outline'"
           :class="
             cn(
@@ -50,7 +50,7 @@ const position = ref("Studies");
     <div class="flex gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger as-child>
-          <Button size="sm" class="justify-betweeng gap-4" variant="outline">
+          <Button size="xs" class="justify-betweeng gap-4" variant="outline">
             {{ position }}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ const position = ref("Studies");
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Button size="sm">Edit</Button>
+      <Button size="xs">Edit</Button>
     </div>
   </div>
 </template>

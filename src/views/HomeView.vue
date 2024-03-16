@@ -9,14 +9,14 @@ import SubtextTask from "../components/SubtextTask.vue";
 </script>
 
 <template>
-  <main class="mt-6 flex gap-8">
-    <div class="w-fit">
+  <main class="mt-8 sm:flex sm:gap-8">
+    <div class="">
       <SearchTask />
       <OverdueTask class="mt-7" />
       <OntimeTask class="mt-8" />
     </div>
 
-    <div class="w-full">
+    <div class="hidden w-full sm:block">
       <ControlBar />
       <TaskTitle class="mt-7" />
       <ChronoTagger class="mt-7" />
