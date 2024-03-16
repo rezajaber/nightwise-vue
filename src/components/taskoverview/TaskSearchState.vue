@@ -14,11 +14,11 @@ const position = ref("This Week");
 
 <template>
   <div class="flex gap-2.5">
-    <Button size="xs" class="w-2/5">Show done</Button>
+    <Button size="sm" class="w-2/5">Show done</Button>
 
     <DropdownMenu>
       <DropdownMenuTrigger as-child>
-        <Button size="xs" class="w-3/5 justify-between px-4" variant="outline">
+        <Button size="sm" class="w-3/5 justify-between px-4" variant="outline">
           {{ position }}
           <svg
             xmlns="http://www.w3.org/2000/svg"
