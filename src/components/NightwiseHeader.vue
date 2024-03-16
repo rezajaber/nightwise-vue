@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { Button } from "@/components/ui/button";
+
+const toggleTheme = ref(false);
+
+const switchTheme = () => {
+  toggleTheme.value = !toggleTheme.value;
+};
 </script>
 
 <template>
@@ -7,7 +14,7 @@ import { Button } from "@/components/ui/button";
     <p class="font-display font-semibold">Nightwise</p>
 
     <div class="">
-      <Button size="xs">
+      <Button v-if="!toggleTheme" size="xs" @click="switchTheme">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -24,7 +31,7 @@ import { Button } from "@/components/ui/button";
         </svg>
       </Button>
 
-      <Button size="xs">
+      <Button v-if="toggleTheme" size="xs" @click="switchTheme">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
