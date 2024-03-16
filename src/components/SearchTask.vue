@@ -21,8 +21,8 @@ const position = ref("This Week");
       <Button size="xs" class="px-2.5"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
+          width="17"
+          height="17"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
