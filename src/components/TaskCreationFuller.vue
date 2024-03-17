@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
     <ControlBar />
     <Input
       placeholder="Do this"
-      class="font-regular mt-7 w-full border-0 px-0 text-3xl focus-visible:ring-0"
+      class="font-regular mt-7 w-full border-0 px-0 text-3xl focus-visible:outline-none focus-visible:ring-0"
     />
     <TaskSideInformation class="mt-7" />
     <Textarea placeholder="Some more context" />
