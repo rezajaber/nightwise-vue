@@ -16,6 +16,7 @@
     "clsx": "^2.1.0",
     "lucide-vue-next": "^0.357.0",
     "pinia": "^2.1.7",
+    "pocketbase": "^0.21.1",
     "radix-vue": "^1.5.2",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
