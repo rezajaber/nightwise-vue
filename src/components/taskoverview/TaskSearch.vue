@@ -15,21 +15,31 @@ const position = ref("This Week");
 
 import { createTask, getTasks } from "@/lib/api/task";
 
-let tasks = ref(undefined);
+/* let tasks = ref(undefined);
 
 onMounted(async () => {
   const newTask = await createTask("Hallo Welt");
   console.log(newTask);
   tasks = (await getTasks()).items;
   console.log(tasks);
-});
+}); */
+
+const tasks = ref([]);
+
+// Function to be called when the button is clicked
+const handleCreateTask = async () => {
+  const newTask = await createTask("New Task Title");
+  console.log(newTask);
+  // Optionally, refresh the tasks list
+  tasks.value = (await getTasks()).items;
+};
 </script>
 
 <template>
   <div class="grid min-w-72 gap-2">
     <div class="flex gap-2.5">
       <Input class="h-7 w-full" />
-      <Button size="xs" class="px-2.5"
+      <Button size="xs" class="px-2.5" @click="handleCreateTask"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="17"
