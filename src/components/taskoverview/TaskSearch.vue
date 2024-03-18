@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const position = ref("This Week");
+
+import { createTask, getTasks } from "@/lib/api/task";
+
+let tasks = ref(undefined);
+
+onMounted(async () => {
+  const newTask = await createTask("Hallo Welt");
+  console.log(newTask);
+  tasks = (await getTasks()).items;
+  console.log(tasks);
+});
 </script>
 
 <template>
