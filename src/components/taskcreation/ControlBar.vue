@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 <template>
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
-      <Button size="xs">Close</Button>
+      <Button size="xs">Create</Button>
 
       <Button size="xs"
         ><svg

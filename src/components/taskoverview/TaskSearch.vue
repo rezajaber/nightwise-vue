@@ -50,12 +50,12 @@ const handleCreateTask = async () => {
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="lucide lucide-circle-plus"
+          class="lucide lucide-search"
         >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M8 12h8" />
-          <path d="M12 8v8" /></svg
-      ></Button>
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+      </Button>
     </div>
 
     <div class="flex gap-2.5">
