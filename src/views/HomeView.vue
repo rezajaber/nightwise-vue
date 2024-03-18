@@ -2,6 +2,20 @@
 import TaskOverview from "@/components/TaskOverview.vue";
 import TaskCreation from "@/components/TaskCreation.vue";
 import TaskCreationFuller from "@/components/TaskCreationFuller.vue";
+import { getTasks, createTask } from "@/lib/api/task";
+import { onMounted, ref } from "vue";
+
+let tasks = ref(undefined);
+
+onMounted(async () => {
+  tasks = (await getTasks()).items;
+  console.log(tasks);
+  console.log("Creating new task");
+  const newTask = await createTask("Hallo Welt");
+  console.log(newTask);
+  tasks = (await getTasks()).items;
+  console.log(tasks);
+});
 </script>
 
 <template>
