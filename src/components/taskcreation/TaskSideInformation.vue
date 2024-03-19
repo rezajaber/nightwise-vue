@@ -2,7 +2,8 @@
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-vue-next";
 
-import { ref } from "vue";
+import { ref, watch } from "vue";
+
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const date = ref<Date>();
-const position = ref("Studies");
+const position = ref("Personal");
+
+const emit = defineEmits(["update-category", "set-date"]);
+
+watch(position, (newValue) => {
+  // Emitting the update-category event with the new value
+  emit("update-category", newValue);
+});
+
+watch(date, (newValue) => {
+  // Emitting the update-category event with the new value
+  emit("set-date", newValue);
+});
 </script>
 
 <template>
@@ -71,11 +84,13 @@ const position = ref("Studies");
         </DropdownMenuTrigger>
         <DropdownMenuContent class="w-56">
           <DropdownMenuRadioGroup v-model="position">
-            <DropdownMenuRadioItem value="Studies">
+            <DropdownMenuRadioItem v-model="position" value="Studies">
               Studies
             </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="Work"> Work </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="Personal">
+            <DropdownMenuRadioItem v-model="position" value="Work">
+              Work
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem v-model="position" value="Personal">
               Personal
             </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>

@@ -9,12 +9,20 @@ import { createTask as createTaskApi } from "@/lib/api/task"; // Assuming this i
 
 const taskTitle = ref("");
 const taskDescription = ref("");
+const category = ref("");
+let due_date = ref(new Date());
 
 const createTask = async () => {
   if (taskTitle.value.trim()) {
-    await createTaskApi(taskTitle.value, taskDescription.value);
+    await createTaskApi(
+      taskTitle.value,
+      taskDescription.value,
+      category.value,
+      due_date.value,
+    );
     taskTitle.value = "";
-    taskDescription.value = ""; // Reset input after creation
+    taskDescription.value = "";
+    // Reset input after creation
     // Optionally, emit an event to notify parent components to refresh the task list
   }
 };
@@ -29,7 +37,11 @@ const createTask = async () => {
       class="font-regular mt-7 w-full border-0 px-0 text-3xl focus-visible:outline-none focus-visible:ring-0"
     />
 
-    <TaskSideInformation class="mt-7" />
+    <TaskSideInformation
+      @set-date="due_date = $event"
+      @update-category="category = $event"
+      class="mt-7"
+    />
     <Textarea v-model="taskDescription" placeholder="Some more context" />
   </div>
 </template>

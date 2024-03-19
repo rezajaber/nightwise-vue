@@ -9,12 +9,14 @@ export const getTasks = async (): Promise<any> => {
 export const createTask = async (
   title: string,
   description: string,
+  category: string,
+  due_date: Date,
 ): Promise<any> => {
   const data = {
     title: title,
     description: description,
-    category: "Kategorie",
-    due_date: "2022-01-01 10:00:00.123Z",
+    category: category,
+    due_date: due_date,
     user_id: "ohbcpavrkosxagz",
   };
   const record = await Base.getPocketbase().collection("task").create(data);
