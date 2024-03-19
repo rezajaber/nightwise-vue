@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
+import { defineEmits } from "vue";
+
+const emits = defineEmits(["create-task"]);
+
+const onCreateClick = () => {
+  emits("create-task");
+};
 </script>
 
 <template>
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
-      <Button size="xs">Create</Button>
+      <Button size="xs" @click="onCreateClick">Create</Button>
 
       <Button size="xs"
         ><svg

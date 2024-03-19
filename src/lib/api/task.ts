@@ -6,10 +6,13 @@ export const getTasks = async (): Promise<any> => {
   });
 };
 
-export const createTask = async (title: string): Promise<any> => {
+export const createTask = async (
+  title: string,
+  description: string,
+): Promise<any> => {
   const data = {
     title: title,
-    description: "Javacript",
+    description: description,
     category: "Kategorie",
     due_date: "2022-01-01 10:00:00.123Z",
     user_id: "ohbcpavrkosxagz",
