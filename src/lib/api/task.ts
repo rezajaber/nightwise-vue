@@ -17,7 +17,7 @@ export const createTask = async (
     description: description,
     category: category,
     due_date: due_date,
-    user_id: "ohbcpavrkosxagz",
+    user_id: "40164s5bfdq72sp",
   };
   const record = await Base.getPocketbase().collection("task").create(data);
   return record;
