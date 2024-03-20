@@ -2,7 +2,7 @@
 
 
 <p align="center">
-<img src=".github/nightwise-readme-rounded.png" alt="Nightwise Logo" style="width: 200px;">
+<img src=".github/nightwise-readme-rounded.jpeg" alt="Nightwise Logo" style="width: 200px;">
 </p>
 
 <p align="center">Nightwise is a sleek and efficient to-do app designed as a bachelor's degree project. It's crafted with Vue.js and tailored to showcase the capabilities of various frontend frameworks such as Svelte and Solid.</p>
