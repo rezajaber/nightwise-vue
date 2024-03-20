@@ -25,6 +25,7 @@ const createTask = async () => {
     // Reset input after creation
     // Optionally, emit an event to notify parent components to refresh the task list
   }
+  window.location.reload();
 };
 </script>
 

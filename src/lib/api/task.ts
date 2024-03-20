@@ -1,11 +1,5 @@
 import Base from "./base";
 
-export const getTasks = async (): Promise<any> => {
-  return await Base.getPocketbase().collection("task").getList(1, 50, {
-    filter: 'created >= "2022-01-01 00:00:00"',
-  });
-};
-
 export const createTask = async (
   title: string,
   description: string,
@@ -21,4 +15,24 @@ export const createTask = async (
   };
   const record = await Base.getPocketbase().collection("task").create(data);
   return record;
+};
+
+export const getTasks = async (): Promise<any[]> => {
+  try {
+    const records = await Base.getPocketbase().collection("task").getFullList({
+      sort: "-created",
+    });
+    return records;
+  } catch (error) {
+    console.error("Failed to fetch tasks:", error);
+    return [];
+  }
+};
+
+export const deleteTask = async (task_id): Promise<void> => {
+  try {
+    await Base.getPocketbase().collection("task").delete(task_id);
+  } catch (error) {
+    console.error("Failed to delete tasks:", error);
+  }
 };

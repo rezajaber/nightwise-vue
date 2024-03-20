@@ -2,15 +2,13 @@
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { onMounted, ref } from "vue";
-import { getTasks } from "@/lib/api/task";
+import { getTasks as getTasksApi } from "@/lib/api/task"; // Assuming this is the API call
 
 const tasks = ref([]);
 
-const fetchTasks = async () => {
-  tasks.value = await getTasks();
-};
-
-onMounted(fetchTasks);
+onMounted(async () => {
+  tasks.value = await getTasksApi();
+});
 </script>
 
 <template>
@@ -31,7 +29,7 @@ onMounted(fetchTasks);
         <label
           class="break-all text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          Test
+          {{ task.title }}
         </label>
       </div>
     </div>

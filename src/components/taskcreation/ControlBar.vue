@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { defineEmits } from "vue";
 
-const emits = defineEmits(["create-task"]);
+const emits = defineEmits(["create-task"]); // Added "task-deleted" to notify parent components
 
 const onCreateClick = () => {
   emits("create-task");
