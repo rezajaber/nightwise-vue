@@ -27,13 +27,19 @@ const createTask = async () => {
   }
   window.location.reload();
 };
+
+const handleEnter = () => {
+  createTask(); // Call the existing createTask function
+};
 </script>
 
 <template>
   <div>
     <ControlBar @create-task="createTask" />
+
     <Input
       v-model="taskTitle"
+      @keyup.enter="handleEnter"
       placeholder="Do this"
       class="font-regular mt-7 w-full border-0 px-0 text-3xl focus-visible:outline-none focus-visible:ring-0"
     />
@@ -43,6 +49,10 @@ const createTask = async () => {
       @update-category="category = $event"
       class="mt-7"
     />
-    <Textarea v-model="taskDescription" placeholder="Some more context" />
+    <Textarea
+      @keyup.enter="handleEnter"
+      v-model="taskDescription"
+      placeholder="Some more context"
+    />
   </div>
 </template>
