@@ -16,7 +16,7 @@ onMounted(async () => {
     <div>
       <div class="flex justify-between">
         <p class="align-middle text-sm font-semibold">Ontime</p>
-        <p class="text-sm font-semibold">3</p>
+        <p class="text-sm font-semibold">{{ tasks.length }}</p>
       </div>
 
       <Separator class="mt-1 bg-primary" />
