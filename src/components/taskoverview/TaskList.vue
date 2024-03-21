@@ -8,7 +8,12 @@ const tasks = ref([]);
 
 onMounted(async () => {
   tasks.value = await getTasksApi();
+  console.log(tasks);
 });
+
+function truncateText(text: string, limit: number = 50) {
+  return text.length > limit ? text.slice(0, limit) + "..." : text;
+}
 </script>
 
 <template>
@@ -22,7 +27,7 @@ onMounted(async () => {
       <Separator class="mt-1 bg-primary" />
     </div>
 
-    <div v-for="task in tasks" :key="task.id" class="mt-5 grid gap-5 pl-4">
+    <div v-for="task in tasks" :key="task.id" class="gap- mt-5 grid gap-2 pl-4">
       <div class="flex items-center space-x-2">
         <Checkbox />
 
@@ -32,6 +37,10 @@ onMounted(async () => {
           {{ task.title }}
         </label>
       </div>
+
+      <p class="break-all pl-6 text-justify text-xs">
+        {{ truncateText(task.description) }}
+      </p>
     </div>
   </div>
 </template>
