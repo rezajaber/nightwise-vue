@@ -2,15 +2,32 @@
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
 
-import { ref } from "vue";
+import { ref, watch, defineProps } from "vue";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { createTask as createTaskApi } from "@/lib/api/task"; // Assuming this is the API call
+
+const props = defineProps({
+  task: Object,
+});
 
 const taskTitle = ref("");
 const taskDescription = ref("");
 const category = ref("");
 let due_date = ref(new Date());
+
+watch(
+  () => props.task,
+  (newTask) => {
+    if (newTask) {
+      taskTitle.value = newTask.title;
+      taskDescription.value = newTask.description;
+      category.value = newTask.category;
+      due_date.value = new Date(newTask.due_date);
+    }
+  },
+  { immediate: true },
+);
 
 const createTask = async () => {
   if (taskTitle.value.trim()) {
