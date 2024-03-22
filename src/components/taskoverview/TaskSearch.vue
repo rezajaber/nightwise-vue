@@ -38,19 +38,25 @@ const handleCreateTask = async () => {
 <template>
   <div class="grid min-w-72 gap-2">
     <div class="flex gap-2.5">
-      <Input class="h-7 w-full" />
-      <Button size="xs" class="px-2.5" @click="handleCreateTask"
+      <Input
+        placeholder="Search Task..."
+        class="h-8 w-full border-2 border-secondary text-primary caret-accent"
+      />
+      <Button
+        size="sm"
+        class="border-none bg-accent px-2.5"
+        @click="handleCreateTask"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
-          width="17"
-          height="17"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="lucide lucide-search"
+          class="lucide lucide-search h-8"
         >
           <circle cx="11" cy="11" r="8" />
           <path d="m21 21-4.3-4.3" />
@@ -59,13 +65,13 @@ const handleCreateTask = async () => {
     </div>
 
     <div class="flex gap-2.5">
-      <Button size="sm" class="w-2/5">Show done</Button>
+      <Button size="sm" class="w-2/5 border-none bg-accent">Show done</Button>
 
       <DropdownMenu>
         <DropdownMenuTrigger as-child>
           <Button
             size="sm"
-            class="w-3/5 justify-between px-4"
+            class="w-3/5 justify-between border-none bg-accent px-4"
             variant="outline"
           >
             {{ position }}

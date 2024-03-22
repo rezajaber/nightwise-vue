@@ -19,7 +19,7 @@ function truncateText(text: string, limit: number = 50) {
 <template>
   <div>
     <div>
-      <div class="flex justify-between">
+      <div class="flex justify-between text-primary">
         <p class="align-middle text-sm font-semibold">Ontime</p>
         <p class="text-sm font-semibold">{{ tasks.length }}</p>
       </div>
@@ -27,8 +27,8 @@ function truncateText(text: string, limit: number = 50) {
       <Separator class="mt-1 bg-primary" />
     </div>
 
-    <div v-for="task in tasks" :key="task.id" class="gap- mt-5 grid gap-2 pl-4">
-      <div class="flex items-center space-x-2">
+    <div v-for="task in tasks" :key="task.id" class="mt-5 grid gap-2 pl-4">
+      <div class="flex items-center space-x-2 text-primary">
         <Checkbox />
 
         <label
@@ -38,7 +38,7 @@ function truncateText(text: string, limit: number = 50) {
         </label>
       </div>
 
-      <p class="break-all pl-6 text-justify text-xs">
+      <p class="break-all pl-6 text-justify text-xs text-secondary">
         {{ truncateText(task.description) }}
       </p>
     </div>

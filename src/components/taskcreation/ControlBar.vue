@@ -12,9 +12,11 @@ const onCreateClick = () => {
 <template>
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
-      <Button size="xs" @click="onCreateClick">Create</Button>
+      <Button size="xs" class="border-none bg-accent" @click="onCreateClick"
+        >Create</Button
+      >
 
-      <Button size="xs"
+      <Button size="xs" class="border-none bg-accent"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -31,7 +33,7 @@ const onCreateClick = () => {
           <path d="M5 5L19 19" /></svg
       ></Button>
 
-      <Button size="xs"
+      <Button size="xs" class="border-none bg-accent"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -50,9 +52,9 @@ const onCreateClick = () => {
     </div>
 
     <div class="flex items-center gap-2">
-      <Button size="xs">Delete</Button>
+      <Button size="xs" class="border-none bg-accent">Delete</Button>
 
-      <Button size="xs"
+      <Button size="xs" class="border-none bg-accent"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -68,7 +70,7 @@ const onCreateClick = () => {
           <path d="M6 8L2 12L6 16" />
           <path d="M2 12H22" /></svg
       ></Button>
-      <Button size="xs"
+      <Button size="xs" class="border-none bg-accent"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -84,7 +86,7 @@ const onCreateClick = () => {
           <path d="M8 18L12 22L16 18" />
           <path d="M12 2V22" /></svg
       ></Button>
-      <Button size="xs"
+      <Button size="xs" class="border-none bg-accent"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"

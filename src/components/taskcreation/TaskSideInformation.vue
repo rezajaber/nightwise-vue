@@ -42,6 +42,7 @@ watch(date, (newValue) => {
     <Popover>
       <PopoverTrigger as-child>
         <Button
+          class="border-none bg-accent"
           size="xs"
           :variant="'outline'"
           :class="
@@ -51,8 +52,10 @@ watch(date, (newValue) => {
             )
           "
         >
-          <CalendarIcon class="mr-2 h-4 w-4" />
-          <span>{{ date ? format(date, "PPP") : "Pick a date" }}</span>
+          <CalendarIcon class="mr-2 h-4 w-4 text-black" />
+          <span class="text-black">{{
+            date ? format(date, "PPP") : "Pick a date"
+          }}</span>
         </Button>
       </PopoverTrigger>
       <PopoverContent class="w-auto p-0">
@@ -63,7 +66,11 @@ watch(date, (newValue) => {
     <div class="flex gap-2">
       <DropdownMenu>
         <DropdownMenuTrigger as-child>
-          <Button size="xs" class="justify-betweeng gap-4" variant="outline">
+          <Button
+            size="xs"
+            class="justify-betweeng gap-4 border-none bg-accent"
+            variant="outline"
+          >
             {{ position }}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +104,7 @@ watch(date, (newValue) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Button size="xs">Edit</Button>
+      <Button class="border-none bg-accent" size="xs">Edit</Button>
     </div>
   </div>
 </template>
