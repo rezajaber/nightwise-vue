@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -12,27 +12,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const position = ref("This Week");
-
-import { createTask, getTasks } from "@/lib/api/task";
-
-/* let tasks = ref(undefined);
-
-onMounted(async () => {
-  const newTask = await createTask("Hallo Welt");
-  console.log(newTask);
-  tasks = (await getTasks()).items;
-  console.log(tasks);
-}); */
-
-const tasks = ref([]);
-
-// Function to be called when the button is clicked
-const handleCreateTask = async () => {
-  const newTask = await createTask("New Task Title");
-  console.log(newTask);
-  // Optionally, refresh the tasks list
-  tasks.value = (await getTasks()).items;
-};
 </script>
 
 <template>
