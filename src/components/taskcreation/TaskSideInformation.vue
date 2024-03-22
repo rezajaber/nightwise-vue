@@ -68,7 +68,7 @@ watch(date, (newValue) => {
         <DropdownMenuTrigger as-child>
           <Button
             size="xs"
-            class="justify-betweeng gap-4 border-none bg-accent"
+            class="justify-between gap-4 border-none bg-accent"
             variant="outline"
           >
             {{ position }}
