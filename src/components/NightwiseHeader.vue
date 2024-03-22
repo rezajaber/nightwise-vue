@@ -14,6 +14,8 @@ const switchTheme = () => {
     <p class="tracking font-display text-sm font-semibold text-primary">
       nightwise
     </p>
-    <img class="w-6" src="../assets/img/nightwise.png" alt="" />
+    <RouterLink to="/"
+      ><img class="w-6 cursor-pointer" src="../assets/img/nightwise.png" alt=""
+    /></RouterLink>
   </div>
 </template>
