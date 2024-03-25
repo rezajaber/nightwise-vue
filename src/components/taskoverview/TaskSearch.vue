@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+import { createTask as createTaskApi } from "@/lib/api/task"; // Assuming this is the API call
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +14,31 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const position = ref("This Week");
+
+const taskTitle = ref("");
+const taskDescription = ref("");
+const category = ref("");
+let due_date = ref(new Date());
+
+const createTask = async () => {
+  if (taskTitle.value.trim()) {
+    await createTaskApi(
+      taskTitle.value,
+      taskDescription.value,
+      category.value,
+      due_date.value,
+    );
+    taskTitle.value = "";
+    taskDescription.value = "";
+    // Reset input after creation
+    // Optionally, emit an event to notify parent components to refresh the task list
+  }
+  window.location.reload();
+};
+
+const handleEnter = () => {
+  createTask(); // Call the existing createTask function
+};
 </script>
 
 <template>
@@ -21,7 +48,7 @@ const position = ref("This Week");
         placeholder="Search Task..."
         class="h-8 w-full border border-accent text-primary caret-accent"
       />
-      <Button size="sm" class="border-none bg-accent px-2.5"
+      <Button size="sm" class="border-none bg-accent px-2.5" @click="createTask"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

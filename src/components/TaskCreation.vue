@@ -2,7 +2,7 @@
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
 
-import { ref, watch, defineProps, onMounted } from "vue";
+import { ref, watch, defineProps } from "vue";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { createTask } from "@/lib/api/task"; // Assuming this is the API call
@@ -57,7 +57,10 @@ const handleEnter = () => {
 
 <template>
   <div class="rounded-md bg-card px-4 py-5">
-    <ControlBar @create-task="createOrUpdateTask" />
+    <ControlBar
+      :mode="props.task?.id ? 'Update' : 'Create'"
+      @create-task="createOrUpdateTask"
+    />
 
     <Input
       v-model="taskTitle"

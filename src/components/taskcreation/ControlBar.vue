@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { defineProps } from "vue";
 import { Button } from "@/components/ui/button";
-import { defineEmits } from "vue";
 
+const props = defineProps({
+  mode: String,
+});
 const emits = defineEmits(["create-task"]); // Added "task-deleted" to notify parent components
 
 const onCreateClick = () => {
@@ -12,9 +15,9 @@ const onCreateClick = () => {
 <template>
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
-      <Button size="xs" class="border-none bg-accent" @click="onCreateClick"
-        >Create</Button
-      >
+      <Button size="xs" class="border-none bg-accent" @click="onCreateClick">{{
+        props.mode
+      }}</Button>
 
       <Button size="xs" class="border-none bg-accent"
         ><svg
