@@ -70,7 +70,7 @@ const handleEnter = () => {
       @keyup.enter="handleEnter"
       v-model="taskDescription"
       placeholder="Some more context"
-      class="text-md mt-7 bg-secondary pl-4 text-primary caret-accent"
+      class="mt-7 bg-secondary pl-4 text-primary caret-accent"
     />
   </div>
 </template>

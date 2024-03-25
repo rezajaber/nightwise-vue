@@ -36,7 +36,7 @@ function truncateText(text: string, limit: number = 50) {
       v-for="task in tasks"
       :key="task.id"
       @click="editTask(task)"
-      class="mt-5 grid cursor-pointer gap-2 rounded-lg pl-4 duration-300 ease-in-out hover:scale-105"
+      class="mt-5 grid cursor-pointer gap-1.5 rounded-lg pl-4 duration-300 ease-in-out hover:scale-105"
     >
       <div class="flex items-center space-x-2 text-primary">
         <Checkbox />
