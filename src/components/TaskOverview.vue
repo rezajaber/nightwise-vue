@@ -7,7 +7,7 @@ const selectedTask = ref(null);
 
 const onEditTask = (task) => {
   selectedTask.value = task;
-  console.log("task:", task);
+
   emit("task-edited", task);
 };
 

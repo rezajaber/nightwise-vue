@@ -45,7 +45,9 @@ export const updateTask = async (
 
   try {
     const record = await Base.getPocketbase()
+
       .collection("task")
+
       .update(taskId, data);
     return record;
   } catch (error) {

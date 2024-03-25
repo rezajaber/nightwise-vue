@@ -2,10 +2,11 @@
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
 
-import { ref, watch, defineProps } from "vue";
+import { ref, watch, defineProps, onMounted } from "vue";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { createTask as createTaskApi } from "@/lib/api/task"; // Assuming this is the API call
+import { createTask } from "@/lib/api/task"; // Assuming this is the API call
+import { updateTask } from "@/lib/api/task"; // Assuming this is the API call
 
 const props = defineProps({
   task: Object,
@@ -29,30 +30,34 @@ watch(
   { immediate: true },
 );
 
-const createTask = async () => {
-  if (taskTitle.value.trim()) {
-    await createTaskApi(
+const createOrUpdateTask = async () => {
+  if (props.task?.id) {
+    await updateTask(
+      props.task.id,
       taskTitle.value,
       taskDescription.value,
       category.value,
       due_date.value,
     );
-    taskTitle.value = "";
-    taskDescription.value = "";
-    // Reset input after creation
-    // Optionally, emit an event to notify parent components to refresh the task list
+  } else {
+    await createTask(
+      taskTitle.value,
+      taskDescription.value,
+      category.value,
+      due_date.value,
+    );
   }
   window.location.reload();
 };
 
 const handleEnter = () => {
-  createTask(); // Call the existing createTask function
+  createOrUpdateTask(); // Call the existing createTask function
 };
 </script>
 
 <template>
   <div class="rounded-md bg-card px-4 py-5">
-    <ControlBar @create-task="createTask" />
+    <ControlBar @create-task="createOrUpdateTask" />
 
     <Input
       v-model="taskTitle"
