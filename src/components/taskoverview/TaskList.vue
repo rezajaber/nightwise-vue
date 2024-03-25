@@ -48,7 +48,7 @@ function truncateText(text: string, limit: number = 50) {
         </label>
       </div>
 
-      <p class="break-all pl-6 text-justify text-xs text-secondary">
+      <p class="break-all pl-6 text-justify text-xs text-primary opacity-60">
         {{ truncateText(task.description) }}
       </p>
     </div>

@@ -51,14 +51,14 @@ const handleEnter = () => {
 </script>
 
 <template>
-  <div>
+  <div class="rounded-md bg-card px-4 py-5">
     <ControlBar @create-task="createTask" />
 
     <Input
       v-model="taskTitle"
       @keyup.enter="handleEnter"
       placeholder="Do this"
-      class="font-regular mt-7 w-full border-0 px-0 text-3xl text-primary caret-accent focus-visible:outline-none focus-visible:ring-0"
+      class="font-regular mt-7 w-full border-0 bg-secondary px-0 pl-4 text-3xl text-primary caret-accent focus-visible:outline-none focus-visible:ring-0"
     />
 
     <TaskSideInformation
@@ -70,7 +70,7 @@ const handleEnter = () => {
       @keyup.enter="handleEnter"
       v-model="taskDescription"
       placeholder="Some more context"
-      class="mt-7 text-lg text-primary caret-accent"
+      class="text-md mt-7 bg-secondary pl-4 text-primary caret-accent"
     />
   </div>
 </template>

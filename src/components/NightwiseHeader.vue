@@ -1,12 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Button } from "@/components/ui/button";
-
-const toggleTheme = ref(false);
-
-const switchTheme = () => {
-  toggleTheme.value = !toggleTheme.value;
-};
 </script>
 
 <template>

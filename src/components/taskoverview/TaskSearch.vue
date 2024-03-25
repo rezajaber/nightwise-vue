@@ -19,7 +19,7 @@ const position = ref("This Week");
     <div class="flex gap-2.5">
       <Input
         placeholder="Search Task..."
-        class="h-8 w-full border-2 border-secondary text-primary caret-accent"
+        class="h-8 w-full border border-accent text-primary caret-accent"
       />
       <Button size="sm" class="border-none bg-accent px-2.5"
         ><svg
