@@ -55,7 +55,7 @@ const handleEnter = () => {
           height="20"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="currentColor"
+          stroke="#ffffff"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -68,8 +68,10 @@ const handleEnter = () => {
       </Button>
     </div>
 
-    <div class="flex gap-2.5">
-      <Button size="sm" class="w-2/5 border-none bg-accent">Show done</Button>
+    <div class="flex gap-2.5 text-white">
+      <Button size="sm" class="w-2/5 border-none bg-accent text-white"
+        >Show done</Button
+      >
 
       <DropdownMenu>
         <DropdownMenuTrigger as-child>

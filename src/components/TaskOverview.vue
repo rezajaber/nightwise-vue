@@ -15,7 +15,9 @@ const emit = defineEmits(["task-edited"]);
 </script>
 
 <template>
-  <div class="rounded-md bg-card px-4 py-5">
+  <div
+    class="relative rounded-xl bg-gradient-to-b from-border to-card p-px px-4 py-5 shadow-lg transition-all"
+  >
     <TaskSearch />
     <TaskList @edit-task="onEditTask" class="mt-9" />
   </div>

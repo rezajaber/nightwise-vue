@@ -52,8 +52,8 @@ watch(date, (newValue) => {
             )
           "
         >
-          <CalendarIcon class="mr-2 h-4 w-4 text-black" />
-          <span class="text-black">{{
+          <CalendarIcon class="mr-2 h-4 w-4 text-white" />
+          <span class="text-white">{{
             date ? format(date, "PPP") : "Pick a date"
           }}</span>
         </Button>
@@ -68,7 +68,7 @@ watch(date, (newValue) => {
         <DropdownMenuTrigger as-child>
           <Button
             size="xs"
-            class="justify-between gap-4 border-none bg-accent"
+            class="justify-between gap-4 border-none bg-accent text-white"
             variant="outline"
           >
             {{ position }}
@@ -78,7 +78,7 @@ watch(date, (newValue) => {
               height="18"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="#ffffff"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -104,7 +104,7 @@ watch(date, (newValue) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Button class="border-none bg-accent" size="xs">Edit</Button>
+      <Button class="border-none bg-accent text-white" size="xs">Edit</Button>
     </div>
   </div>
 </template>
