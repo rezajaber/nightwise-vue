@@ -22,6 +22,10 @@ const onCreateClick = () => {
         >{{ props.mode }}</Button
       >
 
+      <Button size="xs" class="border-none bg-accent text-white">Delete</Button>
+    </div>
+
+    <div class="flex items-center gap-2">
       <Button size="xs" class="border-none bg-accent"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
@@ -39,43 +43,6 @@ const onCreateClick = () => {
           <path d="M5 5L19 19" /></svg
       ></Button>
 
-      <Button size="xs" class="border-none bg-accent text-white"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#ffffff"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-move-down-right"
-        >
-          <path d="M19 13V19H13" />
-          <path d="M5 5L19 19" /></svg
-      ></Button>
-    </div>
-
-    <div class="flex items-center gap-2">
-      <Button size="xs" class="border-none bg-accent text-white">Delete</Button>
-
-      <Button size="xs" class="border-none bg-accent"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#ffffff"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-move-left"
-        >
-          <path d="M6 8L2 12L6 16" />
-          <path d="M2 12H22" /></svg
-      ></Button>
       <Button size="xs" class="border-none bg-accent"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +59,8 @@ const onCreateClick = () => {
           <path d="M8 18L12 22L16 18" />
           <path d="M12 2V22" /></svg
       ></Button>
-      <Button size="xs" class="border-none bg-accent"
+
+      <Button size="xs" class="border-none bg-accent text-white"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -103,10 +71,10 @@ const onCreateClick = () => {
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="lucide lucide-move-right"
+          class="lucide lucide-move-down-right"
         >
-          <path d="M18 8L22 12L18 16" />
-          <path d="M2 12H22" /></svg
+          <path d="M19 13V19H13" />
+          <path d="M5 5L19 19" /></svg
       ></Button>
     </div>
   </div>
