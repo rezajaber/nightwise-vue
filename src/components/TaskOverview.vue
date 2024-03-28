@@ -12,8 +12,6 @@ const onEditTask = (task) => {
 };
 
 const emit = defineEmits(["task-edited"]);
-
-const taskCreationShown;
 </script>
 
 <template>
