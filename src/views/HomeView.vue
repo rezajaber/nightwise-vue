@@ -12,8 +12,8 @@ const handleTaskEdited = (task) => {
 </script>
 
 <template>
-  <main class="mt-8 sm:flex sm:gap-6">
-    <TaskOverview @task-edited="handleTaskEdited" />
+  <main class="gap-6 md:flex">
+    <TaskOverview class="w-full" @task-edited="handleTaskEdited" />
     <TaskCreation :task="editedTask" class="hidden w-full sm:block" />
   </main>
 </template>
