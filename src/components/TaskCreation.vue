@@ -91,6 +91,7 @@ const deleteSelectedTask = async () => {
       @update-category="category = $event"
       class="mt-7"
     />
+
     <Textarea
       @keyup.enter="handleEnter"
       v-model="taskDescription"

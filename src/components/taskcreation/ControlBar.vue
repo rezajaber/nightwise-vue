@@ -29,29 +29,12 @@ const onDeleteClick = () => {
 <template>
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
-      <Dialog>
-        <DialogTrigger as-child>
-          <Button size="xs" class="border-none bg-accent text-white">{{
-            props.mode
-          }}</Button>
-        </DialogTrigger>
-        <DialogContent class="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Create Task</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to create the task?
-            </DialogDescription>
-          </DialogHeader>
-
-          <DialogFooter class="sm:justify-start">
-            <DialogClose as-child class="">
-              <Button type="button" size="sm" @click="onCreateClick">
-                Create
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <Button
+        @click="onCreateClick"
+        size="xs"
+        class="border-none bg-accent text-white"
+        >{{ props.mode }}</Button
+      >
 
       <Dialog>
         <DialogTrigger as-child>
