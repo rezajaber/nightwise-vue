@@ -48,7 +48,10 @@ const handleEnter = () => {
         placeholder="Search Task..."
         class="h-8 w-full border border-accent text-primary caret-accent"
       />
-      <Button size="sm" class="border-none bg-accent px-2.5" @click="createTask"
+      <Button
+        size="sm"
+        class="hidden border-none bg-accent px-2.5 md:block"
+        @click="createTask"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

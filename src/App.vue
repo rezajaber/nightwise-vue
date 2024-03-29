@@ -5,7 +5,9 @@ import Header from "../src/components/NightwiseHeader.vue";
 </script>
 
 <template>
-  <div class="dark grid min-h-screen place-content-center bg-background">
+  <div
+    class="dark grid min-h-screen place-content-center gap-5 bg-background px-4 py-5"
+  >
     <RouterView />
   </div>
 </template>
