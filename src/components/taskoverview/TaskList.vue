@@ -23,7 +23,7 @@ function truncateText(text: string, limit: number = 50) {
 
 <template>
   <div>
-    <div class="">
+    <div>
       <div class="flex justify-between text-primary">
         <p class="align-middle text-sm font-semibold">Ontime</p>
         <p class="text-sm font-semibold">{{ tasks.length }}</p>
@@ -32,25 +32,27 @@ function truncateText(text: string, limit: number = 50) {
       <Separator class="mt-1 bg-primary" />
     </div>
 
-    <div
-      v-for="task in tasks"
-      :key="task.id"
-      @click="editTask(task)"
-      class="mt-5 grid cursor-pointer gap-1.5 rounded-lg pl-4 duration-300 ease-in-out hover:scale-105"
-    >
-      <div class="flex items-center space-x-2 text-primary">
-        <Checkbox />
+    <div class="no-scrollbar h-96 overflow-x-hidden overflow-y-scroll">
+      <div
+        v-for="task in tasks"
+        :key="task.id"
+        @click="editTask(task)"
+        class="mt-5 grid cursor-pointer gap-1.5 rounded-lg pl-4 duration-300 ease-in-out hover:scale-105"
+      >
+        <div class="flex items-center space-x-2 text-primary">
+          <Checkbox />
 
-        <label
-          class="break-all text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-        >
-          {{ task.title }}
-        </label>
+          <label
+            class="break-all text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            {{ task.title }}
+          </label>
+        </div>
+
+        <p class="break-all pl-6 text-justify text-xs text-primary opacity-60">
+          {{ truncateText(task.description) }}
+        </p>
       </div>
-
-      <p class="break-all pl-6 text-justify text-xs text-primary opacity-60">
-        {{ truncateText(task.description) }}
-      </p>
     </div>
   </div>
 </template>

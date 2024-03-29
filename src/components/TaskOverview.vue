@@ -3,15 +3,36 @@ import TaskSearch from "./taskoverview/TaskSearch.vue";
 import TaskList from "./taskoverview/TaskList.vue";
 import { ref } from "vue";
 import { Button } from "@/components/ui/button";
+import { createTask as createTaskApi } from "@/lib/api/task"; // Assuming this is the API call
+
+const emit = defineEmits(["task-edited"]);
 const selectedTask = ref(null);
 
 const onEditTask = (task) => {
   selectedTask.value = task;
-
   emit("task-edited", task);
 };
 
-const emit = defineEmits(["task-edited"]);
+const taskTitle = ref("");
+const taskDescription = ref("");
+const category = ref("");
+let due_date = ref(new Date());
+
+const createTask = async () => {
+  if (taskTitle.value.trim()) {
+    await createTaskApi(
+      taskTitle.value,
+      taskDescription.value,
+      category.value,
+      due_date.value,
+    );
+    taskTitle.value = "";
+    taskDescription.value = "";
+    // Reset input after creation
+    // Optionally, emit an event to notify parent components to refresh the task list
+  }
+  window.location.reload();
+};
 </script>
 
 <template>
@@ -20,12 +41,26 @@ const emit = defineEmits(["task-edited"]);
       class="relative rounded-xl bg-gradient-to-b from-border to-card p-px px-4 py-5 shadow-lg transition-all"
     >
       <TaskSearch />
-      <TaskList
-        @edit-task="onEditTask"
-        class="no-scrollbar mt-9 h-96 overflow-x-hidden overflow-y-scroll"
-      />
+      <TaskList @edit-task="onEditTask" class="mt-9" />
     </div>
 
-    <Button class="md:hidden">Add a Task</Button>
+    <Button @click="createTask" class="gap-1 md:hidden">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#ffffff"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-circle-plus"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M8 12h8" />
+        <path d="M12 8v8" /></svg
+      >Add a Task</Button
+    >
   </div>
 </template>
