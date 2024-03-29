@@ -38,7 +38,7 @@ const onDeleteClick = () => {
         <DialogContent class="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>Create Task</DialogTitle>
-            <DialogDescription class="text-white opacity-60">
+            <DialogDescription>
               Are you sure you want to create the task?
             </DialogDescription>
           </DialogHeader>
