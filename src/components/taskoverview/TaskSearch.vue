@@ -10,6 +10,16 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const position = ref("This Week");
 
@@ -46,27 +56,44 @@ const handleEnter = () => {
         placeholder="Search Task..."
         class="h-8 w-full border border-accent text-primary caret-accent"
       />
-      <Button
-        size="sm"
-        class="hidden border-none bg-accent px-2.5 md:block"
-        @click="createTask"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#ffffff"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-circle-plus"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M8 12h8" />
-          <path d="M12 8v8" />
-        </svg>
-      </Button>
+      <Dialog>
+        <DialogTrigger as-child>
+          <Button size="sm" class="hidden border-none bg-accent px-2.5 md:block"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-circle-plus"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 12h8" />
+              <path d="M12 8v8" />
+            </svg>
+          </Button>
+        </DialogTrigger>
+        <DialogContent class="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Create New Task</DialogTitle>
+            <DialogDescription class="text-white opacity-60">
+              Are you sure you want to create a new task?
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter class="sm:justify-start">
+            <DialogClose as-child class="">
+              <Button type="button" size="sm" @click="createTask">
+                Create
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
 
     <div class="flex gap-2.5 text-white">
