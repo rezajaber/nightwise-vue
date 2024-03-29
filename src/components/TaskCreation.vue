@@ -2,7 +2,7 @@
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
 
-import { ref, watch, defineProps } from "vue";
+import { ref, watch } from "vue";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { createTask } from "@/lib/api/task"; // Assuming this is the API call
