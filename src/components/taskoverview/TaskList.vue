@@ -3,7 +3,6 @@ import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { onMounted, ref } from "vue";
 import { getTasks as getTasksApi } from "@/lib/api/task"; // Assuming this is the API call
-import { defineEmits } from "vue";
 
 const tasks = ref([]);
 
