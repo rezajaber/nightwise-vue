@@ -35,7 +35,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 const date = ref<Date>();
-const position = ref("Personal");
+const position = ref("-");
 const categoryName = ref("");
 
 const emit = defineEmits([
@@ -144,15 +144,20 @@ const handleDeleteCategory = async (categoryId: string) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent class="w-56">
           <DropdownMenuRadioGroup v-model="position">
-            <DropdownMenuRadioItem v-model="position" value="Studies">
-              Studies
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem v-model="position" value="Work">
-              Work
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem v-model="position" value="Personal">
-              Personal
-            </DropdownMenuRadioItem>
+            <template v-if="categories.length > 0">
+              <DropdownMenuRadioItem
+                v-for="category in categories"
+                :key="category.id"
+                v-model="position"
+                :value="category.name"
+              >
+                {{ category.name }}
+              </DropdownMenuRadioItem>
+            </template>
+
+            <template v-else>
+              <DropdownMenuRadioItem value="-">-</DropdownMenuRadioItem>
+            </template>
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
