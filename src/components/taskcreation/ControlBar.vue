@@ -14,10 +14,15 @@ import {
 const props = defineProps({
   mode: String,
 });
-const emits = defineEmits(["create-task"]); // Added "task-deleted" to notify parent components
+const emit = defineEmits(["create-task", "delete-task"]); // Added "task-deleted" to notify parent components
 
 const onCreateClick = () => {
-  emits("create-task");
+  emit("create-task");
+};
+
+const onDeleteClick = () => {
+  emit("delete-task");
+  console.log("emit passed");
 };
 </script>
 
@@ -80,7 +85,9 @@ const onCreateClick = () => {
 
           <DialogFooter class="sm:justify-start">
             <DialogClose as-child class="">
-              <Button type="button" size="sm"> Delete </Button>
+              <Button type="button" size="sm" @click="onDeleteClick"
+                >Delete</Button
+              >
             </DialogClose>
           </DialogFooter>
         </DialogContent>

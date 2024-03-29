@@ -11,6 +11,7 @@ const selectedTask = ref(null);
 const onEditTask = (task) => {
   selectedTask.value = task;
   emit("task-edited", task);
+  console.log("Taskoverview:", selectedTask.value);
 };
 
 const taskTitle = ref("");

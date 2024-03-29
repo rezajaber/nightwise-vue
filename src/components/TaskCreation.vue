@@ -5,8 +5,7 @@ import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
 import { ref, watch } from "vue";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { createTask } from "@/lib/api/task"; // Assuming this is the API call
-import { updateTask } from "@/lib/api/task"; // Assuming this is the API call
+import { createTask, updateTask, deleteTask } from "@/lib/api/task";
 
 const props = defineProps({
   task: Object,
@@ -53,6 +52,21 @@ const createOrUpdateTask = async () => {
 const handleEnter = () => {
   createOrUpdateTask(); // Call the existing createTask function
 };
+
+const deleteSelectedTask = async () => {
+  if (props.task?.id) {
+    try {
+      await deleteTask(props.task.id);
+      window.location.reload(); // Or better, emit an event to inform the parent component to update its task list
+    } catch (error) {
+      console.error("Failed to delete the task:", error);
+      // Handle error (e.g., show a notification to the user)
+    }
+  } else {
+    console.error("Task ID is missing.");
+    // Handle the case when there is no task ID (should not happen in a delete scenario)
+  }
+};
 </script>
 
 <template>
@@ -62,6 +76,7 @@ const handleEnter = () => {
     <ControlBar
       :mode="props.task?.id ? 'Update' : 'Create'"
       @create-task="createOrUpdateTask"
+      @delete-task="deleteSelectedTask"
     />
 
     <Input
