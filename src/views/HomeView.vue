@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import TaskOverview from "@/components/TaskOverview.vue";
 import TaskCreation from "@/components/TaskCreation.vue";
+
 import { ref } from "vue";
 
 const editedTask = ref(null);
 
-// This function is triggered when the `task-edited` event is caught.
 const handleTaskEdited = (task) => {
   editedTask.value = task;
 };

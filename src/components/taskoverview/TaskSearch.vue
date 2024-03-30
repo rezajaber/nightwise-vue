@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { createTask as createTaskApi } from "@/lib/api/task"; // Assuming this is the API call
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { createTask as createTaskApi } from "@/lib/api/task"; // Assuming this is the API call
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,12 +22,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const position = ref("This Week");
-
 const taskTitle = ref("");
 const taskDescription = ref("");
 const category = ref("");
 let due_date = ref(new Date());
+
+const position = ref("This Week");
 
 const createTask = async () => {
   if (taskTitle.value.trim()) {
@@ -38,14 +39,12 @@ const createTask = async () => {
     );
     taskTitle.value = "";
     taskDescription.value = "";
-    // Reset input after creation
-    // Optionally, emit an event to notify parent components to refresh the task list
   }
   window.location.reload();
 };
 
 const handleEnter = () => {
-  createTask(); // Call the existing createTask function
+  createTask();
 };
 </script>
 

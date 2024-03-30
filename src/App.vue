@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { RouterView } from "vue-router";
 import Toaster from "@/components/ui/toast/Toaster.vue";
-import Header from "../src/components/NightwiseHeader.vue";
+
+import { RouterView } from "vue-router";
 </script>
 
 <template>

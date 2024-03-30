@@ -14,7 +14,8 @@ import {
 const props = defineProps({
   mode: String,
 });
-const emit = defineEmits(["create-task", "delete-task"]); // Added "task-deleted" to notify parent components
+
+const emit = defineEmits(["create-task", "delete-task"]);
 
 const onCreateClick = () => {
   emit("create-task");

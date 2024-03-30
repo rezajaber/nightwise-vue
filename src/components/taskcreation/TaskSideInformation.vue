@@ -1,19 +1,17 @@
 <script setup lang="ts">
+import { ref, watch, onMounted } from "vue";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-vue-next";
-import { ref, watch, onMounted } from "vue";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/toast/use-toast";
-
+import { Input } from "@/components/ui/input";
 import {
   getCategory,
   createCategory,
   deleteCategory,
 } from "@/lib/api/category"; // Assuming this is the API call
-
 import {
   Popover,
   PopoverContent,
@@ -35,7 +33,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 
 const { toast } = useToast();
 const date = ref<Date>();

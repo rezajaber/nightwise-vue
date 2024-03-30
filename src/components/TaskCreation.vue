@@ -57,14 +57,12 @@ const deleteSelectedTask = async () => {
   if (props.task?.id) {
     try {
       await deleteTask(props.task.id);
-      window.location.reload(); // Or better, emit an event to inform the parent component to update its task list
+      window.location.reload();
     } catch (error) {
       console.error("Failed to delete the task:", error);
-      // Handle error (e.g., show a notification to the user)
     }
   } else {
     console.error("Task ID is missing.");
-    // Handle the case when there is no task ID (should not happen in a delete scenario)
   }
 };
 </script>

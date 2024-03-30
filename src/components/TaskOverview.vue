@@ -1,22 +1,23 @@
 <script setup lang="ts">
 import TaskSearch from "./taskoverview/TaskSearch.vue";
 import TaskList from "./taskoverview/TaskList.vue";
+
 import { ref } from "vue";
 import { Button } from "@/components/ui/button";
-import { createTask as createTaskApi } from "@/lib/api/task"; // Assuming this is the API call
+import { createTask as createTaskApi } from "@/lib/api/task";
 
 const emit = defineEmits(["task-edited"]);
+
+const taskTitle = ref("");
+const taskDescription = ref("");
+const category = ref("");
 const selectedTask = ref(null);
+let due_date = ref(new Date());
 
 const onEditTask = (task) => {
   selectedTask.value = task;
   emit("task-edited", task);
 };
-
-const taskTitle = ref("");
-const taskDescription = ref("");
-const category = ref("");
-let due_date = ref(new Date());
 
 const createTask = async () => {
   if (taskTitle.value.trim()) {
@@ -28,8 +29,6 @@ const createTask = async () => {
     );
     taskTitle.value = "";
     taskDescription.value = "";
-    // Reset input after creation
-    // Optionally, emit an event to notify parent components to refresh the task list
   }
   window.location.reload();
 };
