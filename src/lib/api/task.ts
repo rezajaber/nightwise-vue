@@ -3,13 +3,13 @@ import Base from "./base";
 export const createTask = async (
   title: string,
   description: string,
-  category: string,
+  category_id: string,
   due_date: Date,
 ): Promise<any> => {
   const data = {
     title: title,
     description: description,
-    category: category,
+    category_id: category_id,
     due_date: due_date,
     user_id: "40164s5bfdq72sp",
   };
@@ -33,13 +33,13 @@ export const updateTask = async (
   taskId: string,
   title: string,
   description: string,
-  category: string,
+  category_id: string,
   due_date: Date,
 ): Promise<any> => {
   const data = {
     title: title,
     description: description,
-    category: category,
+    category_id: category_id,
     due_date: due_date,
   };
 

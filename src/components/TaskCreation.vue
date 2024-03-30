@@ -13,7 +13,7 @@ const props = defineProps({
 
 const taskTitle = ref("");
 const taskDescription = ref("");
-const category = ref("");
+const category_id = ref("");
 let due_date = ref(new Date());
 
 watch(
@@ -22,7 +22,7 @@ watch(
     if (newTask) {
       taskTitle.value = newTask.title;
       taskDescription.value = newTask.description;
-      category.value = newTask.category;
+      category_id.value = newTask.category;
       due_date.value = new Date(newTask.due_date);
     }
   },
@@ -35,14 +35,14 @@ const createOrUpdateTask = async () => {
       props.task.id,
       taskTitle.value,
       taskDescription.value,
-      category.value,
+      category_id.value,
       due_date.value,
     );
   } else {
     await createTask(
       taskTitle.value,
       taskDescription.value,
-      category.value,
+      category_id.value,
       due_date.value,
     );
   }
@@ -86,7 +86,8 @@ const deleteSelectedTask = async () => {
 
     <TaskSideInformation
       @set-date="due_date = $event"
-      @update-category="category = $event"
+      @update-category="category_id = $event"
+      @set-category="category_id = $event"
       class="mt-7"
     />
 

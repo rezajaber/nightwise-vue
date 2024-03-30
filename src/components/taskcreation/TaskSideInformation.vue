@@ -36,13 +36,14 @@ import {
 
 const { toast } = useToast();
 const date = ref<Date>();
-const position = ref("-");
+const categoryPosition = ref("-");
 const categoryName = ref("");
 
 const emit = defineEmits([
   "set-date",
-  "category-fetched",
+  "set-category",
   "get-categories",
+  "category-fetched",
   "category-deleted",
   "category-created",
 ]);
@@ -122,6 +123,15 @@ const handleDeleteCategory = async (categoryId: string) => {
     console.error("Error deleting category:", error);
   }
 };
+
+watch(categoryPosition, (newVal) => {
+  const selectedCategory = categories.value.find(
+    (category) => category.name === newVal,
+  );
+  if (selectedCategory) {
+    emit("set-category", selectedCategory.id); // Emit the category ID
+  }
+});
 </script>
 
 <template>
@@ -158,7 +168,7 @@ const handleDeleteCategory = async (categoryId: string) => {
             class="justify-between gap-4 border-none bg-accent text-white"
             variant="outline"
           >
-            {{ position }}
+            {{ categoryPosition }}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -176,13 +186,13 @@ const handleDeleteCategory = async (categoryId: string) => {
             </svg>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent class="w-56">
-          <DropdownMenuRadioGroup v-model="position">
+        <DropdownMenuContent class="w-52">
+          <DropdownMenuRadioGroup v-model="categoryPosition">
             <template v-if="categories.length > 0">
               <DropdownMenuRadioItem
                 v-for="category in categories"
                 :key="category.id"
-                v-model="position"
+                v-model="categoryPosition"
                 :value="category.name"
               >
                 {{ category.name }}
