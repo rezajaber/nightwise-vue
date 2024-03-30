@@ -5,12 +5,15 @@ import { ref, watch, onMounted } from "vue";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/toast/use-toast";
+
 import {
   getCategory,
   createCategory,
   deleteCategory,
 } from "@/lib/api/category"; // Assuming this is the API call
-import { Label } from "@/components/ui/label";
+
 import {
   Popover,
   PopoverContent,
@@ -34,6 +37,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
+const { toast } = useToast();
 const date = ref<Date>();
 const position = ref("-");
 const categoryName = ref("");
@@ -65,17 +69,39 @@ onMounted(async () => {
 
 const handleCreateCategory = async () => {
   if (categoryName.value.trim().length > 22) {
-    // Notify the user that the category name is too long
-    alert("Category name cannot exceed 22 characters.");
+    toast({
+      title: "Category Creation Failed",
+      description: "Category name cannot exceed 22 characters.",
+      duration: 4000,
+      variant: "destructive",
+    });
   } else if (categoryName.value.trim()) {
     try {
       await createCategory(categoryName.value.trim());
-      emit("category-created"); // Optionally emit an event
-      categoryName.value = ""; // Reset the input field
-      categories.value = await getCategory(); // Refresh the categories list
+      emit("category-created");
+      categoryName.value = "";
+      categories.value = await getCategory();
+
+      toast({
+        title: "Category Created",
+        description: "The new category has been successfully created.",
+        duration: 4000,
+      });
     } catch (error) {
       console.error("Error creating category:", error);
+      toast({
+        title: "Error",
+        description: "There was an error creating the category.",
+        duration: 4000,
+      });
     }
+  } else {
+    toast({
+      title: "Notice",
+      description: "Please enter a category name.",
+      duration: 4000,
+      variant: "destructive",
+    });
   }
 };
 
