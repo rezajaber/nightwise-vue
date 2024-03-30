@@ -15,9 +15,9 @@ const handleTaskEdited = (task) => {
 <template>
   <main class="grid gap-4 md:flex md:gap-6">
     <TaskOverview
-      class="h-fit w-full md:h-auto"
+      class="h-fit md:h-auto md:w-fit"
       @task-edited="handleTaskEdited"
     />
-    <TaskCreation :task="editedTask" class="w-full md:h-auto" />
+    <TaskCreation :task="editedTask" class="w-fit md:h-auto md:w-[32rem]" />
   </main>
 </template>

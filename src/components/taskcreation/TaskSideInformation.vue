@@ -64,9 +64,12 @@ onMounted(async () => {
 });
 
 const handleCreateCategory = async () => {
-  if (categoryName.value.trim()) {
+  if (categoryName.value.trim().length > 22) {
+    // Notify the user that the category name is too long
+    alert("Category name cannot exceed 22 characters.");
+  } else if (categoryName.value.trim()) {
     try {
-      await createCategory(categoryName.value);
+      await createCategory(categoryName.value.trim());
       emit("category-created"); // Optionally emit an event
       categoryName.value = ""; // Reset the input field
       categories.value = await getCategory(); // Refresh the categories list
