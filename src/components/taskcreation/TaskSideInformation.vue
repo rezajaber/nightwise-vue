@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { handleCreateCategory } from "@/utils/categoryHelpers"; // Adjust the path based on your project structure
+
 import { ref, watch, onMounted } from "vue";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-vue-next";
@@ -40,7 +42,6 @@ const position = ref("-");
 const categoryName = ref("");
 
 const emit = defineEmits([
-  "update-category",
   "set-date",
   "category-fetched",
   "get-categories",
@@ -48,13 +49,7 @@ const emit = defineEmits([
   "category-created",
 ]);
 
-watch(position, (newValue) => {
-  // Emitting the update-category event with the new value
-  emit("update-category", newValue);
-});
-
 watch(date, (newValue) => {
-  // Emitting the update-category event with the new value
   emit("set-date", newValue);
 });
 
@@ -65,32 +60,48 @@ onMounted(async () => {
 });
 
 const handleCreateCategory = async () => {
-  if (categoryName.value.trim().length > 22) {
+  const trimmedCategoryName = categoryName.value.trim();
+
+  if (trimmedCategoryName.length > 22) {
     toast({
       title: "Category Creation Failed",
       description: "Category name cannot exceed 22 characters.",
       duration: 4000,
       variant: "destructive",
     });
-  } else if (categoryName.value.trim()) {
-    try {
-      await createCategory(categoryName.value.trim());
-      emit("category-created");
-      categoryName.value = "";
-      categories.value = await getCategory();
+  } else if (trimmedCategoryName) {
+    const existingCategories = await getCategory();
+    const categoryNameExists = existingCategories.some(
+      (category) => category.name === trimmedCategoryName,
+    );
 
+    if (categoryNameExists) {
       toast({
-        title: "Category Created",
-        description: "The new category has been successfully created.",
+        title: "Category Creation Failed",
+        description: "Category name already exists.",
         duration: 4000,
+        variant: "destructive",
       });
-    } catch (error) {
-      console.error("Error creating category:", error);
-      toast({
-        title: "Error",
-        description: "There was an error creating the category.",
-        duration: 4000,
-      });
+    } else {
+      try {
+        await createCategory(trimmedCategoryName);
+        emit("category-created");
+        categoryName.value = "";
+        categories.value = await getCategory();
+
+        toast({
+          title: "Category Created",
+          description: "The new category has been successfully created.",
+          duration: 4000,
+        });
+      } catch (error) {
+        console.error("Error creating category:", error);
+        toast({
+          title: "Error",
+          description: "There was an error creating the category.",
+          duration: 4000,
+        });
+      }
     }
   } else {
     toast({
@@ -108,7 +119,6 @@ const handleDeleteCategory = async (categoryId: string) => {
     categories.value = categories.value.filter(
       (category) => category.id !== categoryId,
     );
-    // Optionally, emit an event to notify the parent component of the change
     emit("category-deleted", categoryId);
   } catch (error) {
     console.error("Error deleting category:", error);
