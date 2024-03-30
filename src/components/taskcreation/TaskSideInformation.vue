@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { handleCreateCategory } from "@/utils/categoryHelpers"; // Adjust the path based on your project structure
-
 import { ref, watch, onMounted } from "vue";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-vue-next";
