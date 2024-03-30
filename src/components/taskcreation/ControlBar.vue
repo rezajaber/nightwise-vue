@@ -58,7 +58,7 @@ const onDeleteClick = () => {
               <line x1="14" x2="14" y1="11" y2="17" /></svg
           ></Button>
         </DialogTrigger>
-        <DialogContent class="sm:max-w-md">
+        <DialogContent class="sm:max-w-xs">
           <DialogHeader>
             <DialogTitle>Delete Task</DialogTitle>
             <DialogDescription class="text-white opacity-60">
@@ -68,7 +68,11 @@ const onDeleteClick = () => {
 
           <DialogFooter class="sm:justify-start">
             <DialogClose as-child class="">
-              <Button type="button" size="sm" @click="onDeleteClick"
+              <Button
+                type="button"
+                class="w-full"
+                size="sm"
+                @click="onDeleteClick"
                 >Delete</Button
               >
             </DialogClose>

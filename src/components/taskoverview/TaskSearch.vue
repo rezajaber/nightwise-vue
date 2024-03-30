@@ -77,7 +77,7 @@ const handleEnter = () => {
             </svg>
           </Button>
         </DialogTrigger>
-        <DialogContent class="sm:max-w-md">
+        <DialogContent class="sm:max-w-xs">
           <DialogHeader>
             <DialogTitle>Create New Task</DialogTitle>
             <DialogDescription class="text-white opacity-60">
@@ -87,7 +87,12 @@ const handleEnter = () => {
 
           <DialogFooter class="sm:justify-start">
             <DialogClose as-child class="">
-              <Button type="button" size="sm" @click="createTask">
+              <Button
+                type="button"
+                class="w-full"
+                size="sm"
+                @click="createTask"
+              >
                 Create
               </Button>
             </DialogClose>

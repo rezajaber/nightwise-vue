@@ -8,7 +8,6 @@ const editedTask = ref(null);
 // This function is triggered when the `task-edited` event is caught.
 const handleTaskEdited = (task) => {
   editedTask.value = task;
-  console.log("Homeview:", editedTask.value);
 };
 </script>
 
