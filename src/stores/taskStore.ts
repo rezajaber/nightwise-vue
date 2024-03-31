@@ -5,6 +5,7 @@ import { createTask, getTasks, updateTask, deleteTask } from "@/lib/api/task";
 export const useTaskStore = defineStore("task", {
   state: () => ({
     tasks: [],
+    selectedTask: null,
   }),
   actions: {
     async fetchTasks() {
@@ -35,6 +36,9 @@ export const useTaskStore = defineStore("task", {
     async removeTask(taskId) {
       await deleteTask(taskId);
       this.tasks = this.tasks.filter((task) => task.id !== taskId);
+    },
+    selectTask(task) {
+      this.selectedTask = task;
     },
   },
 });

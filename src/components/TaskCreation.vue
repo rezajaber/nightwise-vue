@@ -5,7 +5,7 @@ import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 
 const title = ref("");
@@ -24,6 +24,21 @@ const createTask = async () => {
   title.value = "";
   description.value = "";
 };
+
+watch(
+  () => taskStore.selectedTask,
+  (newTask, oldTask) => {
+    console.log("Selected task changed:", newTask);
+    if (newTask) {
+      title.value = newTask.title;
+      description.value = newTask.description;
+    } else {
+      title.value = "";
+      description.value = "";
+    }
+  },
+  { deep: true },
+);
 </script>
 
 <template>

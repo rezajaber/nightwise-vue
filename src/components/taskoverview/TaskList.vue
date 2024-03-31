@@ -15,6 +15,10 @@ onMounted(async () => {
   await taskStore.fetchTasks();
   tasks.value = taskStore.tasks;
 });
+
+function selectTask(task) {
+  taskStore.selectTask(task);
+}
 </script>
 
 <template>
@@ -32,6 +36,7 @@ onMounted(async () => {
       <div
         v-for="task in tasks"
         :key="task.id"
+        @click="selectTask(task)"
         class="mt-5 grid cursor-pointer gap-1.5 rounded-lg pl-4 duration-300 ease-in-out hover:scale-105"
       >
         <div class="flex items-center space-x-2 text-primary">
