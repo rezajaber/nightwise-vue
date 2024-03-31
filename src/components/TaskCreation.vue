@@ -36,6 +36,13 @@ const handleSubmit = async () => {
   }
 };
 
+const handleDelete = async () => {
+  if (taskStore.selectedTask) {
+    await taskStore.deleteTask(taskStore.selectedTask.id);
+    taskStore.clearSelectedTask(); // Clear selected task if needed
+  }
+};
+
 watch(
   () => taskStore.selectedTask,
   (newTask, oldTask) => {
@@ -56,7 +63,7 @@ watch(
   <div
     class="relative rounded-xl bg-gradient-to-b from-border to-card p-px px-4 py-5 shadow-lg transition-all"
   >
-    <ControlBar @create-new-task="handleSubmit" />
+    <ControlBar @create-new-task="handleSubmit" @delete-task="handleDelete" />
 
     <Input
       v-model="title"

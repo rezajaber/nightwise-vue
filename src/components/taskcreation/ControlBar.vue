@@ -38,6 +38,9 @@ const deleteTask = () => {
 const handleCreateOrUpdateClick = () => {
   emit("create-new-task");
 };
+const handleDeleteClick = () => {
+  emit("delete-task");
+};
 
 const taskStore = useTaskStore();
 
@@ -88,7 +91,13 @@ const buttonLabel = computed(() =>
 
           <DialogFooter class="sm:justify-start">
             <DialogClose as-child class="">
-              <Button type="button" class="w-full" size="sm">Delete</Button>
+              <Button
+                type="button"
+                class="w-full"
+                size="sm"
+                @click="handleDeleteClick"
+                >Delete</Button
+              >
             </DialogClose>
           </DialogFooter>
         </DialogContent>

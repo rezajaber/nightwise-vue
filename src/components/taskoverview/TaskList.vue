@@ -2,7 +2,7 @@
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 
 function truncateText(text: string, limit: number = 50) {
@@ -10,11 +10,10 @@ function truncateText(text: string, limit: number = 50) {
 }
 
 const taskStore = useTaskStore();
-const tasks = ref([]);
+const tasks = computed(() => taskStore.tasks);
 
 onMounted(async () => {
   await taskStore.fetchTasks();
-  tasks.value = taskStore.tasks;
 });
 
 function selectTask(task) {
@@ -27,7 +26,7 @@ function selectTask(task) {
     <div>
       <div class="flex justify-between text-primary">
         <p class="align-middle text-sm font-semibold">Ontime</p>
-        <p class="text-sm font-semibold">{{ tasks.length }}</p>
+        <p class="text-sm font-semibold">{{ taskStore.tasks.length }}</p>
       </div>
 
       <Separator class="mt-1 bg-primary" />

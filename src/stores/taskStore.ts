@@ -33,6 +33,14 @@ export const useTaskStore = defineStore("task", {
         this.tasks[index] = updatedTask;
       }
     },
+    async deleteTask(taskId) {
+      try {
+        await deleteTask(taskId);
+        this.tasks = this.tasks.filter((task) => task.id !== taskId);
+      } catch (error) {
+        console.error("Failed to delete task:", error);
+      }
+    },
     selectTask(task) {
       this.selectedTask = task;
     },
