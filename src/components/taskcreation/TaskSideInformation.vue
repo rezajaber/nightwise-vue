@@ -86,22 +86,34 @@ onMounted(() => {
         <DropdownMenuTrigger as-child>
           <Button
             size="xs"
-            class="w-fitjustify-between border-none bg-accent px-4 text-white"
+            class="w-fitjustify-between border-none bg-accent text-white"
             variant="outline"
           >
-            {{ categoryPosition }}
+            {{
+              categoryPosition === "Categories" ||
+              categoryStore.categories.length === 0
+                ? "Categories"
+                : categoryStore.categories.find(
+                    (c) => c.id === categoryPosition,
+                  )?.name
+            }}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent class="w-40">
+        <DropdownMenuContent class="w-46">
           <DropdownMenuRadioGroup v-model="categoryPosition">
-            <DropdownMenuRadioItem value="Personal">
-              Personal
+            <DropdownMenuRadioItem
+              v-for="category in categoryStore.categories"
+              :key="category.id"
+              :value="category.id"
+            >
+              {{ category.name }}
             </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="Business">
-              Business
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="University">
-              University
+
+            <DropdownMenuRadioItem
+              v-if="categoryStore.categories.length === 0"
+              value="Categories"
+            >
+              No categories found
             </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
