@@ -10,16 +10,38 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+
+defineProps();
+
+const emit = defineEmits(["create-task", "update-task", "delete-task"]);
+
+const createTask = () => {
+  emit("create-task");
+};
+const updateTask = () => {
+  emit("update-task");
+};
+const deleteTask = () => {
+  emit("delete-task");
+};
 </script>
 
 <template>
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
-      <Button size="xs" class="border-none bg-accent text-white">Create</Button>
+      <Button
+        size="xs"
+        class="border-none bg-accent text-white"
+        @click="createTask"
+        >Create</Button
+      >
 
       <Dialog>
         <DialogTrigger as-child>
-          <Button size="xs" class="border-none bg-accent text-white"
+          <Button
+            size="xs"
+            class="border-none bg-accent text-white"
+            @click="deleteTask"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
