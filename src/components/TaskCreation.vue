@@ -2,7 +2,7 @@
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
 
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { createTask, updateTask, deleteTask } from "@/lib/api/task";
@@ -22,7 +22,7 @@ watch(
     if (newTask) {
       taskTitle.value = newTask.title;
       taskDescription.value = newTask.description;
-      category_id.value = newTask.category;
+      category_id.value = newTask.category_id;
       due_date.value = new Date(newTask.due_date);
     }
   },
