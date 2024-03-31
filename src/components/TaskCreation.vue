@@ -36,6 +36,10 @@ const handleSubmit = async () => {
   }
 };
 
+const handleEnterSubmit = () => {
+  handleSubmit();
+};
+
 const handleDelete = async () => {
   if (taskStore.selectedTask) {
     await taskStore.deleteTask(taskStore.selectedTask.id);
@@ -67,6 +71,7 @@ watch(
 
     <Input
       v-model="title"
+      @keyup.enter="handleEnterSubmit"
       placeholder="Do this"
       class="font-regular mt-7 w-full border-0 bg-secondary px-0 pl-4 text-3xl text-primary caret-accent focus-visible:outline-none focus-visible:ring-0"
     />
@@ -75,6 +80,7 @@ watch(
 
     <Textarea
       v-model="description"
+      @keyup.enter="handleEnterSubmit"
       placeholder="Some more context"
       class="mt-7 bg-secondary pl-4 text-primary caret-accent"
     />
