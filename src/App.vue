@@ -5,6 +5,7 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
+  <!-- THIS IS THE BACKUP ### IF STORES DO NOT WORK -->
   <Toaster />
 
   <div
