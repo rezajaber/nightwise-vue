@@ -8,6 +8,7 @@ import { useTaskStore } from "@/stores/taskStore";
 function truncateText(text: string, limit: number = 50) {
   return text.length > limit ? text.slice(0, limit) + "..." : text;
 }
+
 const taskStore = useTaskStore();
 const tasks = ref([]);
 

@@ -14,17 +14,6 @@ const category_id = ref("");
 
 const taskStore = useTaskStore();
 
-const createTask = async () => {
-  await taskStore.addTask(
-    title.value,
-    description.value,
-    category_id.value,
-    new Date(),
-  );
-  title.value = "";
-  description.value = "";
-};
-
 const handleSubmit = async () => {
   if (taskStore.selectedTask) {
     await taskStore.updateTask(
@@ -67,7 +56,8 @@ watch(
   <div
     class="relative rounded-xl bg-gradient-to-b from-border to-card p-px px-4 py-5 shadow-lg transition-all"
   >
-    <ControlBar @click="handleSubmit" />
+    <ControlBar @create-new-task="handleSubmit" />
+
     <Input
       v-model="title"
       placeholder="Do this"

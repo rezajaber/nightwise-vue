@@ -33,10 +33,6 @@ export const useTaskStore = defineStore("task", {
         this.tasks[index] = updatedTask;
       }
     },
-    async removeTask(taskId) {
-      await deleteTask(taskId);
-      this.tasks = this.tasks.filter((task) => task.id !== taskId);
-    },
     selectTask(task) {
       this.selectedTask = task;
     },

@@ -15,13 +15,28 @@ import {
 
 defineProps();
 
-const emit = defineEmits(["create-task", "delete-task"]);
+const emit = defineEmits([
+  "create-new-task",
+  "create-task",
+  "update-task",
+  "delete-task",
+]);
 
+const createNewTask = () => {
+  emit("create-new-task");
+};
 const createTask = () => {
   emit("create-task");
 };
+const updateTask = () => {
+  emit("update-task");
+};
 const deleteTask = () => {
   emit("delete-task");
+};
+
+const handleCreateOrUpdateClick = () => {
+  emit("create-new-task");
 };
 
 const taskStore = useTaskStore();
@@ -34,16 +49,16 @@ const buttonLabel = computed(() =>
 <template>
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
-      <Button size="xs" class="border-none bg-accent text-white">{{
-        buttonLabel
-      }}</Button>
+      <Button
+        size="xs"
+        class="border-none bg-accent text-white"
+        @click="handleCreateOrUpdateClick"
+        >{{ buttonLabel }}</Button
+      >
 
       <Dialog>
         <DialogTrigger as-child>
-          <Button
-            size="xs"
-            class="border-none bg-accent text-white"
-            @click="deleteTask"
+          <Button size="xs" class="border-none bg-accent text-white"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
