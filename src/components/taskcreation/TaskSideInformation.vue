@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
+import { useCategoryStore } from "@/stores/categoryStore";
+import { ref, onMounted } from "vue";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-vue-next";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { useToast } from "@/components/ui/toast/use-toast";
 import { Input } from "@/components/ui/input";
 import {
   Popover,
@@ -31,6 +31,28 @@ import {
 
 const date = ref<Date>();
 const categoryPosition = ref("Categories");
+
+const categoryStore = useCategoryStore();
+
+const newCategoryName = ref(""); // For the new category name input
+
+const createCategory = async () => {
+  if (newCategoryName.value.trim()) {
+    await categoryStore.addCategory(newCategoryName.value.trim());
+    newCategoryName.value = ""; // Reset input after adding
+    categoryStore.fetchCategories(); // Refresh categories list
+  }
+};
+
+const deleteCategoryAction = async (categoryId: string) => {
+  await categoryStore.deleteCategory(categoryId);
+  categoryStore.fetchCategories(); // Refresh categories list
+};
+
+// Lifecycle
+onMounted(() => {
+  categoryStore.fetchCategories(); // Load categories on component mount
+});
 </script>
 
 <template>
@@ -102,11 +124,16 @@ const categoryPosition = ref("Categories");
 
           <div class="flex flex-col gap-3 py-2 text-white">
             <div
+              v-for="category in categoryStore.categories"
+              :key="category.id"
               class="flex items-center justify-between rounded-md bg-secondary px-3 py-1.5 duration-300 ease-in-out hover:scale-105"
             >
-              <p class="justify-between">Test</p>
+              <p class="justify-between">{{ category.name }}</p>
 
-              <Button size="sm" class="border-none bg-accent text-white"
+              <Button
+                size="sm"
+                class="border-none bg-accent text-white"
+                @click="deleteCategoryAction(category.id)"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -129,7 +156,10 @@ const categoryPosition = ref("Categories");
           </div>
 
           <div class="flex items-center gap-3">
-            <Button size="md" class="border-none bg-accent text-white"
+            <Button
+              @click="createCategory"
+              size="md"
+              class="border-none bg-accent text-white"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -149,13 +179,16 @@ const categoryPosition = ref("Categories");
                 <path d="M21 12h-6" /></svg
             ></Button>
             <Input
+              v-model="newCategoryName"
               class="w-full border-accent bg-transparent text-white caret-accent"
               placeholder="Add a category..."
             />
           </div>
 
           <DialogFooter>
-            <Button type="submit" class="w-full">Create</Button>
+            <Button type="submit" class="w-full" @click="createCategory"
+              >Create</Button
+            >
           </DialogFooter>
         </DialogContent>
       </Dialog>
