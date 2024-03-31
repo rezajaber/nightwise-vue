@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { useTaskStore } from "@/stores/taskStore";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,28 +15,28 @@ import {
 
 defineProps();
 
-const emit = defineEmits(["create-task", "update-task", "delete-task"]);
+const emit = defineEmits(["create-task", "delete-task"]);
 
 const createTask = () => {
   emit("create-task");
 };
-const updateTask = () => {
-  emit("update-task");
-};
 const deleteTask = () => {
   emit("delete-task");
 };
+
+const taskStore = useTaskStore();
+
+const buttonLabel = computed(() =>
+  taskStore.selectedTask ? "Update" : "Create",
+);
 </script>
 
 <template>
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
-      <Button
-        size="xs"
-        class="border-none bg-accent text-white"
-        @click="createTask"
-        >Create</Button
-      >
+      <Button size="xs" class="border-none bg-accent text-white">{{
+        buttonLabel
+      }}</Button>
 
       <Dialog>
         <DialogTrigger as-child>

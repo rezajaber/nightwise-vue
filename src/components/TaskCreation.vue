@@ -25,6 +25,28 @@ const createTask = async () => {
   description.value = "";
 };
 
+const handleSubmit = async () => {
+  if (taskStore.selectedTask) {
+    await taskStore.updateTask(
+      taskStore.selectedTask.id,
+      title.value,
+      description.value,
+      category_id.value,
+      new Date(),
+    );
+    taskStore.clearSelectedTask();
+  } else {
+    await taskStore.addTask(
+      title.value,
+      description.value,
+      category_id.value,
+      new Date(),
+    );
+    title.value = "";
+    description.value = "";
+  }
+};
+
 watch(
   () => taskStore.selectedTask,
   (newTask, oldTask) => {
@@ -45,8 +67,7 @@ watch(
   <div
     class="relative rounded-xl bg-gradient-to-b from-border to-card p-px px-4 py-5 shadow-lg transition-all"
   >
-    <ControlBar @create-task="createTask" />
-
+    <ControlBar @click="handleSubmit" />
     <Input
       v-model="title"
       placeholder="Do this"
