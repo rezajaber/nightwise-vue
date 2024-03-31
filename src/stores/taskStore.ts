@@ -40,5 +40,8 @@ export const useTaskStore = defineStore("task", {
     selectTask(task) {
       this.selectedTask = task;
     },
+    clearSelectedTask() {
+      this.selectedTask = null;
+    },
   },
 });

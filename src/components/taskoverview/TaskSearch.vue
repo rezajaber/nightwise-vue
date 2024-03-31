@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useTaskStore } from "@/stores/taskStore";
 
 import {
   DropdownMenu,
@@ -22,6 +23,12 @@ import {
 } from "@/components/ui/dialog";
 
 const position = ref("This Week");
+
+const taskStore = useTaskStore();
+
+function clearSelectedTask() {
+  taskStore.clearSelectedTask();
+}
 </script>
 
 <template>
@@ -62,7 +69,14 @@ const position = ref("This Week");
 
           <DialogFooter class="sm:justify-start">
             <DialogClose as-child class="">
-              <Button type="button" class="w-full" size="sm"> Create </Button>
+              <Button
+                type="button"
+                class="w-full"
+                size="sm"
+                @click="clearSelectedTask()"
+              >
+                Create
+              </Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
