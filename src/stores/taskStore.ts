@@ -41,6 +41,7 @@ export const useTaskStore = defineStore("task", {
         console.error("Failed to delete task:", error);
       }
     },
+
     selectTask(task) {
       this.selectedTask = task;
     },
