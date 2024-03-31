@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { createTask as createTaskApi } from "@/lib/api/task"; // Assuming this is the API call
 
 import {
   DropdownMenu,
@@ -22,30 +21,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const taskTitle = ref("");
-const taskDescription = ref("");
-const category = ref("");
-let due_date = ref(new Date());
-
 const position = ref("This Week");
-
-const createTask = async () => {
-  if (taskTitle.value.trim()) {
-    await createTaskApi(
-      taskTitle.value,
-      taskDescription.value,
-      category.value,
-      due_date.value,
-    );
-    taskTitle.value = "";
-    taskDescription.value = "";
-  }
-  window.location.reload();
-};
-
-const handleEnter = () => {
-  createTask();
-};
 </script>
 
 <template>
@@ -86,14 +62,7 @@ const handleEnter = () => {
 
           <DialogFooter class="sm:justify-start">
             <DialogClose as-child class="">
-              <Button
-                type="button"
-                class="w-full"
-                size="sm"
-                @click="createTask"
-              >
-                Create
-              </Button>
+              <Button type="button" class="w-full" size="sm"> Create </Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
@@ -130,7 +99,7 @@ const handleEnter = () => {
             </svg>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent class="w-56">
+        <DropdownMenuContent class="w-44">
           <DropdownMenuRadioGroup v-model="position">
             <DropdownMenuRadioItem value="Today"> Today </DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="This Week">

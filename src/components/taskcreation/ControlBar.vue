@@ -10,32 +10,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
-const props = defineProps({
-  mode: String,
-});
-
-const emit = defineEmits(["create-task", "delete-task"]);
-
-const onCreateClick = () => {
-  emit("create-task");
-};
-
-const onDeleteClick = () => {
-  emit("delete-task");
-  console.log("emit passed");
-};
 </script>
 
 <template>
   <div class="flex justify-between">
     <div class="flex items-center gap-2">
-      <Button
-        @click="onCreateClick"
-        size="xs"
-        class="border-none bg-accent text-white"
-        >{{ props.mode }}</Button
-      >
+      <Button size="xs" class="border-none bg-accent text-white">Create</Button>
 
       <Dialog>
         <DialogTrigger as-child>
@@ -69,13 +49,7 @@ const onDeleteClick = () => {
 
           <DialogFooter class="sm:justify-start">
             <DialogClose as-child class="">
-              <Button
-                type="button"
-                class="w-full"
-                size="sm"
-                @click="onDeleteClick"
-                >Delete</Button
-              >
+              <Button type="button" class="w-full" size="sm">Delete</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

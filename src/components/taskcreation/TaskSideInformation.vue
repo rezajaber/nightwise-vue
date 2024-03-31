@@ -8,11 +8,6 @@ import { Calendar } from "@/components/ui/calendar";
 import { useToast } from "@/components/ui/toast/use-toast";
 import { Input } from "@/components/ui/input";
 import {
-  getCategory,
-  createCategory,
-  deleteCategory,
-} from "@/lib/api/category"; // Assuming this is the API call
-import {
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -34,104 +29,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const { toast } = useToast();
 const date = ref<Date>();
-const categoryPosition = ref("-");
-const categoryName = ref("");
-
-const emit = defineEmits([
-  "set-date",
-  "set-category",
-  "get-categories",
-  "category-fetched",
-  "category-deleted",
-  "category-created",
-]);
-
-watch(date, (newValue) => {
-  emit("set-date", newValue);
-});
-
-const categories = ref([]);
-
-onMounted(async () => {
-  categories.value = await getCategory();
-});
-
-const handleCreateCategory = async () => {
-  const trimmedCategoryName = categoryName.value.trim();
-
-  if (trimmedCategoryName.length > 22) {
-    toast({
-      title: "Category Creation Failed",
-      description: "Category name cannot exceed 22 characters.",
-      duration: 4000,
-      variant: "destructive",
-    });
-  } else if (trimmedCategoryName) {
-    const existingCategories = await getCategory();
-    const categoryNameExists = existingCategories.some(
-      (category) => category.name === trimmedCategoryName,
-    );
-
-    if (categoryNameExists) {
-      toast({
-        title: "Category Creation Failed",
-        description: "Category name already exists.",
-        duration: 4000,
-        variant: "destructive",
-      });
-    } else {
-      try {
-        await createCategory(trimmedCategoryName);
-        emit("category-created");
-        categoryName.value = "";
-        categories.value = await getCategory();
-
-        toast({
-          title: "Category Created",
-          description: "The new category has been successfully created.",
-          duration: 4000,
-        });
-      } catch (error) {
-        console.error("Error creating category:", error);
-        toast({
-          title: "Error",
-          description: "There was an error creating the category.",
-          duration: 4000,
-        });
-      }
-    }
-  } else {
-    toast({
-      title: "Notice",
-      description: "Please enter a category name.",
-      duration: 4000,
-      variant: "destructive",
-    });
-  }
-};
-
-const handleDeleteCategory = async (categoryId: string) => {
-  try {
-    await deleteCategory(categoryId);
-    categories.value = categories.value.filter(
-      (category) => category.id !== categoryId,
-    );
-    emit("category-deleted", categoryId);
-  } catch (error) {
-    console.error("Error deleting category:", error);
-  }
-};
-
-watch(categoryPosition, (newVal) => {
-  const selectedCategory = categories.value.find(
-    (category) => category.name === newVal,
-  );
-  if (selectedCategory) {
-    emit("set-category", selectedCategory.id); // Emit the category ID
-  }
-});
+const categoryPosition = ref("Categories");
 </script>
 
 <template>
@@ -165,43 +64,23 @@ watch(categoryPosition, (newVal) => {
         <DropdownMenuTrigger as-child>
           <Button
             size="xs"
-            class="justify-between gap-4 border-none bg-accent text-white"
+            class="w-fitjustify-between border-none bg-accent px-4 text-white"
             variant="outline"
           >
             {{ categoryPosition }}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-arrow-down"
-            >
-              <path d="M12 5v14" />
-              <path d="m19 12-7 7-7-7" />
-            </svg>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent class="w-52">
+        <DropdownMenuContent class="w-40">
           <DropdownMenuRadioGroup v-model="categoryPosition">
-            <template v-if="categories.length > 0">
-              <DropdownMenuRadioItem
-                v-for="category in categories"
-                :key="category.id"
-                v-model="categoryPosition"
-                :value="category.name"
-              >
-                {{ category.name }}
-              </DropdownMenuRadioItem>
-            </template>
-
-            <template v-else>
-              <DropdownMenuRadioItem value="-">-</DropdownMenuRadioItem>
-            </template>
+            <DropdownMenuRadioItem value="Personal">
+              Personal
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="Business">
+              Business
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="University">
+              University
+            </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -212,6 +91,7 @@ watch(categoryPosition, (newVal) => {
             >Edit</Button
           >
         </DialogTrigger>
+
         <DialogContent class="sm:max-w-[375px]">
           <DialogHeader>
             <DialogTitle>Edit Categories</DialogTitle>
@@ -223,17 +103,10 @@ watch(categoryPosition, (newVal) => {
           <div class="flex flex-col gap-3 py-2 text-white">
             <div
               class="flex items-center justify-between rounded-md bg-secondary px-3 py-1.5 duration-300 ease-in-out hover:scale-105"
-              v-for="category in categories"
-              :key="category.id"
             >
-              <p class="b justify-between rounded-md">
-                {{ category.name }}
-              </p>
+              <p class="justify-between">Test</p>
 
-              <Button
-                size="sm"
-                class="border-none bg-accent text-white"
-                @click="handleDeleteCategory(category.id)"
+              <Button size="sm" class="border-none bg-accent text-white"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -276,16 +149,13 @@ watch(categoryPosition, (newVal) => {
                 <path d="M21 12h-6" /></svg
             ></Button>
             <Input
-              v-model="categoryName"
               class="w-full border-accent bg-transparent text-white caret-accent"
               placeholder="Add a category..."
             />
           </div>
 
           <DialogFooter>
-            <Button type="submit" class="w-full" @click="handleCreateCategory"
-              >Create</Button
-            >
+            <Button type="submit" class="w-full">Create</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

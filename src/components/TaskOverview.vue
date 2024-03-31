@@ -2,36 +2,7 @@
 import TaskSearch from "./taskoverview/TaskSearch.vue";
 import TaskList from "./taskoverview/TaskList.vue";
 
-import { ref } from "vue";
 import { Button } from "@/components/ui/button";
-import { createTask as createTaskApi } from "@/lib/api/task";
-
-const emit = defineEmits(["task-edited"]);
-
-const taskTitle = ref("");
-const taskDescription = ref("");
-const category = ref("");
-const selectedTask = ref(null);
-let due_date = ref(new Date());
-
-const onEditTask = (task) => {
-  selectedTask.value = task;
-  emit("task-edited", task);
-};
-
-const createTask = async () => {
-  if (taskTitle.value.trim()) {
-    await createTaskApi(
-      taskTitle.value,
-      taskDescription.value,
-      category.value,
-      due_date.value,
-    );
-    taskTitle.value = "";
-    taskDescription.value = "";
-  }
-  window.location.reload();
-};
 </script>
 
 <template>
@@ -40,10 +11,10 @@ const createTask = async () => {
       class="relative rounded-xl bg-gradient-to-b from-border to-card p-px px-4 py-5 shadow-lg transition-all"
     >
       <TaskSearch />
-      <TaskList @edit-task="onEditTask" class="mt-9" />
+      <TaskList class="mt-9" />
     </div>
 
-    <Button @click="createTask" class="gap-1 md:hidden">
+    <Button class="gap-1 md:hidden">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
