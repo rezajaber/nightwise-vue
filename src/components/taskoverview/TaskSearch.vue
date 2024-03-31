@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useTaskStore } from "@/stores/taskStore";
@@ -22,7 +22,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+const props = defineProps();
+
+const emit = defineEmits(["update:searchQuery"]);
+
 const position = ref("This Week");
+const searchQuery = ref("");
+
+watch(searchQuery, (newValue) => {
+  emit("update:searchQuery", newValue);
+});
 
 const taskStore = useTaskStore();
 
@@ -35,6 +44,7 @@ function clearSelectedTask() {
   <div class="grid min-w-72 gap-2">
     <div class="flex gap-2.5">
       <Input
+        v-model="searchQuery"
         placeholder="Search Task..."
         class="h-8 w-full border border-accent text-primary caret-accent"
       />

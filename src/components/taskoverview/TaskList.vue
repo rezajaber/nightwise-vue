@@ -10,7 +10,6 @@ function truncateText(text: string, limit: number = 50) {
 }
 
 const taskStore = useTaskStore();
-const tasks = computed(() => taskStore.tasks);
 
 onMounted(async () => {
   await taskStore.fetchTasks();
@@ -19,6 +18,20 @@ onMounted(async () => {
 function selectTask(task) {
   taskStore.selectTask(task);
 }
+
+const props = defineProps({
+  searchQuery: String,
+});
+
+const filteredTasks = computed(() => {
+  let tasks = taskStore.tasks;
+  if (props.searchQuery) {
+    tasks = tasks.filter((task) =>
+      task.title.toLowerCase().includes(props.searchQuery.toLowerCase()),
+    );
+  }
+  return tasks;
+});
 </script>
 
 <template>
@@ -34,7 +47,7 @@ function selectTask(task) {
 
     <div class="no-scrollbar h-96 overflow-x-hidden overflow-y-scroll">
       <div
-        v-for="task in tasks"
+        v-for="task in filteredTasks"
         :key="task.id"
         @click="selectTask(task)"
         class="mt-5 grid cursor-pointer gap-1.5 rounded-lg pl-4 duration-300 ease-in-out hover:scale-105"

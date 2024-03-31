@@ -3,6 +3,13 @@ import TaskSearch from "./taskoverview/TaskSearch.vue";
 import TaskList from "./taskoverview/TaskList.vue";
 
 import { Button } from "@/components/ui/button";
+import { ref } from "vue";
+
+const searchQuery = ref("");
+
+function updateSearchQuery(newQuery) {
+  searchQuery.value = newQuery;
+}
 </script>
 
 <template>
@@ -10,8 +17,8 @@ import { Button } from "@/components/ui/button";
     <div
       class="relative rounded-xl bg-gradient-to-b from-border to-card p-px px-4 py-5 shadow-lg transition-all"
     >
-      <TaskSearch />
-      <TaskList class="mt-9" />
+      <TaskSearch @update:searchQuery="updateSearchQuery" />
+      <TaskList :searchQuery="searchQuery" class="mt-9" />
     </div>
 
     <Button class="gap-1 md:hidden">
