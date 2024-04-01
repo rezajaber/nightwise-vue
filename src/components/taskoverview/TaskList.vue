@@ -101,21 +101,49 @@ const filteredTasks = computed(() => {
         v-for="task in filteredTasks"
         :key="task.id"
         @click="selectTask(task)"
-        class="mt-5 grid cursor-pointer gap-1.5 rounded-lg pl-4 duration-300 ease-in-out hover:scale-105"
       >
-        <div class="flex items-center space-x-2 text-primary">
-          <Checkbox v-model="task.completed" />
+        <div
+          class="mt-5 flex cursor-pointer justify-between rounded-lg pl-4 duration-300 ease-in-out hover:scale-105"
+        >
+          <div class="grid gap-1.5">
+            <div class="flex items-center space-x-2 text-primary">
+              <Checkbox v-model="task.completed" />
 
-          <label
-            class="break-all text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
-            {{ truncateText(task.title) }}
-          </label>
+              <label
+                class="break-all text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
+                {{ truncateText(task.title) }}
+              </label>
+            </div>
+
+            <p
+              class="break-all pl-6 text-justify text-xs text-primary opacity-60"
+            >
+              {{ truncateText(task.description) }}
+            </p>
+          </div>
+          <!-- Conditionally render the SVG icon if the task is overdue -->
+          <span v-if="isOverdue(task.due_date)" class="flex-shrink-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#b91c1c"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-shield-alert"
+            >
+              <path
+                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+              />
+              <path d="M12 8v4" />
+              <path d="M12 16h.01" />
+            </svg>
+          </span>
         </div>
-
-        <p class="pl-6 text-xs text-primary opacity-60">
-          {{ truncateText(task.description) }}
-        </p>
       </div>
     </div>
   </div>
