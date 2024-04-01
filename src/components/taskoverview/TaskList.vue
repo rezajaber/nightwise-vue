@@ -43,7 +43,7 @@ const filteredTasks = computed(() => {
 <template>
   <div>
     <div class="flex justify-between">
-      <!-- Conditional styling for the "Overdue"/"Ontime"/"Tasks" header -->
+      <!-- Conditional text for Overdue/Ontime/Tasks -->
       <p
         :class="{
           'text-red-700':
@@ -57,6 +57,7 @@ const filteredTasks = computed(() => {
           'font-semibold': true,
         }"
       >
+        <!-- This now shows "Tasks" by default or "Overdue"/"Ontime" based on the selected task -->
         {{
           taskStore.selectedTask
             ? isOverdue(taskStore.selectedTask.due_date)
@@ -65,7 +66,7 @@ const filteredTasks = computed(() => {
             : "Tasks"
         }}
       </p>
-      <!-- Conditional styling for the tasks count -->
+      <!-- Adjusted task count display -->
       <p
         :class="{
           'text-red-700':
@@ -78,7 +79,8 @@ const filteredTasks = computed(() => {
           'font-semibold': true,
         }"
       >
-        {{ filteredTasks.length }}
+        <!-- Show the number of selected tasks or total tasks -->
+        {{ taskStore.selectedTask ? "1" : filteredTasks.length }}
       </p>
     </div>
 
