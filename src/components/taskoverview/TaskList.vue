@@ -39,7 +39,7 @@ const filteredTasks = computed(() => {
     <div>
       <div class="flex justify-between text-primary">
         <p class="align-middle text-sm font-semibold">Ontime</p>
-        <p class="text-sm font-semibold">{{ taskStore.tasks.length }}</p>
+        <p class="text-sm font-semibold">{{ filteredTasks.length }}</p>
       </div>
 
       <Separator class="mt-1 bg-primary" />
