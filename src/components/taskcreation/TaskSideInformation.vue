@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTaskStore } from "@/stores/taskStore";
+import { usePrioStore } from "@/stores/prioStore";
 import { useCategoryStore } from "@/stores/categoryStore";
 import { ref, onMounted, watch } from "vue";
 import { format } from "date-fns";
@@ -37,9 +38,11 @@ const props = defineProps({
 });
 
 const date = ref<Date>();
-const categoryPosition = ref("Categories");
+const categoryPosition = ref("Category");
+const prioPosition = ref("Priority");
 
 const taskStore = useTaskStore();
+const prioStore = usePrioStore();
 const categoryStore = useCategoryStore();
 
 const newCategoryName = ref(""); // For the new category name input
@@ -96,34 +99,71 @@ taskStore.$subscribe((mutation, state) => {
 // Lifecycle
 onMounted(() => {
   categoryStore.fetchCategories(); // Load categories on component mount
+  prioStore.fetchPrios();
 });
 </script>
 
 <template>
   <div class="flex justify-between">
-    <Popover>
-      <PopoverTrigger as-child>
-        <Button
-          class="border-none bg-accent"
-          size="xs"
-          :variant="'outline'"
-          :class="
-            cn(
-              'w-fit justify-start text-left font-normal',
-              !date && 'text-muted-foreground',
-            )
-          "
-        >
-          <CalendarIcon class="mr-2 h-4 w-4 text-white" />
-          <span class="text-white">{{
-            date ? format(date, "PPP") : "Pick a date"
-          }}</span>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent class="w-auto p-0">
-        <Calendar v-model="date" />
-      </PopoverContent>
-    </Popover>
+    <div class="flex gap-2">
+      <Popover>
+        <PopoverTrigger as-child>
+          <Button
+            class="border-none bg-accent"
+            size="xs"
+            :variant="'outline'"
+            :class="
+              cn(
+                'w-fit justify-start text-left font-normal',
+                !date && 'text-muted-foreground',
+              )
+            "
+          >
+            <CalendarIcon class="mr-2 h-4 w-4 text-white" />
+            <span class="text-white">{{
+              date ? format(date, "PPP") : "Pick a date"
+            }}</span>
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent class="w-auto p-0">
+          <Calendar v-model="date" />
+        </PopoverContent>
+      </Popover>
+
+      <DropdownMenu>
+        <DropdownMenuTrigger as-child>
+          <Button
+            size="xs"
+            class="w-fitjustify-between border-none bg-accent text-white"
+            variant="outline"
+          >
+            {{
+              prioPosition === "Priority" || prioStore.prios.length === 0
+                ? "Priority"
+                : prioStore.prios.find((c) => c.id === prioPosition)?.name
+            }}
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent class="w-46">
+          <DropdownMenuRadioGroup v-model="prioPosition">
+            <DropdownMenuRadioItem
+              v-for="prio in prioStore.prios"
+              :key="prio.id"
+              :value="prio.id"
+            >
+              {{ prio.name }}
+            </DropdownMenuRadioItem>
+
+            <DropdownMenuRadioItem
+              v-if="prioStore.prios.length === 0"
+              value="Priority"
+            >
+              No priorities found
+            </DropdownMenuRadioItem>
+          </DropdownMenuRadioGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
 
     <div class="flex gap-2">
       <DropdownMenu>
@@ -134,9 +174,9 @@ onMounted(() => {
             variant="outline"
           >
             {{
-              categoryPosition === "Categories" ||
+              categoryPosition === "Category" ||
               categoryStore.categories.length === 0
-                ? "Categories"
+                ? "Category"
                 : categoryStore.categories.find(
                     (c) => c.id === categoryPosition,
                   )?.name
