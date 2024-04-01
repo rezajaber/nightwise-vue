@@ -105,55 +105,24 @@ const buttonLabel = computed(() =>
     </div>
 
     <div class="flex items-center gap-2">
-      <Button size="xs" class="border-none bg-accent"
+      <Button
+        size="xs"
+        class="gap-1.5 border-none bg-accent tracking-wide text-white"
         ><svg
           xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           stroke="#ffffff"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="lucide lucide-move-up-left"
+          class="lucide lucide-info"
         >
-          <path d="M5 11V5H11" />
-          <path d="M5 5L19 19" /></svg
-      ></Button>
-
-      <Button size="xs" class="border-none bg-accent"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#ffffff"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-move-down"
-        >
-          <path d="M8 18L12 22L16 18" />
-          <path d="M12 2V22" /></svg
-      ></Button>
-
-      <Button size="xs" class="border-none bg-accent text-white"
-        ><svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#ffffff"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-move-down-right"
-        >
-          <path d="M19 13V19H13" />
-          <path d="M5 5L19 19" /></svg
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" /></svg
       ></Button>
     </div>
   </div>
