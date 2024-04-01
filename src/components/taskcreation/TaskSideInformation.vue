@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useTaskStore } from "@/stores/taskStore";
 import { useCategoryStore } from "@/stores/categoryStore";
 import { ref, onMounted, watch } from "vue";
 import { format } from "date-fns";
@@ -38,6 +39,7 @@ const props = defineProps({
 const date = ref<Date>();
 const categoryPosition = ref("Categories");
 
+const taskStore = useTaskStore();
 const categoryStore = useCategoryStore();
 
 const newCategoryName = ref(""); // For the new category name input
@@ -75,11 +77,6 @@ watch(
   { immediate: true },
 );
 
-// Lifecycle
-onMounted(() => {
-  categoryStore.fetchCategories(); // Load categories on component mount
-});
-
 watch(
   () => props.category,
   (newVal) => {
@@ -87,6 +84,17 @@ watch(
   },
   { immediate: true },
 );
+
+taskStore.$subscribe((mutation, state) => {
+  if (state.selectedTask !== null && state.selectedTask !== undefined) {
+    date.value = new Date(state.selectedTask.due_date);
+  }
+});
+
+// Lifecycle
+onMounted(() => {
+  categoryStore.fetchCategories(); // Load categories on component mount
+});
 </script>
 
 <template>
