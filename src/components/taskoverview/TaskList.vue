@@ -5,7 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { onMounted, ref, computed } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 
-function truncateText(text: string, limit: number = 40) {
+function truncateText(text: string, limit: number = 35) {
   return text.length > limit ? text.slice(0, limit) + "..." : text;
 }
 
@@ -114,7 +114,7 @@ const filteredTasks = computed(() => {
               <label
                 class="break-all text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
-                {{ truncateText(task.title) }}
+                {{ truncateText(task.title, 28) }}
               </label>
             </div>
 
