@@ -30,6 +30,11 @@ import {
 } from "@/components/ui/dialog";
 
 const emit = defineEmits(["update-category", "update-date"]);
+
+const props = defineProps({
+  category: String,
+});
+
 const date = ref<Date>();
 const categoryPosition = ref("Categories");
 
@@ -74,6 +79,14 @@ watch(
 onMounted(() => {
   categoryStore.fetchCategories(); // Load categories on component mount
 });
+
+watch(
+  () => props.category,
+  (newVal) => {
+    categoryPosition.value = newVal || "Categories";
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
