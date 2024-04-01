@@ -103,48 +103,131 @@ const filteredTasks = computed(() => {
         v-for="task in filteredTasks"
         :key="task.id"
         @click="selectTask(task)"
+        class="px-2.5"
       >
         <div
-          class="mt-5 flex cursor-pointer justify-between rounded-lg pl-2 duration-300 ease-in-out hover:scale-105"
+          class="mt-5 flex cursor-pointer items-center justify-between rounded-lg duration-300 ease-in-out hover:scale-105"
         >
           <div class="grid gap-1.5">
             <div class="flex items-center space-x-2 text-primary">
               <Checkbox v-model="task.completed" />
-
               <label
                 class="break-all text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
                 {{ truncateText(task.title, 28) }}
               </label>
+              <!-- Priority icon based on task's priority -->
             </div>
-
             <p
               class="break-all pl-6 text-justify text-xs text-primary opacity-60"
             >
               {{ truncateText(task.description) }}
             </p>
           </div>
-          <!-- Conditionally render the SVG icon if the task is overdue -->
-          <span v-if="isOverdue(task.due_date)" class="pr-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#b91c1c"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-shield-alert"
-            >
-              <path
-                d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
-              />
-              <path d="M12 8v4" />
-              <path d="M12 16h.01" />
-            </svg>
-          </span>
+
+          <div class="flex gap-1.5">
+            <span v-if="isOverdue(task.due_date)" class="">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#b91c1c"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-calendar-clock"
+              >
+                <path
+                  d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"
+                />
+                <path d="M16 2v4" />
+                <path d="M8 2v4" />
+                <path d="M3 10h5" />
+                <path d="M17.5 17.5 16 16.3V14" />
+                <circle cx="16" cy="16" r="6" />
+              </svg>
+            </span>
+
+            <!-- Conditionally render the SVG icon if the task is overdue -->
+            <span>
+              <svg
+                v-if="task.prio_id === 'dbj5yur26rch27u'"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#379a6c"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shield-check"
+              >
+                <path
+                  d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+              <svg
+                v-if="task.prio_id === 'laa3ohx04zyu8sa'"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#d5c453"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shield-alert"
+              >
+                <path
+                  d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                />
+                <path d="M12 8v4" />
+                <path d="M12 16h.01" />
+              </svg>
+              <svg
+                v-if="task.prio_id === 'on8c05q8tbq1jyp'"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#b91c1c"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shield-half"
+              >
+                <path
+                  d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                />
+                <path d="M12 22V2" />
+              </svg>
+              <svg
+                v-if="task.prio_id === 's915i7fhvcw4dxd'"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#ff0000"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shield-x"
+              >
+                <path
+                  d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+                />
+                <path d="m14.5 9.5-5 5" />
+                <path d="m9.5 9.5 5 5" />
+              </svg>
+            </span>
+          </div>
         </div>
       </div>
     </div>
