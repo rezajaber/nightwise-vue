@@ -17,8 +17,8 @@ function updateSearchQuery(newQuery) {
     <div
       class="relative rounded-xl bg-gradient-to-b from-border to-card p-px px-4 py-5 shadow-lg transition-all"
     >
-      <TaskSearch @update:searchQuery="updateSearchQuery" />
-      <TaskList :searchQuery="searchQuery" class="mt-9" />
+      <TaskSearch @update:searchQuery="updateSearchQuery" class="mb-8" />
+      <TaskList :searchQuery="searchQuery" />
     </div>
 
     <Button class="gap-1 md:hidden">

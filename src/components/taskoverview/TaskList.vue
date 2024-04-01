@@ -23,6 +23,12 @@ const props = defineProps({
   searchQuery: String,
 });
 
+function isOverdue(dueDate) {
+  const today = new Date();
+  const due = new Date(dueDate);
+  return due < today;
+}
+
 const filteredTasks = computed(() => {
   let tasks = taskStore.tasks;
   if (props.searchQuery) {
@@ -36,15 +42,60 @@ const filteredTasks = computed(() => {
 
 <template>
   <div>
-    <div>
-      <div class="flex justify-between text-primary">
-        <p class="align-middle text-sm font-semibold">Ontime</p>
-        <p class="text-sm font-semibold">{{ filteredTasks.length }}</p>
-      </div>
-
-      <Separator class="mt-1 bg-primary" />
+    <div class="flex justify-between">
+      <!-- Conditional styling for the "Overdue"/"Ontime"/"Tasks" header -->
+      <p
+        :class="{
+          'text-red-700':
+            taskStore.selectedTask &&
+            isOverdue(taskStore.selectedTask.due_date),
+          'text-primary':
+            !taskStore.selectedTask ||
+            !isOverdue(taskStore.selectedTask.due_date),
+          'align-middle': true,
+          'text-sm': true,
+          'font-semibold': true,
+        }"
+      >
+        {{
+          taskStore.selectedTask
+            ? isOverdue(taskStore.selectedTask.due_date)
+              ? "Overdue"
+              : "Ontime"
+            : "Tasks"
+        }}
+      </p>
+      <!-- Conditional styling for the tasks count -->
+      <p
+        :class="{
+          'text-red-700':
+            taskStore.selectedTask &&
+            isOverdue(taskStore.selectedTask.due_date),
+          'text-primary':
+            !taskStore.selectedTask ||
+            !isOverdue(taskStore.selectedTask.due_date),
+          'text-sm': true,
+          'font-semibold': true,
+        }"
+      >
+        {{ filteredTasks.length }}
+      </p>
     </div>
 
+    <!-- Use bg-primary for the separator by default, switch to bg-red-700 if a task is overdue -->
+    <Separator
+      :class="{
+        'bg-red-700':
+          taskStore.selectedTask && isOverdue(taskStore.selectedTask.due_date),
+        'bg-primary':
+          !taskStore.selectedTask ||
+          !isOverdue(taskStore.selectedTask.due_date),
+        'mt-1': true,
+      }"
+    />
+  </div>
+
+  <div>
     <div class="no-scrollbar h-96 overflow-x-hidden overflow-y-scroll">
       <div
         v-for="task in filteredTasks"
@@ -62,7 +113,7 @@ const filteredTasks = computed(() => {
           </label>
         </div>
 
-        <p class="break-all pl-6 text-justify text-xs text-primary opacity-60">
+        <p class="pl-6 text-xs text-primary opacity-60">
           {{ truncateText(task.description) }}
         </p>
       </div>
