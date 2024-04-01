@@ -105,7 +105,7 @@ const filteredTasks = computed(() => {
         @click="selectTask(task)"
       >
         <div
-          class="mt-5 flex cursor-pointer justify-between rounded-lg pl-4 duration-300 ease-in-out hover:scale-105"
+          class="mt-5 flex cursor-pointer justify-between rounded-lg pl-2 duration-300 ease-in-out hover:scale-105"
         >
           <div class="grid gap-1.5">
             <div class="flex items-center space-x-2 text-primary">
@@ -125,7 +125,7 @@ const filteredTasks = computed(() => {
             </p>
           </div>
           <!-- Conditionally render the SVG icon if the task is overdue -->
-          <span v-if="isOverdue(task.due_date)" class="flex-shrink-0">
+          <span v-if="isOverdue(task.due_date)" class="pr-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
