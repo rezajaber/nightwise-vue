@@ -88,6 +88,8 @@ watch(
 taskStore.$subscribe((mutation, state) => {
   if (state.selectedTask !== null && state.selectedTask !== undefined) {
     date.value = new Date(state.selectedTask.due_date);
+  } else {
+    date.value = null;
   }
 });
 
