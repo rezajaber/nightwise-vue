@@ -38,6 +38,9 @@ const handleSubmit = async () => {
     );
     title.value = "";
     description.value = "";
+    category_id.value = "";
+    prio_id.value = "";
+    due_date.value = "";
   }
 };
 
