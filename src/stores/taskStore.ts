@@ -11,21 +11,30 @@ export const useTaskStore = defineStore("task", {
     async fetchTasks() {
       this.tasks = await getTasks();
     },
-    async addTask(title, description, category_id, due_date) {
+    async addTask(title, description, category_id, prio_id, due_date) {
       const newTask = await createTask(
         title,
         description,
         category_id,
+        prio_id,
         due_date,
       );
       this.tasks.push(newTask);
     },
-    async updateTask(taskId, title, description, category_id, due_date) {
+    async updateTask(
+      taskId,
+      title,
+      description,
+      category_id,
+      prio_id,
+      due_date,
+    ) {
       const updatedTask = await updateTask(
         taskId,
         title,
         description,
         category_id,
+        prio_id,
         due_date,
       );
       const index = this.tasks.findIndex((task) => task.id === taskId);

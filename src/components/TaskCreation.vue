@@ -12,6 +12,7 @@ import { useTaskStore } from "@/stores/taskStore";
 const title = ref("");
 const description = ref("");
 const category_id = ref("");
+const prio_id = ref("");
 const due_date = ref("");
 
 const taskStore = useTaskStore();
@@ -23,6 +24,7 @@ const handleSubmit = async () => {
       title.value,
       description.value,
       category_id.value,
+      prio_id.value,
       due_date.value,
     );
     taskStore.clearSelectedTask();
@@ -31,6 +33,7 @@ const handleSubmit = async () => {
       title.value,
       description.value,
       category_id.value,
+      prio_id.value,
       due_date.value,
     );
     title.value = "";
@@ -53,10 +56,12 @@ watch(
       title.value = newTask.title;
       description.value = newTask.description;
       category_id.value = newTask.category_id;
+      prio_id.value = newTask.prio_id;
     } else {
       title.value = "";
       description.value = "";
       category_id.value = "";
+      prio_id.value = "";
     }
   },
   { deep: true },
@@ -78,8 +83,10 @@ watch(
 
     <TaskSideInformation
       @updateCategory="category_id = $event"
+      @updatePrio="prio_id = $event"
       @updateDate="due_date = $event"
       :category="category_id"
+      :prio="prio_id"
       class="mt-7"
     />
 

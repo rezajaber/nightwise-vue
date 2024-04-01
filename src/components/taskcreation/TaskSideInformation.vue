@@ -31,15 +31,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const emit = defineEmits(["update-category", "update-date"]);
+const emit = defineEmits(["update-category", "update-date", "update-prio"]);
 
 const props = defineProps({
   category: String,
+  prio: String,
 });
 
 const date = ref<Date>();
-const categoryPosition = ref("Category");
 const prioPosition = ref("Priority");
+const categoryPosition = ref("Category");
 
 const taskStore = useTaskStore();
 const prioStore = usePrioStore();
@@ -71,6 +72,16 @@ watch(
 );
 
 watch(
+  prioPosition,
+  (newValue) => {
+    if (newValue) {
+      emit("update-prio", newValue);
+    }
+  },
+  { immediate: true },
+);
+
+watch(
   date,
   (newValue) => {
     if (newValue) {
@@ -83,7 +94,15 @@ watch(
 watch(
   () => props.category,
   (newVal) => {
-    categoryPosition.value = newVal || "Categories";
+    categoryPosition.value = newVal || "Category";
+  },
+  { immediate: true },
+);
+
+watch(
+  () => props.prio,
+  (newVal) => {
+    prioPosition.value = newVal || "Priority";
   },
   { immediate: true },
 );
@@ -156,7 +175,7 @@ onMounted(() => {
 
             <DropdownMenuRadioItem
               v-if="prioStore.prios.length === 0"
-              value="Priority"
+              value="Priorities"
             >
               No priorities found
             </DropdownMenuRadioItem>

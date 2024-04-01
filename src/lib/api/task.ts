@@ -4,12 +4,14 @@ export const createTask = async (
   title: string,
   description: string,
   category_id: string,
+  prio_id: string,
   due_date: Date,
 ): Promise<any> => {
   const data = {
     title: title,
     description: description,
     category_id: category_id,
+    prio_id: prio_id,
     due_date: due_date,
     user_id: "40164s5bfdq72sp",
   };
@@ -34,12 +36,14 @@ export const updateTask = async (
   title: string,
   description: string,
   category_id: string,
+  prio_id: string,
   due_date: Date,
 ): Promise<any> => {
   const data = {
     title: title,
     description: description,
     category_id: category_id,
+    prio_id: prio_id,
     due_date: due_date,
   };
 
