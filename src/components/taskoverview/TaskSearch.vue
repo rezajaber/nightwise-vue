@@ -26,7 +26,15 @@ const props = defineProps();
 
 const emit = defineEmits(["update:searchQuery"]);
 
-const position = ref("This Week");
+const priorities = [
+  { id: "dbj5yur26rch27u", name: "Low" },
+  { id: "laa3ohx04zyu8sa", name: "Normal" },
+  { id: "on8c05q8tbq1jyp", name: "High" },
+  { id: "s915i7fhvcw4dxd", name: "Critical" },
+];
+
+const prioPosition = ref("Priority");
+const selectedPriority = ref(null);
 const searchQuery = ref("");
 
 watch(searchQuery, (newValue) => {
@@ -37,6 +45,17 @@ const taskStore = useTaskStore();
 
 function clearSelectedTask() {
   taskStore.clearSelectedTask();
+}
+
+function updateSelectedPriority(priorityId) {
+  // Find the priority object by ID
+  const priority = priorities.find((p) => p.id === priorityId);
+  if (priority) {
+    console.log("New selected priority:", priority.name);
+    selectedPriority.value = priority;
+    taskStore.selectPriority(priority.id); // Store the ID in the taskStore
+    prioPosition.value = priority.name; // Update the displayed name
+  }
 }
 </script>
 
@@ -105,7 +124,7 @@ function clearSelectedTask() {
             class="w-3/5 justify-between border-none bg-accent px-4"
             variant="outline"
           >
-            {{ position }}
+            {{ prioPosition }}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -124,16 +143,21 @@ function clearSelectedTask() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent class="w-44">
-          <DropdownMenuRadioGroup v-model="position">
-            <DropdownMenuRadioItem value="Today"> Today </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="This Week">
-              This Week
+          <DropdownMenuRadioGroup
+            v-model="prioPosition"
+            @update:modelValue="updateSelectedPriority"
+          >
+            <DropdownMenuRadioItem value="dbj5yur26rch27u">
+              Low
             </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="Next 30 Days">
-              Next 30 Days
+            <DropdownMenuRadioItem value="laa3ohx04zyu8sa">
+              Normal
             </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="All Tasks">
-              All Tasks
+            <DropdownMenuRadioItem value="on8c05q8tbq1jyp">
+              High
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="s915i7fhvcw4dxd">
+              Critical
             </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>

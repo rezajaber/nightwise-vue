@@ -6,10 +6,12 @@ export const useTaskStore = defineStore("task", {
   state: () => ({
     tasks: [],
     selectedTask: null,
+    selectedPriority: null, // Add this line
   }),
   actions: {
     async fetchTasks() {
       this.tasks = await getTasks();
+      console.log("Tasks fetched:", this.tasks); // Log fetched tasks
     },
     async addTask(title, description, category_id, prio_id, due_date) {
       const newTask = await createTask(
@@ -56,6 +58,9 @@ export const useTaskStore = defineStore("task", {
     },
     clearSelectedTask() {
       this.selectedTask = null;
+    },
+    selectPriority(priorityId) {
+      this.selectedPriority = priorityId;
     },
   },
 });
