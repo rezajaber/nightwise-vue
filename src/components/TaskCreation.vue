@@ -1,3 +1,4 @@
+TaskCreation.vue:
 <script setup lang="ts">
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
@@ -11,6 +12,7 @@ import { useTaskStore } from "@/stores/taskStore";
 const title = ref("");
 const description = ref("");
 const category_id = ref("");
+const due_date = ref("");
 
 const taskStore = useTaskStore();
 
@@ -21,7 +23,7 @@ const handleSubmit = async () => {
       title.value,
       description.value,
       category_id.value,
-      new Date(),
+      due_date.value,
     );
     taskStore.clearSelectedTask();
   } else {
@@ -29,7 +31,7 @@ const handleSubmit = async () => {
       title.value,
       description.value,
       category_id.value,
-      new Date(),
+      due_date.value,
     );
     title.value = "";
     description.value = "";
@@ -76,7 +78,11 @@ watch(
       class="font-regular mt-7 w-full border-0 bg-secondary px-0 pl-4 text-3xl text-primary caret-accent focus-visible:outline-none focus-visible:ring-0"
     />
 
-    <TaskSideInformation class="mt-7" />
+    <TaskSideInformation
+      @updateCategory="category_id = $event"
+      @updateDate="due_date = $event"
+      class="mt-7"
+    />
 
     <Textarea
       v-model="description"

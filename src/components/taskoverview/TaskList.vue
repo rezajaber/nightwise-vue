@@ -5,7 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { onMounted, ref, computed } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 
-function truncateText(text: string, limit: number = 50) {
+function truncateText(text: string, limit: number = 40) {
   return text.length > limit ? text.slice(0, limit) + "..." : text;
 }
 

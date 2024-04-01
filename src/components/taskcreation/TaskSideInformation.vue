@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCategoryStore } from "@/stores/categoryStore";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-vue-next";
 import { cn } from "@/lib/utils";
@@ -29,6 +29,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+const emit = defineEmits(["update-category", "update-date"]);
 const date = ref<Date>();
 const categoryPosition = ref("Categories");
 
@@ -48,6 +49,26 @@ const deleteCategoryAction = async (categoryId: string) => {
   await categoryStore.deleteCategory(categoryId);
   categoryStore.fetchCategories(); // Refresh categories list
 };
+
+watch(
+  categoryPosition,
+  (newValue) => {
+    if (newValue) {
+      emit("update-category", newValue);
+    }
+  },
+  { immediate: true },
+);
+
+watch(
+  date,
+  (newValue) => {
+    if (newValue) {
+      emit("update-date", newValue);
+    }
+  },
+  { immediate: true },
+);
 
 // Lifecycle
 onMounted(() => {
