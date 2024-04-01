@@ -27,13 +27,14 @@ const props = defineProps();
 const emit = defineEmits(["update:searchQuery"]);
 
 const priorities = [
+  { id: "", name: "All" },
   { id: "dbj5yur26rch27u", name: "Low" },
   { id: "laa3ohx04zyu8sa", name: "Normal" },
   { id: "on8c05q8tbq1jyp", name: "High" },
   { id: "s915i7fhvcw4dxd", name: "Critical" },
 ];
 
-const prioPosition = ref("Priority");
+const prioPosition = ref("Priorities");
 const selectedPriority = ref(null);
 const searchQuery = ref("");
 
@@ -147,6 +148,7 @@ function updateSelectedPriority(priorityId) {
             v-model="prioPosition"
             @update:modelValue="updateSelectedPriority"
           >
+            <DropdownMenuRadioItem value=""> All </DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="dbj5yur26rch27u">
               Low
             </DropdownMenuRadioItem>
