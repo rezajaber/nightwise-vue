@@ -1,11 +1,29 @@
 <script setup lang="ts">
+import { RouterView } from "vue-router";
+import { onMounted, ref } from "vue";
+import { Button } from "@/components/ui/button";
+
 import Toaster from "@/components/ui/toast/Toaster.vue";
 
-import { RouterView } from "vue-router";
+const showPreloader = ref(true);
+
+onMounted(() => {
+  setTimeout(() => {
+    showPreloader.value = false;
+  }, 2000); // Adjust the time according to your needs
+});
 </script>
 
 <template>
-  <!-- THIS IS THE BACKUP ### IF STORES DO NOT WORK -->
+  <Transition>
+    <div
+      v-if="showPreloader"
+      class="dark fixed inset-0 z-50 flex items-center justify-center bg-background text-xl tracking-wide text-white"
+    >
+      <Button class="animate-bounce">nightwise</Button>
+    </div>
+  </Transition>
+
   <Toaster />
 
   <div
@@ -14,3 +32,16 @@ import { RouterView } from "vue-router";
     <RouterView />
   </div>
 </template>
+
+<style scoped>
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.35s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>
