@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose port 8080 to the outside once the container has launched
-EXPOSE 8080
+EXPOSE 4173
 
 # Command to run the app
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "preview"]
