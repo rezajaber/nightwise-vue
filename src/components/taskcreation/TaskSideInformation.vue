@@ -97,7 +97,7 @@ const createCategory = async () => {
   );
 };
 const deleteCategoryAction = async (categoryId: string) => {
-  await categoryStore.deleteCategory(categoryId);
+  await categoryStore.removeCategory(categoryId);
   categoryStore.fetchCategories(); // Refresh categories list
 };
 
