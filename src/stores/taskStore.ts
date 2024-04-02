@@ -72,11 +72,9 @@ export const useTaskStore = defineStore("task", {
         this.doneTasks.push(doneTask);
       }
     },
-
     toggleShowDoneTasks() {
       this.showDoneTasks = !this.showDoneTasks;
     },
-
     getVisibleTasks() {
       return this.showDoneTasks ? this.doneTasks : this.tasks;
     },
