@@ -30,12 +30,48 @@ const emit = defineEmits([
 
 const handleCreateOrUpdateClick = () => {
   emit("create-new-task");
+  toast({
+    title: `Task ${taskStore.selectedTask ? "Updated" : "Created"}`,
+    description: `The task has been successfully ${taskStore.selectedTask ? "updated" : "created"}.`,
+    duration: 4000,
+  });
 };
 const handleDoneClick = () => {
+  if (!taskStore.selectedTask) {
+    toast({
+      title: "No Task Selected",
+      description: "Please select a task to mark as done.",
+      duration: 4000,
+      variant: "destructive",
+    });
+    return;
+  }
   emit("done-task", taskStore.selectedTask.id);
+  // Success notification
+  toast({
+    title: "Task Completed",
+    description: "The task has been successfully marked as done.",
+    duration: 4000,
+  });
 };
+
 const handleDeleteClick = () => {
+  if (!taskStore.selectedTask) {
+    toast({
+      title: "No Task Selected",
+      description: "Please select a task to delete.",
+      duration: 4000,
+      variant: "destructive",
+    });
+    return;
+  }
   emit("delete-task");
+  // Success notification
+  toast({
+    title: "Task Deleted",
+    description: "The task has been successfully deleted.",
+    duration: 4000,
+  });
 };
 
 const { toast } = useToast();

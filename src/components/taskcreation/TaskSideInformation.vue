@@ -9,6 +9,11 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
+
+import { h } from "vue";
+import { useToast } from "@/components/ui/toast/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+
 import {
   Popover,
   PopoverContent,
@@ -42,6 +47,7 @@ const date = ref<Date>();
 const prioPosition = ref("Priority");
 const categoryPosition = ref("Category");
 
+const { toast } = useToast();
 const taskStore = useTaskStore();
 const prioStore = usePrioStore();
 const categoryStore = useCategoryStore();
@@ -49,13 +55,54 @@ const categoryStore = useCategoryStore();
 const newCategoryName = ref(""); // For the new category name input
 
 const createCategory = async () => {
-  if (newCategoryName.value.trim()) {
-    await categoryStore.addCategory(newCategoryName.value.trim());
-    newCategoryName.value = ""; // Reset input after adding
-    categoryStore.fetchCategories(); // Refresh categories list
-  }
-};
+  const trimmedName = newCategoryName.value.trim();
 
+  // Check for empty input
+  if (!trimmedName) {
+    toast({
+      title: "Creation Error",
+      description: "Category name cannot be empty.",
+      duration: 4000,
+      variant: "destructive",
+    });
+    return;
+  }
+
+  // Check for length constraint
+  if (trimmedName.length > 18) {
+    toast({
+      title: "Category Creation Failed",
+      description: "Category name cannot exceed 18 characters.",
+      duration: 4000,
+      variant: "destructive",
+    });
+    return;
+  }
+
+  // Check for duplicate category name
+  const isDuplicate = categoryStore.categories.some(
+    (category) => category.name.toLowerCase() === trimmedName.toLowerCase(),
+  );
+  if (isDuplicate) {
+    toast({
+      title: "Duplicate Category",
+      description: "A category with this name already exists.",
+      duration: 4000,
+      variant: "destructive",
+    });
+    return;
+  }
+
+  // If all checks pass, add the category
+  await categoryStore.addCategory(trimmedName);
+  newCategoryName.value = ""; // Reset input after adding
+  categoryStore.fetchCategories(); // Refresh categories list
+  toast({
+    title: "Category Added",
+    description: `Category "${trimmedName}" has been successfully added.`,
+    duration: 4000,
+  });
+};
 const deleteCategoryAction = async (categoryId: string) => {
   await categoryStore.deleteCategory(categoryId);
   categoryStore.fetchCategories(); // Refresh categories list
@@ -243,7 +290,7 @@ onMounted(() => {
               :key="category.id"
               class="flex items-center justify-between rounded-md bg-secondary px-3 py-1.5 duration-300 ease-in-out hover:scale-105"
             >
-              <p class="justify-between">{{ category.name }}</p>
+              <p class="justify-between break-all">{{ category.name }}</p>
 
               <Button
                 size="sm"
