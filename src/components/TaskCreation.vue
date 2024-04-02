@@ -2,13 +2,15 @@ TaskCreation.vue:
 <script setup lang="ts">
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
-import { useToast } from "@/components/ui/toast/use-toast";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 
 import { ref, watch } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
+import { showToast } from "@/lib/utils/toastUtils";
+
+// Example usage in a Vue component or Pinia store
 
 const taskReset = () => {
   title.value = "";
@@ -24,26 +26,45 @@ const category_id = ref("");
 const prio_id = ref("");
 const due_date = ref("");
 
-const { toast } = useToast();
 const taskStore = useTaskStore();
 
 const handleSubmit = async () => {
   // Validation checks for all fields
   if (title.value.trim() === "") {
-    toast({
-      title: "Missing Title",
-      description: "Please provide a title for the task.",
-      duration: 4000,
-      variant: "destructive",
-    });
+    showToast(
+      "Missing Title",
+      "Please provide a title for the task.",
+      "destructive",
+    );
     return;
   } else if (description.value.trim() === "") {
-    toast({
-      title: "Missing Description",
-      description: "Please provide a description for the task.",
-      duration: 4000,
-      variant: "destructive",
-    });
+    showToast(
+      "Missing Title",
+      "Please provide a title for the task.",
+      "destructive",
+    );
+    return;
+  }
+  if (category_id.value.trim() === "") {
+    showToast(
+      "Missing Title",
+      "Please provide a title for the task.",
+      "destructive",
+    );
+    return;
+  } else if (prio_id.value.trim() === "") {
+    showToast(
+      "Missing Title",
+      "Please provide a title for the task.",
+      "destructive",
+    );
+    return;
+  } else if (!due_date) {
+    showToast(
+      "Missing Title",
+      "Please provide a title for the task.",
+      "destructive",
+    );
     return;
   }
 
@@ -71,11 +92,11 @@ const handleSubmit = async () => {
   }
 
   // Success toast message
-  toast({
-    title: `Task ${taskStore.selectedTask ? "Updated" : "Created"}`,
-    description: `The task has been successfully ${taskStore.selectedTask ? "updated" : "created"}.`,
-    duration: 4000,
-  });
+  showToast(
+    `Task ${taskStore.selectedTask ? "Updated" : "Created"}`,
+    `The task has been successfully ${taskStore.selectedTask ? "updated" : "created"}.`,
+    "default",
+  );
 };
 
 const handleDelete = async () => {

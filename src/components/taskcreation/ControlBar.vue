@@ -2,10 +2,7 @@
 import { computed } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 import { Button } from "@/components/ui/button";
-
-import { h } from "vue";
-import { useToast } from "@/components/ui/toast/use-toast";
-import { ToastAction } from "@/components/ui/toast";
+import { showToast } from "@/lib/utils/toastUtils";
 
 import {
   Dialog,
@@ -34,43 +31,42 @@ const handleCreateOrUpdateClick = () => {
 
 const handleDoneClick = () => {
   if (!taskStore.selectedTask) {
-    toast({
-      title: "No Task Selected",
-      description: "Please select a task to mark as done.",
-      duration: 4000,
-      variant: "destructive",
-    });
+    showToast(
+      "No Task Selected",
+      "Please select a task to mark as done.",
+      "destructive",
+    );
     return;
   }
   emit("done-task", taskStore.selectedTask.id);
   // Success notification
-  toast({
-    title: "Task Completed",
-    description: "The task has been successfully marked as done.",
-    duration: 4000,
-  });
+
+  showToast(
+    "Task Completed",
+    "The task has been successfully marked as done.",
+    "default",
+  );
 };
 
 const handleDeleteClick = () => {
   if (!taskStore.selectedTask) {
-    toast({
-      title: "No Task Selected",
-      description: "Please select a task to delete.",
-      duration: 4000,
-      variant: "destructive",
-    });
+    showToast(
+      "No Task Selected",
+      "Please select a task to delete.",
+      "destructive",
+    );
     return;
   }
   emit("delete-task");
   // Success notification
-  toast({
-    title: "Task Deleted",
-    description: "The task has been successfully deleted.",
-    duration: 4000,
-  });
+
+  showToast(
+    "Task Deleted",
+    "The task has been successfully deleted.",
+    "default",
+  );
 };
 
-const { toast } = useToast();
 const taskStore = useTaskStore();
 
 const buttonLabel = computed(() =>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useToast } from "@/components/ui/toast/use-toast";
+import { showToast } from "@/lib/utils/toastUtils";
 import { useTaskStore } from "@/stores/taskStore";
 import { usePrioStore } from "@/stores/prioStore";
 import { useCategoryStore } from "@/stores/categoryStore";
@@ -44,7 +44,6 @@ const date = ref<Date>();
 const prioPosition = ref("Priority");
 const categoryPosition = ref("Category");
 
-const { toast } = useToast();
 const taskStore = useTaskStore();
 const prioStore = usePrioStore();
 const categoryStore = useCategoryStore();
@@ -56,23 +55,21 @@ const createCategory = async () => {
 
   // Check for empty input
   if (!trimmedName) {
-    toast({
-      title: "Creation Error",
-      description: "Category name cannot be empty.",
-      duration: 4000,
-      variant: "destructive",
-    });
+    showToast(
+      "Creation Error",
+      "Category name cannot be empty.",
+      "destructive",
+    );
     return;
   }
 
   // Check for length constraint
   if (trimmedName.length > 18) {
-    toast({
-      title: "Category Creation Failed",
-      description: "Category name cannot exceed 18 characters.",
-      duration: 4000,
-      variant: "destructive",
-    });
+    showToast(
+      "Category Creation Failed",
+      "Category name cannot exceed 18 characters.",
+      "destructive",
+    );
     return;
   }
 
@@ -81,12 +78,11 @@ const createCategory = async () => {
     (category) => category.name.toLowerCase() === trimmedName.toLowerCase(),
   );
   if (isDuplicate) {
-    toast({
-      title: "Duplicate Category",
-      description: "A category with this name already exists.",
-      duration: 4000,
-      variant: "destructive",
-    });
+    showToast(
+      "Duplicate Category",
+      "A category with this name already exists.",
+      "destructive",
+    );
     return;
   }
 
@@ -94,11 +90,11 @@ const createCategory = async () => {
   await categoryStore.addCategory(trimmedName);
   newCategoryName.value = ""; // Reset input after adding
   categoryStore.fetchCategories(); // Refresh categories list
-  toast({
-    title: "Category Added",
-    description: `Category "${trimmedName}" has been successfully added.`,
-    duration: 4000,
-  });
+  showToast(
+    "Category Added",
+    `Category "${trimmedName}" has been successfully added.`,
+    "default",
+  );
 };
 const deleteCategoryAction = async (categoryId: string) => {
   await categoryStore.deleteCategory(categoryId);
