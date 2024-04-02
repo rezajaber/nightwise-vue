@@ -2,20 +2,27 @@
 import { defineStore } from "pinia";
 import { getPrio, createPrio, deletePrio } from "@/lib/api/prio";
 
+// Assuming a type for your priorities; adjust as needed
+interface Prio {
+  id: string;
+  name: string;
+  // Add other properties as needed
+}
+
 export const usePrioStore = defineStore("prio", {
   state: () => ({
-    prios: [],
-    selectedPrio: null,
+    prios: [] as Prio[],
+    selectedPrio: null as Prio | null,
   }),
   actions: {
     async fetchPrios() {
       this.prios = await getPrio();
     },
-    async addPrio(name) {
-      const newPrio = await createPrio(name);
+    async addPrio(name: string) {
+      const newPrio: Prio = await createPrio(name);
       this.prios.push(newPrio);
     },
-    async deletePrio(prioId) {
+    async removePrio(prioId: string) {
       try {
         await deletePrio(prioId);
         this.prios = this.prios.filter((prio) => prio.id !== prioId);
@@ -23,8 +30,7 @@ export const usePrioStore = defineStore("prio", {
         console.error("Failed to delete prio:", error);
       }
     },
-
-    selectPrio(prio) {
+    selectPrio(prio: Prio) {
       this.selectedPrio = prio;
     },
     clearSelectedPrio() {
