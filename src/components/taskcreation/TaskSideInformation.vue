@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useToast } from "@/components/ui/toast/use-toast";
 import { useTaskStore } from "@/stores/taskStore";
 import { usePrioStore } from "@/stores/prioStore";
 import { useCategoryStore } from "@/stores/categoryStore";
@@ -9,10 +10,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
-
-import { h } from "vue";
-import { useToast } from "@/components/ui/toast/use-toast";
-import { ToastAction } from "@/components/ui/toast";
 
 import {
   Popover,
