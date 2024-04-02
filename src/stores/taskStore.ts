@@ -12,19 +12,28 @@ export const useTaskStore = defineStore("task", {
   }),
   actions: {
     async fetchTasks() {
-      this.tasks = await getTasks();
-      console.log("Tasks fetched:", this.tasks); // Log fetched tasks
+      try {
+        this.tasks = await getTasks();
+      } catch (error) {
+        console.error("Failed to fetch tasks:", error);
+      }
     },
+
     async addTask(title, description, category_id, prio_id, due_date) {
-      const newTask = await createTask(
-        title,
-        description,
-        category_id,
-        prio_id,
-        due_date,
-      );
-      this.tasks.push(newTask);
+      try {
+        const newTask = await createTask(
+          title,
+          description,
+          category_id,
+          prio_id,
+          due_date,
+        );
+        this.tasks.push(newTask);
+      } catch (error) {
+        console.error("Failed to add task:", error);
+      }
     },
+
     async updateTask(
       taskId,
       title,
@@ -33,19 +42,24 @@ export const useTaskStore = defineStore("task", {
       prio_id,
       due_date,
     ) {
-      const updatedTask = await updateTask(
-        taskId,
-        title,
-        description,
-        category_id,
-        prio_id,
-        due_date,
-      );
-      const index = this.tasks.findIndex((task) => task.id === taskId);
-      if (index !== -1) {
-        this.tasks[index] = updatedTask;
+      try {
+        const updatedTask = await updateTask(
+          taskId,
+          title,
+          description,
+          category_id,
+          prio_id,
+          due_date,
+        );
+        const index = this.tasks.findIndex((task) => task.id === taskId);
+        if (index !== -1) {
+          this.tasks[index] = updatedTask;
+        }
+      } catch (error) {
+        console.error("Failed to update task:", error);
       }
     },
+
     async deleteTask(taskId) {
       try {
         await deleteTask(taskId);
@@ -72,6 +86,7 @@ export const useTaskStore = defineStore("task", {
         this.doneTasks.push(doneTask);
       }
     },
+
     toggleShowDoneTasks() {
       this.showDoneTasks = !this.showDoneTasks;
     },
