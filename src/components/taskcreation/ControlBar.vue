@@ -31,6 +31,7 @@ const emit = defineEmits([
 const handleCreateOrUpdateClick = () => {
   emit("create-new-task");
 };
+
 const handleDoneClick = () => {
   if (!taskStore.selectedTask) {
     toast({

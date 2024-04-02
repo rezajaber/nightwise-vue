@@ -10,6 +10,14 @@ import { Input } from "@/components/ui/input";
 import { ref, watch } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 
+const taskReset = () => {
+  title.value = "";
+  description.value = "";
+  category_id.value = "";
+  prio_id.value = "";
+  due_date.value = "";
+};
+
 const title = ref("");
 const description = ref("");
 const category_id = ref("");
@@ -20,18 +28,26 @@ const { toast } = useToast();
 const taskStore = useTaskStore();
 
 const handleSubmit = async () => {
-  // Check if the title is empty
+  // Validation checks for all fields
   if (title.value.trim() === "") {
-    // Display a toast message indicating the title cannot be empty
     toast({
       title: "Missing Title",
       description: "Please provide a title for the task.",
       duration: 4000,
-      variant: "destructive", // Use a warning variant or any other variant you prefer
+      variant: "destructive",
     });
-    return; // Return early to prevent further execution
+    return;
+  } else if (description.value.trim() === "") {
+    toast({
+      title: "Missing Description",
+      description: "Please provide a description for the task.",
+      duration: 4000,
+      variant: "destructive",
+    });
+    return;
   }
 
+  // Proceed with task update or creation
   if (taskStore.selectedTask) {
     await taskStore.updateTask(
       taskStore.selectedTask.id,
@@ -51,14 +67,10 @@ const handleSubmit = async () => {
       due_date.value,
     );
     // Reset fields after successful task creation
-    title.value = "";
-    description.value = "";
-    category_id.value = "";
-    prio_id.value = "";
-    due_date.value = "";
+    taskReset();
   }
 
-  // Success toast message can be triggered here if needed
+  // Success toast message
   toast({
     title: `Task ${taskStore.selectedTask ? "Updated" : "Created"}`,
     description: `The task has been successfully ${taskStore.selectedTask ? "updated" : "created"}.`,
@@ -76,7 +88,6 @@ const handleDelete = async () => {
 watch(
   () => taskStore.selectedTask,
   (newTask, oldTask) => {
-    console.log("Selected task changed:", newTask);
     if (newTask) {
       title.value = newTask.title;
       description.value = newTask.description;

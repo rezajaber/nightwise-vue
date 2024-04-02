@@ -52,7 +52,6 @@ function updateSelectedPriority(priorityId) {
   // Find the priority object by ID
   const priority = priorities.find((p) => p.id === priorityId);
   if (priority) {
-    console.log("New selected priority:", priority.name);
     selectedPriority.value = priority;
     taskStore.selectPriority(priority.id); // Store the ID in the taskStore
     prioPosition.value = priority.name; // Update the displayed name

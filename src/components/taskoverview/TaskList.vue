@@ -42,7 +42,6 @@ const filteredTasks = computed(() => {
     tasks = tasks.filter((task) => task.prio_id === taskStore.selectedPriority);
   }
 
-  console.log("Filtered tasks:", tasks); // Log the filtered tasks
   return tasks;
 });
 </script>
