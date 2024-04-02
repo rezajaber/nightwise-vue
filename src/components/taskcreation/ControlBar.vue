@@ -20,6 +20,7 @@ const emit = defineEmits([
   "create-task",
   "update-task",
   "delete-task",
+  "done-task",
 ]);
 
 const createNewTask = () => {
@@ -37,6 +38,9 @@ const deleteTask = () => {
 
 const handleCreateOrUpdateClick = () => {
   emit("create-new-task");
+};
+const handleDoneClick = () => {
+  emit("done-task");
 };
 const handleDeleteClick = () => {
   emit("delete-task");
@@ -58,6 +62,50 @@ const buttonLabel = computed(() =>
         @click="handleCreateOrUpdateClick"
         >{{ buttonLabel }}</Button
       >
+
+      <Dialog>
+        <DialogTrigger as-child>
+          <Button size="xs" class="border-none bg-accent text-white"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-list-checks"
+            >
+              <path d="m3 17 2 2 4-4" />
+              <path d="m3 7 2 2 4-4" />
+              <path d="M13 6h8" />
+              <path d="M13 12h8" />
+              <path d="M13 18h8" /></svg
+          ></Button>
+        </DialogTrigger>
+        <DialogContent class="sm:max-w-xs">
+          <DialogHeader>
+            <DialogTitle>Finish Task</DialogTitle>
+            <DialogDescription class="text-white opacity-60">
+              Is this task finished and can be moved to the done section?
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter class="sm:justify-start">
+            <DialogClose as-child class="">
+              <Button
+                type="button"
+                class="w-full"
+                size="sm"
+                @click="handleDeleteClick"
+                >Done</Button
+              >
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <Dialog>
         <DialogTrigger as-child>
