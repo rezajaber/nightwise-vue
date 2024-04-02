@@ -15,6 +15,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <!-- THIS IS WHERE THE APP ENDS WITH POCKETBASE LOCAL INSTANCE -->
   <Transition>
     <div
       v-if="showPreloader"
@@ -34,7 +35,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* we will explain what these classes do next! */
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.35s ease;
