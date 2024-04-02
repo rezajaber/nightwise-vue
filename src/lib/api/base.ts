@@ -15,6 +15,6 @@ export class BaseService {
   }
 }
 
-export const base = new BaseService("http://localhost:8090");
+export const base = new BaseService(import.meta.env.VITE_POCKETBASE_URL);
 
 export default base;
