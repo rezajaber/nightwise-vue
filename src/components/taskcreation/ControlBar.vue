@@ -2,6 +2,11 @@
 import { computed } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 import { Button } from "@/components/ui/button";
+
+import { h } from "vue";
+import { useToast } from "@/components/ui/toast/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+
 import {
   Dialog,
   DialogClose,
@@ -40,12 +45,13 @@ const handleCreateOrUpdateClick = () => {
   emit("create-new-task");
 };
 const handleDoneClick = () => {
-  emit("done-task");
+  emit("done-task", taskStore.selectedTask.id);
 };
 const handleDeleteClick = () => {
   emit("delete-task");
 };
 
+const { toast } = useToast();
 const taskStore = useTaskStore();
 
 const buttonLabel = computed(() =>
@@ -99,7 +105,7 @@ const buttonLabel = computed(() =>
                 type="button"
                 class="w-full"
                 size="sm"
-                @click="$emit('done-task', taskStore.selectedTask.id)"
+                @click="handleDoneClick"
                 >Done</Button
               >
             </DialogClose>
