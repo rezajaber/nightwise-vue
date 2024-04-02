@@ -1,19 +1,15 @@
 // toastUtils.ts
 
-// You might need to adjust imports based on your project setup
 import { useToast } from "@/components/ui/toast/use-toast";
+
+type ToastVariant = "default" | "destructive";
 
 export function showToast(
   title: string,
   description: string,
-  variant: "default" | "destructive",
+  variant: ToastVariant,
   duration: number = 4000,
-) {
+): void {
   const { toast } = useToast();
-  toast({
-    title,
-    description,
-    duration,
-    variant,
-  });
+  toast({ title, description, variant, duration });
 }
