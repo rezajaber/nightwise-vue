@@ -114,8 +114,11 @@ function updateSelectedPriority(priorityId) {
     </div>
 
     <div class="flex gap-2.5 text-white">
-      <Button size="sm" class="w-2/5 border-none bg-accent text-white"
-        >Show done</Button
+      <Button
+        size="sm"
+        class="w-2/5 border-none bg-accent text-white"
+        @click="taskStore.toggleShowDoneTasks"
+        >{{ taskStore.showDoneTasks ? "Hide Done" : "Show Done" }}</Button
       >
 
       <DropdownMenu>

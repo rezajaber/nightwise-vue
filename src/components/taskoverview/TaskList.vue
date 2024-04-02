@@ -30,7 +30,7 @@ function isOverdue(dueDate) {
 }
 
 const filteredTasks = computed(() => {
-  let tasks = taskStore.tasks;
+  let tasks = taskStore.getVisibleTasks();
 
   if (props.searchQuery) {
     tasks = tasks.filter((task) =>

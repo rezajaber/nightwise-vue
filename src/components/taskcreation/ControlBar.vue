@@ -99,7 +99,7 @@ const buttonLabel = computed(() =>
                 type="button"
                 class="w-full"
                 size="sm"
-                @click="handleDeleteClick"
+                @click="$emit('done-task', taskStore.selectedTask.id)"
                 >Done</Button
               >
             </DialogClose>

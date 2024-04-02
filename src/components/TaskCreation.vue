@@ -75,7 +75,11 @@ watch(
   <div
     class="relative rounded-xl bg-gradient-to-b from-border to-card p-px px-4 py-5 shadow-lg transition-all"
   >
-    <ControlBar @create-new-task="handleSubmit" @delete-task="handleDelete" />
+    <ControlBar
+      @create-new-task="handleSubmit"
+      @delete-task="handleDelete"
+      @done-task="taskStore.markTaskAsDone"
+    />
 
     <Input
       v-model="title"
