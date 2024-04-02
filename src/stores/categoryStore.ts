@@ -6,20 +6,27 @@ import {
   deleteCategory,
 } from "@/lib/api/category";
 
+// Assuming a type for your categories; adjust as needed
+interface Category {
+  id: string;
+  name: string;
+  // Add other properties as needed
+}
+
 export const useCategoryStore = defineStore("category", {
   state: () => ({
-    categories: [],
-    selectedCategory: null,
+    categories: [] as Category[],
+    selectedCategory: null as Category | null,
   }),
   actions: {
     async fetchCategories() {
       this.categories = await getCategory();
     },
-    async addCategory(name) {
-      const newCategory = await createCategory(name);
+    async addCategory(name: string) {
+      const newCategory: Category = await createCategory(name);
       this.categories.push(newCategory);
     },
-    async deleteCategory(categoryId) {
+    async removeCategory(categoryId: string) {
       try {
         await deleteCategory(categoryId);
         this.categories = this.categories.filter(
@@ -29,8 +36,7 @@ export const useCategoryStore = defineStore("category", {
         console.error("Failed to delete category:", error);
       }
     },
-
-    selectCategory(category) {
+    selectCategory(category: Category) {
       this.selectedCategory = category;
     },
     clearSelectedCategory() {
