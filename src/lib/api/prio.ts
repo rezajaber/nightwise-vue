@@ -2,42 +2,48 @@ import Base from "./base";
 
 export const getPrio = async (): Promise<any[]> => {
   try {
-    // you can also fetch all records at once via getFullList
-    const records = await Base.getPocketbase().collection("prio").getFullList({
-      sort: "-created",
-    });
+    const records = await Base.getPocketbase()
+      .collection("prio")
+      .getFullList({ sort: "-created" });
     return records;
   } catch (error) {
-    console.error("Failed to fetch tasks:", error);
+    console.error("Failed to fetch priorities:", error);
     return [];
   }
 };
 
 export const createPrio = async (name: string): Promise<any> => {
-  const data = {
-    name: name,
-  };
-  const record = await Base.getPocketbase().collection("prio").create(data);
-  return record;
+  try {
+    const data = { name };
+    const record = await Base.getPocketbase().collection("prio").create(data);
+    return record;
+  } catch (error) {
+    console.error("Failed to create priority:", error);
+    throw error; // Propagate the error for handling at the calling site
+  }
 };
 
 export const updatePrio = async (
-  name: string,
   prio_id: string,
+  name: string,
 ): Promise<any> => {
-  const data = {
-    name: name,
-  };
-  const record = await Base.getPocketbase()
-    .collection("prio")
-    .update(prio_id, data);
-  return record;
+  try {
+    const data = { name };
+    const record = await Base.getPocketbase()
+      .collection("prio")
+      .update(prio_id, data);
+    return record;
+  } catch (error) {
+    console.error("Failed to update priority:", error);
+    throw error; // Propagate the error for handling at the calling site
+  }
 };
 
 export const deletePrio = async (prio_id: string): Promise<void> => {
   try {
     await Base.getPocketbase().collection("prio").delete(prio_id);
   } catch (error) {
-    console.error("Failed to delete tasks:", error);
+    console.error("Failed to delete priority:", error);
+    // You might want to handle the error or rethrow it based on your error handling strategy
   }
 };
