@@ -28,19 +28,6 @@ const emit = defineEmits([
   "done-task",
 ]);
 
-const createNewTask = () => {
-  emit("create-new-task");
-};
-const createTask = () => {
-  emit("create-task");
-};
-const updateTask = () => {
-  emit("update-task");
-};
-const deleteTask = () => {
-  emit("delete-task");
-};
-
 const handleCreateOrUpdateClick = () => {
   emit("create-new-task");
 };
