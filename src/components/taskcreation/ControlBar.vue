@@ -30,11 +30,6 @@ const emit = defineEmits([
 
 const handleCreateOrUpdateClick = () => {
   emit("create-new-task");
-  toast({
-    title: `Task ${taskStore.selectedTask ? "Updated" : "Created"}`,
-    description: `The task has been successfully ${taskStore.selectedTask ? "updated" : "created"}.`,
-    duration: 4000,
-  });
 };
 const handleDoneClick = () => {
   if (!taskStore.selectedTask) {

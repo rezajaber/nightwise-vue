@@ -2,6 +2,7 @@ TaskCreation.vue:
 <script setup lang="ts">
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
+import { useToast } from "@/components/ui/toast/use-toast";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -15,9 +16,22 @@ const category_id = ref("");
 const prio_id = ref("");
 const due_date = ref("");
 
+const { toast } = useToast();
 const taskStore = useTaskStore();
 
 const handleSubmit = async () => {
+  // Check if the title is empty
+  if (title.value.trim() === "") {
+    // Display a toast message indicating the title cannot be empty
+    toast({
+      title: "Missing Title",
+      description: "Please provide a title for the task.",
+      duration: 4000,
+      variant: "destructive", // Use a warning variant or any other variant you prefer
+    });
+    return; // Return early to prevent further execution
+  }
+
   if (taskStore.selectedTask) {
     await taskStore.updateTask(
       taskStore.selectedTask.id,
@@ -36,12 +50,20 @@ const handleSubmit = async () => {
       prio_id.value,
       due_date.value,
     );
+    // Reset fields after successful task creation
     title.value = "";
     description.value = "";
     category_id.value = "";
     prio_id.value = "";
     due_date.value = "";
   }
+
+  // Success toast message can be triggered here if needed
+  toast({
+    title: `Task ${taskStore.selectedTask ? "Updated" : "Created"}`,
+    description: `The task has been successfully ${taskStore.selectedTask ? "updated" : "created"}.`,
+    duration: 4000,
+  });
 };
 
 const handleDelete = async () => {
