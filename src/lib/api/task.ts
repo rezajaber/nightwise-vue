@@ -20,22 +20,27 @@ export const createTask = async (
   due_date: Date,
 ): Promise<any> => {
   const data: any = {
-    title: title,
-    description: description,
-    due_date: due_date,
-    user_id: "40164s5bfdq72sp",
+    title,
+    description,
+    due_date,
+    user_id: "40164s5bfdq72sp", // Assume this is a fixed user ID for demonstration
   };
 
-  // Add category_id and prio_id to the data object only if they have valid selections
   if (category_id && category_id !== "Category") {
     data.category_id = category_id;
   }
+
   if (prio_id && prio_id !== "Priority") {
     data.prio_id = prio_id;
   }
 
-  const record = await Base.getPocketbase().collection("task").create(data);
-  return record;
+  try {
+    const record = await Base.getPocketbase().collection("task").create(data);
+    return record;
+  } catch (error) {
+    console.error("Failed to create task:", error);
+    throw error; // It's usually better to throw the error so that the calling context can handle it
+  }
 };
 
 export const updateTask = async (
@@ -47,15 +52,15 @@ export const updateTask = async (
   due_date: Date,
 ): Promise<any> => {
   const data: any = {
-    title: title,
-    description: description,
-    due_date: due_date,
+    title,
+    description,
+    due_date,
   };
 
-  // Add category_id and prio_id to the data object only if they have valid selections
   if (category_id && category_id !== "Category") {
     data.category_id = category_id;
   }
+
   if (prio_id && prio_id !== "Priority") {
     data.prio_id = prio_id;
   }
@@ -67,13 +72,15 @@ export const updateTask = async (
     return record;
   } catch (error) {
     console.error("Failed to update task:", error);
-    throw error; // Rethrow the error to handle it in the calling context if necessary
+    throw error;
   }
 };
-export const deleteTask = async (task_id): Promise<void> => {
+
+export const deleteTask = async (task_id: string): Promise<void> => {
   try {
     await Base.getPocketbase().collection("task").delete(task_id);
   } catch (error) {
     console.error("Failed to delete tasks:", error);
+    // Consider throwing the error here as well, or handling it in a specific way if needed.
   }
 };
