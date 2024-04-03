@@ -14,11 +14,13 @@
 - **Identical Implementations**: Nightwise is meticulously crafted across three distinct frontend technologies: Vue.js, Svelte, and Solid, each paired with Pocketbase for backend operations.
 - **Comparison Methodology**: The project employs a range of methodologies to assess and compare the frameworks, including but not limited to performance benchmarks, developer experience, and syntax ease-of-use.
 
+
  ## Features
 
 - **User-friendly Interface**: Nightwise offers an intuitive and clean user interface, making task management a breeze.
 - **Task Organization**: Easily organize your tasks with categories, priorities, and due dates.
 - **Responsive Design**: Nightwise adapts seamlessly to different screen sizes, ensuring a consistent user experience across devices.
+
 
 ## Installation
 
@@ -28,13 +30,6 @@
 4. Start the development server: `npm run serve`
 5. Open your browser and visit `http://localhost:8080` to explore Nightwise.
 
-## Installation
-
-1. Clone the repository: `git clone https://github.com/yourusername/nightwise.git`
-2. Navigate to the project directory: `cd nightwise`
-3. Install dependencies: `npm install`
-4. Start the development server: `npm run serve`
-5. Open your browser and visit `http://localhost:8080` to view Nightwise in action.
 
 ## Usage
 
@@ -44,9 +39,11 @@
 4. Manage your tasks by marking them as complete or deleting them.
 5. Explore the app and compare its performance with other frameworks.
 
+
 ## Framework Comparison
 
 This project offers a unique opportunity to delve into the intricacies of Vue.js, Svelte, and Solid. It's designed to provide hands-on experience and insights into each framework's syntax, performance, and overall development workflow. Engage with Nightwise to inform your choice of technology for future projects.
+
 
 ## License
 
