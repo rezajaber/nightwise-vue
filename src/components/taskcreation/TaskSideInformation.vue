@@ -163,7 +163,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex justify-between">
+  <div class="grid gap-2.5 lg:flex lg:justify-between">
     <div class="flex gap-2">
       <Popover>
         <PopoverTrigger as-child>
