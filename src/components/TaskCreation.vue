@@ -23,7 +23,7 @@ const resetTaskForm = () => {
   category_id.value = "";
   prio_id.value = "";
   due_date.value = "";
-  task_done.value = false,
+  task_done.value = false;
 };
 
 const handleSubmit = async () => {
