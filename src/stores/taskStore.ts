@@ -19,7 +19,14 @@ export const useTaskStore = defineStore("task", {
       }
     },
 
-    async addTask(title, description, category_id, prio_id, due_date) {
+    async addTask(
+      title,
+      description,
+      category_id,
+      prio_id,
+      due_date,
+      task_done,
+    ) {
       try {
         const newTask = await createTask(
           title,
@@ -27,6 +34,7 @@ export const useTaskStore = defineStore("task", {
           category_id,
           prio_id,
           due_date,
+          task_done,
         );
         this.tasks.push(newTask);
       } catch (error) {
@@ -41,6 +49,7 @@ export const useTaskStore = defineStore("task", {
       category_id,
       prio_id,
       due_date,
+      task_done,
     ) {
       try {
         const updatedTask = await updateTask(
@@ -50,6 +59,7 @@ export const useTaskStore = defineStore("task", {
           category_id,
           prio_id,
           due_date,
+          task_done,
         );
         const index = this.tasks.findIndex((task) => task.id === taskId);
         if (index !== -1) {

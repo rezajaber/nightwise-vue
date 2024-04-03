@@ -18,6 +18,7 @@ export const createTask = async (
   category_id: string | null,
   prio_id: string | null,
   due_date: Date,
+  task_done: boolean,
 ): Promise<any> => {
   const data: any = {
     title,
@@ -25,6 +26,7 @@ export const createTask = async (
     category_id,
     prio_id,
     due_date,
+    task_done,
     user_id: "40164s5bfdq72sp", // Assume this is a fixed user ID for demonstration
   };
 
@@ -44,6 +46,7 @@ export const updateTask = async (
   category_id: string | null,
   prio_id: string | null,
   due_date: Date,
+  task_done: boolean,
 ): Promise<any> => {
   const data: any = {
     title,
@@ -51,6 +54,7 @@ export const updateTask = async (
     category_id,
     prio_id,
     due_date,
+    task_done,
   };
 
   try {
