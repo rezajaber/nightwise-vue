@@ -28,8 +28,8 @@
 2. Navigate to the project directory: `cd nightwise`
 3. Install dependencies: `npm install`
 4. Start the development server: `npm run serve`
-5. Open your browser and visit `http://localhost:8080` to explore Nightwise.
-
+5. Open your browser and visit `http://localhost:3000` to explore Nightwise.
+   
 
 ## Usage
 
@@ -55,4 +55,4 @@ A heartfelt thank you to the communities behind Vue.js, Svelte, and Solid. Their
 
 ---
 
-I am excited to present Nightwise as a tool for educational and research purposes in the field of web development. Your feedback and contributions are highly appreciated as I continue to explore and document the capabilities of modern frontend frameworks. Happy exploring! 🚀
+I am excited to present Nightwise as a tool for educational and research purposes in the field of web development.
