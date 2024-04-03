@@ -55,4 +55,4 @@ A heartfelt thank you to the communities behind Vue.js, Svelte, and Solid. Their
 
 ---
 
-I am excited to present Nightwise as a tool for educational and research purposes in the field of web development.
+I am excited to present Nightwise as a tool for educational and research purposes in the field of web development 🙏🏼
