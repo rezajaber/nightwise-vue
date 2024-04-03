@@ -108,6 +108,16 @@ const handleDelete = async () => {
   taskStore.clearSelectedTask();
 };
 
+const handleMarkAsDone = async (taskId) => {
+  await taskStore.markTaskAsDone(taskId);
+  taskStore.clearSelectedTask();
+  showToast(
+    "Task Marked as Done",
+    "The task has been successfully marked as done and the form has been reset.",
+    "default",
+  );
+};
+
 watch(
   () => taskStore.selectedTask,
   (newTask) => {
@@ -124,16 +134,6 @@ watch(
   },
   { deep: true },
 );
-
-const handleMarkAsDone = async (taskId) => {
-  await taskStore.markTaskAsDone(taskId);
-  resetTaskForm(); // Reset the form after the task is marked as done
-  showToast(
-    "Task Marked as Done",
-    "The task has been successfully marked as done and the form has been reset.",
-    "default",
-  );
-};
 </script>
 
 <template>
