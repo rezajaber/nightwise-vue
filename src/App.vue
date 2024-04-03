@@ -10,7 +10,7 @@ const showPreloader = ref(true);
 onMounted(() => {
   setTimeout(() => {
     showPreloader.value = false;
-  }, 500); // Adjust the time according to your needs
+  }, 1750); // Adjust the time according to your needs
 });
 </script>
 
