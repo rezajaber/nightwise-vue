@@ -88,7 +88,7 @@ function updateSelectedPriority(priorityId) {
             </svg>
           </Button>
         </DialogTrigger>
-        <DialogContent class="sm:max-w-xs">
+        <DialogContent class="max-w-xs rounded-md">
           <DialogHeader>
             <DialogTitle>Create New Task</DialogTitle>
             <DialogDescription class="text-white opacity-60">

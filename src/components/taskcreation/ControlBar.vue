@@ -106,7 +106,7 @@ const buttonLabel = computed(() =>
               <path d="M13 18h8" /></svg
           ></Button>
         </DialogTrigger>
-        <DialogContent class="sm:max-w-xs">
+        <DialogContent class="max-w-xs rounded-md">
           <DialogHeader>
             <DialogTitle>Finish Task</DialogTitle>
             <DialogDescription class="text-white opacity-60">
@@ -150,7 +150,7 @@ const buttonLabel = computed(() =>
               <line x1="14" x2="14" y1="11" y2="17" /></svg
           ></Button>
         </DialogTrigger>
-        <DialogContent class="sm:max-w-xs">
+        <DialogContent class="max-w-xs rounded-md">
           <DialogHeader>
             <DialogTitle>Delete Task</DialogTitle>
             <DialogDescription class="text-white opacity-60">
