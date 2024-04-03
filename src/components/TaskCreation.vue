@@ -13,6 +13,7 @@ const description = ref("");
 const category_id = ref("");
 const prio_id = ref("");
 const due_date = ref("");
+const task_done = ref(false);
 
 const taskStore = useTaskStore();
 
@@ -22,6 +23,7 @@ const resetTaskForm = () => {
   category_id.value = "";
   prio_id.value = "";
   due_date.value = "";
+  task_done.value = false,
 };
 
 const handleSubmit = async () => {
@@ -35,6 +37,7 @@ const handleSubmit = async () => {
       category_id.value,
       prio_id.value,
       new Date(due_date.value),
+      task_done.value,
     );
   } else {
     await taskStore.addTask(
@@ -43,6 +46,7 @@ const handleSubmit = async () => {
       category_id.value,
       prio_id.value,
       new Date(due_date.value),
+      task_done.value,
     );
     resetTaskForm();
   }
@@ -113,6 +117,7 @@ watch(
       category_id.value = newTask.category_id;
       prio_id.value = newTask.prio_id;
       due_date.value = newTask.due_date || "";
+      task_done.value = newTask.task_done;
     } else {
       resetTaskForm();
     }
