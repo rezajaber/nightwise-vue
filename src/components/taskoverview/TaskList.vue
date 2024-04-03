@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
-
+import { Button } from "@/components/ui/button";
 import { onMounted, ref, computed } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 
@@ -44,6 +44,10 @@ const filteredTasks = computed(() => {
 
   return tasks;
 });
+
+function unmarkTaskAsDone(taskId) {
+  taskStore.unmarkTaskAsDone(taskId);
+}
 </script>
 
 <template>
@@ -157,7 +161,7 @@ const filteredTasks = computed(() => {
             </span>
 
             <!-- Conditionally render the SVG icon if the task is overdue -->
-            <span>
+            <span class="flex items-center gap-2">
               <svg
                 v-if="task.prio_id === 'dbj5yur26rch27u'"
                 xmlns="http://www.w3.org/2000/svg"
@@ -232,6 +236,31 @@ const filteredTasks = computed(() => {
                 <path d="m14.5 9.5-5 5" />
                 <path d="m9.5 9.5 5 5" />
               </svg>
+
+              <Button
+                size="xs"
+                class="cursor-pointer px-1.5"
+                v-if="task.task_done"
+                @click.stop="unmarkTaskAsDone(task.id)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17"
+                  height="17"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-undo-2"
+                >
+                  <path d="M9 14 4 9l5-5" />
+                  <path
+                    d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"
+                  />
+                </svg>
+              </Button>
             </span>
           </div>
         </div>

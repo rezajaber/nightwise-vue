@@ -126,6 +126,34 @@ export const useTaskStore = defineStore("task", {
       }
     },
 
+    async unmarkTaskAsDone(taskId) {
+      // Find the task in either tasks or doneTasks
+      let taskIndex = this.doneTasks.findIndex((task) => task.id === taskId);
+      let task = taskIndex !== -1 ? this.doneTasks[taskIndex] : null;
+
+      if (task) {
+        try {
+          // Call API to update task_done to false
+          await updateTask(
+            task.id,
+            task.title,
+            task.description,
+            task.category_id,
+            task.prio_id,
+            task.due_date,
+            false,
+          );
+          // Update local state to reflect the change
+          task.task_done = false;
+          // Optionally move the task from doneTasks to tasks if you're maintaining separate lists
+          this.tasks.push(task);
+          this.doneTasks.splice(taskIndex, 1);
+        } catch (error) {
+          console.error("Failed to unmark task as done:", error);
+        }
+      }
+    },
+
     toggleShowDoneTasks() {
       this.showDoneTasks = !this.showDoneTasks;
     },
