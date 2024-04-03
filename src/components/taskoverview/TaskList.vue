@@ -116,7 +116,7 @@ function unmarkTaskAsDone(taskId) {
         class="px-2.5"
       >
         <div
-          class="mt-5 flex cursor-pointer items-center justify-between rounded-lg duration-300 ease-in-out hover:scale-105"
+          class="mt-5 flex cursor-pointer items-center justify-between rounded-lg duration-300 ease-in-out hover:scale-105 hover:bg-secondary hover:px-2 hover:py-2"
         >
           <div class="grid gap-1.5">
             <div class="flex items-center space-x-2 text-primary">
