@@ -13,7 +13,18 @@ export const useTaskStore = defineStore("task", {
   actions: {
     async fetchTasks() {
       try {
-        this.tasks = await getTasks();
+        const fetchedTasks = await getTasks();
+        // Clear the current tasks and doneTasks arrays
+        this.tasks = [];
+        this.doneTasks = [];
+        // Iterate over fetched tasks and categorize them based on `task_done` status
+        fetchedTasks.forEach((task) => {
+          if (task.task_done) {
+            this.doneTasks.push(task);
+          } else {
+            this.tasks.push(task);
+          }
+        });
       } catch (error) {
         console.error("Failed to fetch tasks:", error);
       }
@@ -89,11 +100,29 @@ export const useTaskStore = defineStore("task", {
       this.selectedPriority = priorityId;
     },
 
+    // In taskStore.ts
     markTaskAsDone(taskId) {
       const taskIndex = this.tasks.findIndex((task) => task.id === taskId);
       if (taskIndex !== -1) {
-        const [doneTask] = this.tasks.splice(taskIndex, 1);
-        this.doneTasks.push(doneTask);
+        // First, update the task's `task_done` status in the database
+        const task = this.tasks[taskIndex];
+        this.updateTask(
+          task.id,
+          task.title,
+          task.description,
+          task.category_id,
+          task.prio_id,
+          new Date(task.due_date),
+          true,
+        )
+          .then(() => {
+            // Once the task is updated, move it to the doneTasks array
+            const [doneTask] = this.tasks.splice(taskIndex, 1);
+            this.doneTasks.push(doneTask);
+          })
+          .catch((error) =>
+            console.error("Failed to mark task as done:", error),
+          );
       }
     },
 
