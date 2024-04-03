@@ -1,24 +1,12 @@
-TaskCreation.vue:
 <script setup lang="ts">
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
-
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 
 import { ref, watch } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 import { showToast } from "@/lib/utils/toastUtils";
-
-// Example usage in a Vue component or Pinia store
-
-const taskReset = () => {
-  title.value = "";
-  description.value = "";
-  category_id.value = "";
-  prio_id.value = "";
-  due_date.value = "";
-};
 
 const title = ref("");
 const description = ref("");
@@ -28,47 +16,17 @@ const due_date = ref("");
 
 const taskStore = useTaskStore();
 
-const handleSubmit = async () => {
-  // Validation checks for all fields
-  if (title.value.trim() === "") {
-    showToast(
-      "Missing Title",
-      "Please provide a title for the task.",
-      "destructive",
-    );
-    return;
-  } else if (description.value.trim() === "") {
-    showToast(
-      "Missing Title",
-      "Please provide a title for the task.",
-      "destructive",
-    );
-    return;
-  }
-  if (category_id.value.trim() === "") {
-    showToast(
-      "Missing Title",
-      "Please provide a title for the task.",
-      "destructive",
-    );
-    return;
-  } else if (prio_id.value.trim() === "") {
-    showToast(
-      "Missing Title",
-      "Please provide a title for the task.",
-      "destructive",
-    );
-    return;
-  } else if (!due_date) {
-    showToast(
-      "Missing Title",
-      "Please provide a title for the task.",
-      "destructive",
-    );
-    return;
-  }
+const resetTaskForm = () => {
+  title.value = "";
+  description.value = "";
+  category_id.value = "";
+  prio_id.value = "";
+  due_date.value = "";
+};
 
-  // Proceed with task update or creation
+const handleSubmit = async () => {
+  if (!validateForm()) return;
+
   if (taskStore.selectedTask) {
     await taskStore.updateTask(
       taskStore.selectedTask.id,
@@ -76,22 +34,19 @@ const handleSubmit = async () => {
       description.value,
       category_id.value,
       prio_id.value,
-      due_date.value,
+      new Date(due_date.value),
     );
-    taskStore.clearSelectedTask();
   } else {
     await taskStore.addTask(
       title.value,
       description.value,
       category_id.value,
       prio_id.value,
-      due_date.value,
+      new Date(due_date.value),
     );
-    // Reset fields after successful task creation
-    taskReset();
+    resetTaskForm();
   }
 
-  // Success toast message
   showToast(
     `Task ${taskStore.selectedTask ? "Updated" : "Created"}`,
     `The task has been successfully ${taskStore.selectedTask ? "updated" : "created"}.`,
@@ -99,26 +54,67 @@ const handleSubmit = async () => {
   );
 };
 
-const handleDelete = async () => {
-  if (taskStore.selectedTask) {
-    await taskStore.deleteTask(taskStore.selectedTask.id);
-    taskStore.clearSelectedTask(); // Clear selected task if needed
+const validateForm = () => {
+  if (title.value.trim() === "") {
+    showToast(
+      "Missing Title",
+      "Please provide a title for the task.",
+      "destructive",
+    );
+    return false;
   }
+  if (description.value.trim() === "") {
+    showToast(
+      "Missing Description",
+      "Please provide a description for the task.",
+      "destructive",
+    );
+    return false;
+  }
+  if (!due_date.value) {
+    showToast(
+      "Missing Due Date",
+      "Please provide a due date for the task.",
+      "destructive",
+    );
+    return false;
+  }
+  if (prio_id.value.trim() === "Priority") {
+    showToast(
+      "Missing Priority",
+      "Please select a priority for the task.",
+      "destructive",
+    );
+    return false;
+  }
+  if (category_id.value.trim() === "Category") {
+    showToast(
+      "Missing Category",
+      "Please select a category for the task.",
+      "destructive",
+    );
+    return false;
+  }
+  return true;
+};
+
+const handleDelete = async () => {
+  if (!taskStore.selectedTask) return;
+  await taskStore.deleteTask(taskStore.selectedTask.id);
+  taskStore.clearSelectedTask();
 };
 
 watch(
   () => taskStore.selectedTask,
-  (newTask, oldTask) => {
+  (newTask) => {
     if (newTask) {
       title.value = newTask.title;
       description.value = newTask.description;
       category_id.value = newTask.category_id;
       prio_id.value = newTask.prio_id;
+      due_date.value = newTask.due_date || "";
     } else {
-      title.value = "";
-      description.value = "";
-      category_id.value = "";
-      prio_id.value = "";
+      resetTaskForm();
     }
   },
   { deep: true },
@@ -134,14 +130,12 @@ watch(
       @delete-task="handleDelete"
       @done-task="taskStore.markTaskAsDone"
     />
-
     <Input
       v-model="title"
       @keyup.enter="handleSubmit"
       placeholder="Do this"
       class="font-regular mt-7 w-full border-0 bg-secondary px-0 pl-4 text-3xl text-primary caret-accent focus-visible:outline-none focus-visible:ring-0"
     />
-
     <TaskSideInformation
       @updateCategory="category_id = $event"
       @updatePrio="prio_id = $event"
@@ -150,7 +144,6 @@ watch(
       :prio="prio_id"
       class="mt-7"
     />
-
     <Textarea
       v-model="description"
       @keyup.enter="handleSubmit"

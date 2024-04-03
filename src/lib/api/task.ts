@@ -22,17 +22,11 @@ export const createTask = async (
   const data: any = {
     title,
     description,
+    category_id,
+    prio_id,
     due_date,
     user_id: "40164s5bfdq72sp", // Assume this is a fixed user ID for demonstration
   };
-
-  if (category_id && category_id !== "Category") {
-    data.category_id = category_id;
-  }
-
-  if (prio_id && prio_id !== "Priority") {
-    data.prio_id = prio_id;
-  }
 
   try {
     const record = await Base.getPocketbase().collection("task").create(data);
@@ -54,16 +48,10 @@ export const updateTask = async (
   const data: any = {
     title,
     description,
+    category_id,
+    prio_id,
     due_date,
   };
-
-  if (category_id && category_id !== "Category") {
-    data.category_id = category_id;
-  }
-
-  if (prio_id && prio_id !== "Priority") {
-    data.prio_id = prio_id;
-  }
 
   try {
     const record = await Base.getPocketbase()
