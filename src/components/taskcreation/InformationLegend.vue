@@ -62,7 +62,7 @@ import {
                   />
                   <Button
                     size="sm"
-                    class="hidden border-none bg-accent px-2.5 md:block"
+                    class="hidden cursor-default border-none bg-accent px-2.5 md:block"
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -92,7 +92,7 @@ import {
 
                   <Button
                     size="sm"
-                    class="w-full border-none bg-accent text-white"
+                    class="w-full cursor-default border-none bg-accent text-white"
                     >Show/Hide Done</Button
                   >
                 </div>
@@ -103,7 +103,7 @@ import {
                   </p>
                   <Button
                     size="sm"
-                    class="w-full justify-evenly border-none bg-accent text-white"
+                    class="w-full cursor-default justify-evenly border-none bg-accent text-white"
                     >Priorities
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +129,9 @@ import {
                   <p class="text-center text-sm text-white opacity-60">
                     <b>Create</b> a Task <b></b>
                   </p>
-                  <Button size="xs" class="border-none bg-accent text-white"
+                  <Button
+                    size="xs"
+                    class="cursor-default border-none bg-accent text-white"
                     >Create
                   </Button>
                 </div>
@@ -138,7 +140,9 @@ import {
                   <p class="text-center text-sm text-white opacity-60">
                     <b>Update </b> a Task
                   </p>
-                  <Button size="xs" class="border-none bg-accent text-white"
+                  <Button
+                    size="xs"
+                    class="cursor-default border-none bg-accent text-white"
                     >Update
                   </Button>
                 </div>
@@ -150,7 +154,9 @@ import {
                   <p class="text-center text-sm text-white opacity-60">
                     <b>Mark</b> as <b>Done</b>
                   </p>
-                  <Button size="xs" class="border-none bg-accent text-white"
+                  <Button
+                    size="xs"
+                    class="cursor-default border-none bg-accent text-white"
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
@@ -175,7 +181,9 @@ import {
                   <p class="text-center text-sm text-white opacity-60">
                     <b>Delete</b> a Task
                   </p>
-                  <Button size="xs" class="border-none bg-accent text-white"
+                  <Button
+                    size="xs"
+                    class="cursor-default border-none bg-accent text-white"
                     ><svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -204,7 +212,7 @@ import {
                     <b>Pick</b> a <b>Due Date</b> for Task
                   </p>
 
-                  <Button size="xs"
+                  <Button size="xs" class="cursor-default"
                     ><CalendarIcon
                       class="mr-2 h-4 w-4 text-white"
                     ></CalendarIcon
@@ -242,7 +250,7 @@ import {
                     <b>Select</b> Task <b>Priority</b>
                   </p>
 
-                  <Button size="xs"> Priority</Button>
+                  <Button class="cursor-default" size="xs"> Priority</Button>
 
                   <div class="mt-1 flex justify-evenly">
                     <svg
@@ -325,7 +333,7 @@ import {
                   <p class="text-center text-sm text-white opacity-60">
                     <b>Assign Category</b>
                   </p>
-                  <Button size="xs">Category</Button>
+                  <Button class="cursor-default" size="xs">Category</Button>
 
                   <p class="text-center text-sm text-red-600 opacity-60">
                     Categories need to be created first via Edit!
@@ -337,7 +345,7 @@ import {
                     <b>Edit Categories</b>
                   </p>
 
-                  <Button size="xs">Edit</Button>
+                  <Button class="cursor-default" size="xs">Edit</Button>
 
                   <p class="text-center text-sm text-red-600 opacity-60">
                     Categories that are in used can not be deleted!
