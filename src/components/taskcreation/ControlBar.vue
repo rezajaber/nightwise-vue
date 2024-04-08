@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Legend from "../taskcreation/InformationLegend.vue";
+
 import { computed } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 import { Button } from "@/components/ui/button";
@@ -174,27 +176,7 @@ const buttonLabel = computed(() =>
     </div>
 
     <div class="flex items-center gap-2">
-      <a href="https://youtu.be/wTg3BmgRi9g" target="_blank">
-        <Button
-          size="xs"
-          class="gap-1.5 border-none bg-accent tracking-wide text-white"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#ffffff"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-info"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4" />
-            <path d="M12 8h.01" /></svg
-        ></Button>
-      </a>
+      <Legend />
     </div>
   </div>
 </template>
