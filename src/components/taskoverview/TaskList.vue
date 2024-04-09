@@ -48,6 +48,12 @@ const filteredTasks = computed(() => {
 function unmarkTaskAsDone(taskId) {
   taskStore.unmarkTaskAsDone(taskId);
 }
+
+const prettierDescription = (desc) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(desc, "text/html");
+  return doc.body.textContent || "";
+};
 </script>
 
 <template>
@@ -131,7 +137,7 @@ function unmarkTaskAsDone(taskId) {
             <p
               class="break-all pl-6 text-justify text-xs text-primary opacity-60"
             >
-              {{ truncateText(task.description) }}
+              {{ prettierDescription(truncateText(task.description)) }}
             </p>
           </div>
 
