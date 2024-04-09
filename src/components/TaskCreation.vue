@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
+import Editor from "./TipTap.vue";
+
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 
@@ -159,11 +161,6 @@ watch(
       :prio="prio_id"
       class="mt-7"
     />
-    <Textarea
-      v-model="description"
-      @keyup.enter="handleSubmit"
-      placeholder="Some more context"
-      class="mt-7 bg-secondary pl-4 text-primary caret-accent"
-    />
+    <Editor v-model="description" />
   </div>
 </template>
