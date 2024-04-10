@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import Legend from "../taskcreation/InformationLegend.vue";
+import InformationLegend from "../taskcreation/InformationLegend.vue";
+import MarkdownLegend from "../taskcreation/MarkdownLegend.vue";
 
 import { computed } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
@@ -176,7 +177,8 @@ const buttonLabel = computed(() =>
     </div>
 
     <div class="flex items-center gap-2">
-      <Legend />
+      <MarkdownLegend />
+      <InformationLegend />
     </div>
   </div>
 </template>
