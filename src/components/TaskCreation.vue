@@ -151,7 +151,7 @@ watch(
       v-model="title"
       @keyup.enter="handleSubmit"
       placeholder="Do this"
-      class="font-regular mt-7 w-full border-0 bg-secondary px-0 pl-4 text-3xl text-primary caret-accent focus-visible:outline-none focus-visible:ring-0"
+      class="font-regular mt-7 w-full border-0 bg-secondary px-4 text-3xl text-primary caret-accent focus-visible:outline-none focus-visible:ring-0"
     />
     <TaskSideInformation
       @updateCategory="category_id = $event"

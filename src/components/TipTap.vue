@@ -1,13 +1,8 @@
-<template>
-  <editor-content :editor="editor" />
-</template>
-
 <script>
 import StarterKit from "@tiptap/starter-kit";
 import { Editor, EditorContent } from "@tiptap/vue-3";
 import Highlight from "@tiptap/extension-highlight";
 import Typography from "@tiptap/extension-typography";
-import BulletList from "@tiptap/extension-bullet-list";
 
 export default {
   components: {
@@ -31,11 +26,7 @@ export default {
 
   watch: {
     modelValue(value) {
-      // HTML
       const isSame = this.editor.getHTML() === value;
-
-      // JSON
-      // const isSame = JSON.stringify(this.editor.getJSON()) === JSON.stringify(value)
 
       if (isSame) {
         return;
@@ -57,13 +48,9 @@ export default {
           return text.toUpperCase();
         },
       },
-      extensions: [StarterKit, Highlight, Typography, BulletList],
+      extensions: [StarterKit, Highlight, Typography],
       onUpdate: () => {
-        // HTML
         this.$emit("update:modelValue", this.editor.getHTML());
-
-        // JSON
-        // this.$emit('update:modelValue', this.editor.getJSON())
       },
     });
   },
@@ -73,6 +60,10 @@ export default {
   },
 };
 </script>
+
+<template>
+  <editor-content :editor="editor" />
+</template>
 
 <style>
 /* Basic editor styles */
@@ -148,6 +139,8 @@ export default {
 
   hr {
     margin: 1rem 0;
+
+    border-color: rgb(185, 185, 185);
   }
 
   blockquote {
