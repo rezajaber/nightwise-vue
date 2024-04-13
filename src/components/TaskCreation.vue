@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ControlBar from "./taskcreation/ControlBar.vue";
 import TaskSideInformation from "./taskcreation/TaskSideInformation.vue";
-import Editor from "./TipTap.vue";
+import Editor from "./taskcreation/TipTap.vue";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
