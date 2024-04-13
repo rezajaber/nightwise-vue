@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 </script>
 
 <template>
-  <div class="flex justify-between border-2">
+  <div class="flex justify-between">
     <img src="../assets/img/nightwise.png" class="w-7" alt="Nightwise Logo" />
 
     <Dialog>
