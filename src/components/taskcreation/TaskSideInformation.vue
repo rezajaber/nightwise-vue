@@ -269,7 +269,7 @@ onMounted(() => {
           >
         </DialogTrigger>
 
-        <DialogContent class="sm:max-w-[375px]">
+        <DialogContent class="max-w-xs sm:max-w-[375px]">
           <DialogHeader>
             <DialogTitle>Edit Categories</DialogTitle>
             <DialogDescription>

@@ -26,7 +26,7 @@ import { Label } from "@/components/ui/label";
         >
       </DialogTrigger>
 
-      <DialogContent class="flex sm:max-w-[375px]">
+      <DialogContent class="flex max-w-xs sm:max-w-[375px]">
         <DialogHeader>
           <DialogTitle>Login</DialogTitle>
           <DialogDescription>
