@@ -12,6 +12,23 @@ export class BaseService {
   getPocketbase(): PocketBase {
     return this.pb;
   }
+
+  async authenticateWithGoogle() {
+    try {
+      const authData = await this.pb
+        .collection("user")
+        .authWithOAuth2({ provider: "google" });
+      console.log("Authentication Successful:", authData);
+      return authData;
+    } catch (error) {
+      console.error("Authentication Failed:", error);
+      throw error; // It's useful to rethrow the error so that you can catch it in the component.
+    }
+  }
+
+  getAuthStore() {
+    return this.pb.authStore;
+  }
 }
 
 // Assuming VITE_POCKETBASE_URL is properly configured in your env
