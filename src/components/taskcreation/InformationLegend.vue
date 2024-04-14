@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Calendar as CalendarIcon } from "lucide-vue-next";
-import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
