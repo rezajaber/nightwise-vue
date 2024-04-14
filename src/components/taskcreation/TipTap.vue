@@ -52,6 +52,9 @@ export default {
       onUpdate: () => {
         this.$emit("update:modelValue", this.editor.getHTML());
       },
+      content: `
+       You can use MarkDown - Therefor press next to the Info-Button. Have Fun 🎉
+      `,
     });
   },
 
