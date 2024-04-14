@@ -146,7 +146,7 @@ const prettierDescription = (desc) => {
             </p>
           </div>
 
-          <div class="flex gap-1.5">
+          <div class="flex items-center gap-1.5">
             <span v-if="isOverdue(task.due_date)" class="">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
