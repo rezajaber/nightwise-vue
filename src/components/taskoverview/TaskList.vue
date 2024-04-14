@@ -2,7 +2,7 @@
 import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 
 function truncateText(text: string, limit: number = 35) {
@@ -10,6 +10,8 @@ function truncateText(text: string, limit: number = 35) {
 }
 
 const taskStore = useTaskStore();
+const tasks = ref([]);
+const filteredTasks = ref([]);
 
 onMounted(async () => {
   await taskStore.fetchTasks();
@@ -29,20 +31,23 @@ function isOverdue(dueDate) {
   return due < today;
 }
 
-const filteredTasks = computed(() => {
-  let tasks = taskStore.getVisibleTasks();
+taskStore.$subscribe((mutation, state) => {
+  tasks.value = state.tasks;
+  let visTasks = taskStore.getVisibleTasks();
 
   if (props.searchQuery) {
-    tasks = tasks.filter((task) =>
+    visTasks = visTasks.filter((task) =>
       task.title.toLowerCase().includes(props.searchQuery.toLowerCase()),
     );
   }
 
   if (taskStore.selectedPriority) {
-    tasks = tasks.filter((task) => task.prio_id === taskStore.selectedPriority);
+    visTasks = visTasks.filter(
+      (task) => task.prio_id === taskStore.selectedPriority,
+    );
   }
 
-  return tasks;
+  filteredTasks.value = visTasks;
 });
 
 function unmarkTaskAsDone(taskId) {

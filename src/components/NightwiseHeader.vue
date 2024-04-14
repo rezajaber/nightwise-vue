@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { base } from "@/lib/api/base"; // Adjust the path according to your project structure
 import { ref } from "vue";
-
+import { useTaskStore } from "@/stores/taskStore";
 import {
   Dialog,
   DialogContent,
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog";
 
 const authStatus = ref(false);
+const taskStore = useTaskStore();
 
 const authenticateWithGithub = async () => {
   try {
@@ -20,6 +21,7 @@ const authenticateWithGithub = async () => {
     console.log("Authentication data:", authData);
     authStatus.value = true; // Update authentication status
     // You can now use authData for further processing or routing
+    await taskStore.fetchTasks();
   } catch (error) {
     console.error("Error during authentication:", error);
     authStatus.value = false; // Update authentication status on failure
@@ -27,20 +29,16 @@ const authenticateWithGithub = async () => {
 };
 
 const logout = () => {
-  authStatus.value = false; // Reset authentication status
-  console.log("Logged out successfully.");
+  base.getAuthStore().clear();
+  authStatus.value = false;
 };
 </script>
 
 <template>
-  <div class="flex justify-between">
-    <img src="../assets/img/nightwise.png" class="w-7" alt="Nightwise Logo" />
-
+  <div class="flex items-center justify-between">
     <Dialog v-if="!authStatus">
-      <DialogTrigger as-child>
-        <Button class="border-none bg-accent px-3 text-white" size="sm"
-          >Login</Button
-        >
+      <DialogTrigger as-child
+        ><Button>Nightwise | Login</Button>
       </DialogTrigger>
 
       <DialogContent class="max-w-xs rounded-md sm:max-w-[375px]">
@@ -105,14 +103,9 @@ const logout = () => {
         </div>
       </DialogContent>
     </Dialog>
-
-    <Button
-      v-else
-      @click="logout"
-      class="border-none bg-accent px-3 text-white"
-      size="sm"
-    >
-      Logout
-    </Button>
+    <div class="flex w-full items-center justify-between" v-else>
+      <img src="../assets/img/nightwise.png" class="w-7" alt="Nightwise Logo" />
+      <Button size="sm" @click="logout">Logout</Button>
+    </div>
   </div>
 </template>

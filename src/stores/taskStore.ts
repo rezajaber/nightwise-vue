@@ -1,4 +1,6 @@
 // src/stores/taskStore.ts
+import Base from "../lib/api/base";
+
 import { defineStore } from "pinia";
 import { createTask, getTasks, updateTask, deleteTask } from "@/lib/api/task";
 
@@ -12,6 +14,10 @@ export const useTaskStore = defineStore("task", {
   }),
   actions: {
     async fetchTasks() {
+      const base: any = Base.getAuthStore();
+      if (!base.isValid) {
+        return [];
+      }
       try {
         const fetchedTasks = await getTasks();
         // Clear the current tasks and doneTasks arrays
@@ -38,6 +44,11 @@ export const useTaskStore = defineStore("task", {
       due_date,
       task_done,
     ) {
+      const base: any = Base.getAuthStore();
+      console.log(base);
+      if (!base.isValid) {
+        return;
+      }
       try {
         const newTask = await createTask(
           title,
@@ -62,6 +73,10 @@ export const useTaskStore = defineStore("task", {
       due_date,
       task_done,
     ) {
+      const base: any = Base.getAuthStore();
+      if (!base.isValid) {
+        return;
+      }
       try {
         const updatedTask = await updateTask(
           taskId,
@@ -82,6 +97,10 @@ export const useTaskStore = defineStore("task", {
     },
 
     async deleteTask(taskId) {
+      const base: any = Base.getAuthStore();
+      if (!base.isValid) {
+        return;
+      }
       try {
         await deleteTask(taskId);
         this.tasks = this.tasks.filter((task) => task.id !== taskId);
@@ -91,17 +110,33 @@ export const useTaskStore = defineStore("task", {
     },
 
     selectTask(task) {
+      const base: any = Base.getAuthStore();
+      if (!base.isValid) {
+        return {};
+      }
       this.selectedTask = task;
     },
     clearSelectedTask() {
+      const base: any = Base.getAuthStore();
+      if (!base.isValid) {
+        return;
+      }
       this.selectedTask = null;
     },
     selectPriority(priorityId) {
+      const base: any = Base.getAuthStore();
+      if (!base.isValid) {
+        return;
+      }
       this.selectedPriority = priorityId;
     },
 
     // In taskStore.ts
     markTaskAsDone(taskId) {
+      const base: any = Base.getAuthStore();
+      if (!base.isValid) {
+        return;
+      }
       const taskIndex = this.tasks.findIndex((task) => task.id === taskId);
       if (taskIndex !== -1) {
         // First, update the task's `task_done` status in the database
@@ -127,6 +162,10 @@ export const useTaskStore = defineStore("task", {
     },
 
     async unmarkTaskAsDone(taskId) {
+      const base: any = Base.getAuthStore();
+      if (!base.isValid) {
+        return;
+      }
       // Find the task in either tasks or doneTasks
       let taskIndex = this.doneTasks.findIndex((task) => task.id === taskId);
       let task = taskIndex !== -1 ? this.doneTasks[taskIndex] : null;
@@ -155,9 +194,17 @@ export const useTaskStore = defineStore("task", {
     },
 
     toggleShowDoneTasks() {
+      const base: any = Base.getAuthStore();
+      if (!base.isValid) {
+        return;
+      }
       this.showDoneTasks = !this.showDoneTasks;
     },
     getVisibleTasks() {
+      const base: any = Base.getAuthStore();
+      if (!base.isValid) {
+        return [];
+      }
       return this.showDoneTasks ? this.doneTasks : this.tasks;
     },
   },

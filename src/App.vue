@@ -4,7 +4,6 @@ import { onMounted, ref } from "vue";
 import { Button } from "@/components/ui/button";
 
 import Toaster from "@/components/ui/toast/Toaster.vue";
-import Header from "./components/NightwiseHeader.vue";
 
 const showPreloader = ref(true);
 
@@ -31,7 +30,6 @@ onMounted(() => {
   <div
     class="dark grid min-h-screen place-content-center gap-3 bg-background px-4 py-5"
   >
-    <Header />
     <RouterView />
   </div>
 </template>
