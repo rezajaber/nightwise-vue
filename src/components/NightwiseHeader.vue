@@ -37,9 +37,7 @@ const logout = () => {
 <template>
   <div class="flex items-center justify-between">
     <Dialog v-if="!authStatus">
-      <DialogTrigger as-child
-        ><Button>Nightwise | Login</Button>
-      </DialogTrigger>
+      <DialogTrigger as-child><Button>Hello | Login</Button> </DialogTrigger>
 
       <DialogContent class="max-w-xs rounded-md sm:max-w-[375px]">
         <DialogHeader>
