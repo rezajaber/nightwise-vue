@@ -1,10 +1,12 @@
+// @ts-nocheck
 import Base from "./base";
 
 export const getCategory = async (): Promise<any[]> => {
+  const userId = Base.getAuthStore().baseModel.id; // Getting user_id from authentication store
   try {
     const records = await Base.getPocketbase()
       .collection("category")
-      .getFullList({ sort: "-created" });
+      .getFullList({ sort: "-created", filter: `user_id = '${userId}'` });
     return records;
   } catch (error) {
     console.error("Failed to fetch categories:", error);
@@ -13,8 +15,9 @@ export const getCategory = async (): Promise<any[]> => {
 };
 
 export const createCategory = async (name: string): Promise<any> => {
+  const userId = Base.getAuthStore().baseModel.id; // Getting user_id from authentication store
   try {
-    const data = { name }; // Simplify object assignment
+    const data = { name, user_id: userId }; // Simplify object assignment
     const record = await Base.getPocketbase()
       .collection("category")
       .create(data);

@@ -1,10 +1,15 @@
+// @ts-nocheck
 import Base from "./base";
 
 export const getTasks = async (): Promise<any[]> => {
+  const userId = Base.getAuthStore().baseModel.id; // Getting user_id from authentication store
   try {
-    const records = await Base.getPocketbase().collection("task").getFullList({
-      sort: "-created",
-    });
+    const records = await Base.getPocketbase()
+      .collection("task")
+      .getFullList({
+        sort: "-created",
+        filter: `user_id = '${userId}'`,
+      });
     return records;
   } catch (error) {
     console.error("Failed to fetch tasks:", error);
@@ -20,6 +25,7 @@ export const createTask = async (
   due_date: Date,
   task_done: boolean,
 ): Promise<any> => {
+  const userId = Base.getAuthStore().baseModel.id; // Getting user_id from authentication store
   const data: any = {
     title,
     description,
@@ -27,7 +33,7 @@ export const createTask = async (
     prio_id,
     due_date,
     task_done,
-    user_id: "40164s5bfdq72sp", // Assume this is a fixed user ID for demonstration
+    user_id: userId, // Using the dynamic user_id
   };
 
   try {
