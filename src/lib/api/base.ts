@@ -13,11 +13,11 @@ export class BaseService {
     return this.pb;
   }
 
-  async authenticateWithGithub() {
+  async authenticateWithProvider(provider: string) {
     try {
       const authData = await this.pb
         .collection("user")
-        .authWithOAuth2({ provider: "github" });
+        .authWithOAuth2({ provider: provider });
       console.log("Authentication Successful:", authData);
       return authData;
     } catch (error) {
