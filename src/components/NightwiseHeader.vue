@@ -26,7 +26,9 @@ import { Label } from "@/components/ui/label";
         >
       </DialogTrigger>
 
-      <DialogContent class="flex max-w-xs sm:max-w-[375px]">
+      <DialogContent
+        class="flex max-w-xs flex-col rounded-md sm:max-w-[375px] sm:flex-row"
+      >
         <DialogHeader>
           <DialogTitle>Login</DialogTitle>
           <DialogDescription>
@@ -34,7 +36,7 @@ import { Label } from "@/components/ui/label";
           </DialogDescription>
         </DialogHeader>
 
-        <div class="mt-7 flex justify-evenly gap-4">
+        <div class="flex justify-evenly gap-4 sm:mt-7">
           <div
             class="flex cursor-pointer justify-center rounded-md bg-secondary px-4 py-3 duration-300 ease-in-out hover:scale-105"
           >
