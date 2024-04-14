@@ -40,6 +40,7 @@ const searchQuery = ref("");
 
 watch(searchQuery, (newValue) => {
   emit("update:searchQuery", newValue);
+  taskStore.fetchTasks();
 });
 
 const taskStore = useTaskStore();

@@ -53,7 +53,7 @@ export default {
         this.$emit("update:modelValue", this.editor.getHTML());
       },
       content: `
-       You can use MarkDown - Therefor press next to the Info-Button. Have Fun 🎉
+       You can use Markdown - Therefore press next to the Info-Button. Have Fun 🎉
       `,
     });
   },
